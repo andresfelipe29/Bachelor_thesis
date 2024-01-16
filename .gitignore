@@ -1,0 +1,13 @@
+# TeX, snapshot, and latexmk generated files
+*.aux
+*.bbl
+*.blg
+*.dep
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.synctex.gz
+*.toc
