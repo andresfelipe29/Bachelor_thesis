@@ -1,0 +1,356 @@
+% Esta es la Plantilla UNAL en LaTeX
+\documentclass[10pt,spanish,fleqn,openany,twoside,letterpaper]{book}
+
+%Muestra los márgenes del documento para evitar Warnings
+%Para activar la siguiente línea quite el simbolo % 
+%\usepackage[showframe]{geometry}
+
+%Formato de fuentes bibliográficas
+%Use el estilo bibliográfico que sea pertinente según el área de estudio APA, IEEE, etc
+
+%Usando el paquete BibLaTeX
+%Cita normal con \cite[página]{} y cita con paréntesis \parencite[página]{}
+
+% Configuración de BibLaTeX
+%\usepackage[backend=biber,style=authoryear,maxcitenames=2,maxbibnames=99,giveninits=true,uniquename=false]{biblatex}
+%\addbibresource{biblio.bib}
+
+% Cambiar el idioma de las referencias bibliográficas a español
+%\DefineBibliographyStrings{spanish}{%ext install latex-workshop
+%  andothers = {et\addabbrvspace al\adddot},
+%  andmore = {et\addabbrvspace al\adddot},
+%}
+
+% Personalizar el formato de las citas y la bibliografía
+%\DeclareNameAlias{sortname}{family-given}
+%\DeclareDelimFormat{multinamedelim}{\addcomma\space}
+%\DeclareDelimFormat{finalnamedelim}{\addcomma\space\&\space}
+%\DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}
+%\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{\titlecase{#1}}
+%\DeclareFieldFormat{journaltitlecase}{\titlecase{#1}}
+%\DeclareFieldFormat{pages}{#1}
+%\DeclareFieldFormat{volume}{\mkbibbold{#1}}
+%\renewbibmacro{in:}{}
+%\AtEveryBibitem{\clearfield{month}}
+
+%Usando el paquete Natbib
+%Cita normal \cite[página]{} y cita con paréntesis \citep[página]{}
+\usepackage{natbib}
+\bibpunct{[}{]}{;}{\&}{.}{}
+\bibliographystyle{dtvstyle}
+
+%Idioma del documento
+%Use main para el idioma principal del documento
+\usepackage[main=spanish,english,german,french,portuguese]{babel}
+
+% Carácteres especiales
+\usepackage{fontenc}
+
+% Evita ligadura li & fl
+\usepackage{microtype}
+\DisableLigatures{encoding = *, family = *}
+
+% Otros paquetes de tablas y colores avanzados
+\usepackage{amsmath,graphicx,rotating,float,multirow}
+\usepackage{longtable}
+\setlength{\LTcapwidth}{6in}
+\usepackage[utf8]{inputenc}
+\usepackage{epsfig,epic,eepic,threeparttable,amscd,here,lscape,tabularx,subfigure}
+\usepackage{tabu,array}
+\usepackage[rgb]{xcolor}
+
+% Permite ver y configurar los parámetros de la página
+\usepackage{layout}
+%Hyperref permite ver las secciones del texto
+\usepackage[hidelinks]{hyperref}
+
+%Genera los comandos de la página de autoría
+\newcommand{\studentname}{}
+\newcommand{\submissiondate}{}
+\newcommand{\academictitle}{}
+\newcommand{\resgroupone}{}
+\newcommand{\resgrouptwo}{}
+\newcommand{\researchtopic}{}
+\newcommand{\thesisname}{}
+\newcommand{\director}{}
+\newcommand{\codirector}{}
+\newcommand{\issuedate}{}
+\newcommand{\palabrasclave}{}
+\newcommand{\keywords}{}
+\newcommand{\schlusselworter}{}
+\newcommand{\palavraschave}{}
+\newcommand{\sede}{}
+\newcommand{\department}{}
+\newcommand{\faculty}{}
+
+%Información de la tesis
+%Diligenciar aquí los datos para su carga automática donde se requiera en el documento
+\renewcommand{\studentname}{Andrés Felipe Vargas-Londoño}
+\renewcommand{\thesisname}{CosmicWatch: The Desktop Muon Detectors, exploring gamma-ray spectroscopy}
+\renewcommand{\issuedate}{2024}
+\renewcommand{\submissiondate}{Fecha entrega}
+\renewcommand{\director}{Prof. Luis Fernando Cristancho Mejia}
+\renewcommand{\codirector}{Prof. Spencer Axani}
+\renewcommand{\academictitle}{Físico}
+\renewcommand{\resgroupone}{Grupo de Física Nuclear Universidad Nacional (GFNUN) }
+\renewcommand{\resgrouptwo}{Axani Group (AxLab) }
+\renewcommand{\researchtopic}{Espectroscopía gamma}
+\renewcommand{\sede}{Sede Bogotá} 
+\renewcommand{\department}{Departamento de Física}
+\renewcommand{\faculty}{Facultad de Ciencias}
+
+%Palabras clave del documento - Tener presente los Theasurus https://www.thesaurus.com/
+%Disponible en 3 idiomas aunque se puede extender a francés o otro idioma
+\renewcommand{\palabrasclave}{Use palabras clave que estén en Theasaurus} 
+\renewcommand{\keywords}{Use keywords available in Theasaurus}
+%\renewcommand{\schlusselworter}{}
+%\renewcommand{\palavraschave}{}
+
+%Formatting for headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\fancypagestyle{plain}
+
+\newcommand{\RomanNumeralCaps}[1]
+    {\MakeUppercase{\romannumeral #1}}
+
+%\fancyhead[RO,LE]{Monolithic Nanocomposite Detector for LaBrAT-PET}
+
+% Redefinir \sectionmark
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+% Redefinir \leftmark para mostrar solo el nombre de la sección
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+% Configurar encabezado y pie de página
+\fancyhead[RO]{\thepage} % Encabezado derecho en páginas impares
+\fancyhead[LO]{\textbf{\leftmark}}   % Encabezado izquierdo en páginas impares
+\fancyhead[RE]{\textbf{\thesisname}}   % Encabezado izquierdo en páginas pares
+\fancyhead[LE]{\thepage}  % Encabezado derecho en páginas pares
+\fancyfoot[C]{}            % Pie de página central vacío
+
+\usepackage{titlesec}
+% Permite personalizar los títulos de sección y de capítulos
+% hang lo deja en el mismo renglón, display lo despliega
+% Elimina el "Capitulo" y deja solo el número
+%\titleformat{\chapter}[hang]
+%  {\sffamily\Huge\bfseries}{\thechapter}{0.5cm}{\sffamily\Huge}
+%\titleformat{\section}[hang]{\sffamily\LARGE}{\thesection}{0.5cm}{}
+%\titleformat{\subsection}[hang]{\sffamily\Large}{\thesubsection}{0.5cm}{}
+%\titleformat{\subsubsection}[hang]{\sffamily\large}{\thesubsubsection}{0.5cm}{}
+%\titleformat{\paragraph}[runin]{\sffamily\normalsize}{}{}{\emph}
+
+%Coloca anexo o apéndice en la Tabla de contenido
+\usepackage[toc,page]{appendix}
+
+% Configuración de las páginas en twoside-mode
+% Permite ver y configurar los parámetros de la página
+\setlength{\voffset}{-0.25in}
+\setlength{\headwidth}{467pt}
+\setlength{\headheight}{22pt}
+\setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt}
+\setlength{\marginparwidth}{0pt}
+\setlength{\marginparsep}{0pt}
+\setlength{\parskip}{2em}
+\setlength{\footskip}{20pt}
+\setlength{\textheight}{650pt}
+\setlength{\textwidth}{467pt}
+\setlength{\headsep}{5pt}
+\setlength{\parindent}{0pt}
+\setlength{\baselineskip}{10pt plus 5pt minus 5pt}
+\renewcommand{\theequation}{\thechapter-\arabic{equation}}
+\renewcommand{\thefigure}{\textbf{\thechapter-\arabic{figure}}}
+\renewcommand{\thetable}{\textbf{\thechapter-\arabic{table}}}
+
+
+%Define la distancia de la primera linea de un parrafo a la margen
+\parindent0cm 
+
+%Espacio entre lineas
+\renewcommand{\baselinestretch}{1}
+
+%Para rotar texto, objetos y tablas seite.
+\usepackage{rotating}
+
+%Permite incluir mecanismos y reacciones químicas
+\usepackage{tikz}
+\usepackage{chemformula}
+\usepackage{chemfig}
+
+\usetikzlibrary{calc,arrows.meta}% per right to e left to
+\tikzset{
+myedge/.style={->, -{Latex[#1]}}
+}
+
+%Fuente de la presentación Ancizar Sans UNAL
+%Para usar este compilado en Overleaf se debe usar el compilador XeLaTeX o LuaLaTeX!!
+%Menu -> Compiler -> XeLaTeX o LuaLaTeX
+%La siguiente línea debe comentarse si desea compilar con pdfLaTeX
+%\RequireXeTeX
+
+
+% Definición de la fuente Ancizar Sans
+\newif\ifxetexorluatex
+
+\ifxetexorluatex
+  \usepackage{fontspec}
+  \usefonttheme{serif}
+  \setmainfont{AncizarSans}[Path=./AncizarSans/,Scale=1,Extension=.otf,UprightFont=*-Regular,BoldFont=*-Bold,ItalicFont=*-Italic,BoldItalicFont=*-BoldItalic]
+\else
+  % Si se compila con pdfLaTeX, cargar la fuente apropiada aquí
+  \usepackage[T1]{fontenc}
+\fi
+% Metadatos del documento
+\AtBeginDocument{%
+	\hypersetup{
+		pdfborder={0 0 0},
+		pdfauthor={\studentname},
+		pdfsubject={\thesisname}, 
+		pdfcreator={\studentname},
+		pdfproducer={\studentname},
+	}
+}
+
+%Carga el simbolo de grado y el de Angstrom
+\newcommand{\angstrom}{\textup{\AA}}
+\newcommand{\grad}{$^{\circ}$}
+
+%Inicio del documento, no olvide la etiqueta de cierre al final \end{document}
+\begin{document}
+
+%Nombres y formatos de títulos, tablas y figuras
+%Use \sffamily para dejar con letra Sans Serif, sin etiqueta queda LaTeX clásico
+\renewcommand{\listfigurename}{List of Figures}
+\renewcommand{\listtablename}{List of Tables}
+\renewcommand{\contentsname}{Table of contents}
+\renewcommand{\chaptername}{Chapter}
+%\renewcommand{\tablename}{\scriptsize \centering \textbf{Tabla}}
+%\renewcommand{\figurename}{\scriptsize \centering \textbf{Figura}}
+\renewcommand{\appendixname}{Appendix}
+
+%Cambia el nombre de la sección de referencias
+\renewcommand{\bibname}{Bibliography}
+
+%Páginas de Presentación del documento - No modificar esto se hace automáticamente
+{\newpage
+\thispagestyle{empty}
+\begin{center}
+\begin{figure}
+\centering
+\epsfig{file=figures/EscudoUN2016,scale=1}%
+\end{figure}
+\vspace{2.5cm}
+\textbf{\Huge \thesisname} \\ 
+\vspace{2.5cm}
+\textbf{\Large \studentname} \\
+\vspace{5.0cm}
+\small Universidad Nacional de Colombia \\
+\faculty \\
+\department \\
+\sede, Colombia\\
+\issuedate
+\newpage 
+\thispagestyle{empty}
+\vspace{2.5cm}
+\textbf{\Huge \thesisname} \\
+\vspace{2.5cm}
+\textbf{\Large \studentname} \\
+\vspace{2.5cm}
+\small Tesis presentada como requisito parcial para optar por el título de: \\
+{\bfseries \academictitle}\\
+\vspace{2.5cm}
+Director(a): \\
+\director \\
+Codirector(a): \\
+\codirector \\
+\vspace{2.5cm}
+Línea de investigación: \\ 
+\researchtopic\\
+Grupo de investigación: \\
+\resgroupone \\
+\resgrouptwo \\
+\vspace{2.0cm} 
+Universidad Nacional de Colombia \\
+\faculty \\
+\department \\
+\issuedate
+\end{center}
+
+% Dedicatorias
+\newpage
+\thispagestyle{empty}
+\begin{flushright}
+\begin{minipage}{12.5cm}
+\noindent
+\\[10em]
+%Modificar la cita que se quiere agregar
+{\Large Cita 01.}
+\\[3em]
+Autor
+\\ \textit{Fuente}
+\\[10em]
+%Para anular la adición de una segunda cita anule las siguientes lineas desde acá mediante comentario (%)
+{\Large \textit{Wenn du es nicht einfach erkl\"{a}ren kannst, hast du es nicht genug verstanden} - Si no eres capaz de explicar algo claramente, es que aún no lo has entendido lo suficiente.}
+\\[3em]
+Albert Einstein
+%Hasta acá!
+\end{minipage}
+\end{flushright} 
+
+% Declaracíon de originalidad del texto y del contenido
+% No modificar, se hace automáticamente con los comandos ya definidos
+\newpage
+\chapter*{Declaración}\chaptermark{Declaración}
+\par Me permito afirmar que he realizado ésta tesis de manera autónoma y con la única ayuda de los medios permitidos y no diferentes a los mencionados el presente texto. Todos los pasajes que se han tomado de manera textual o figurativa de textos publicados y no publicados, los he reconocido en el presente trabajo. Ninguna parte del presente trabajo se ha empleado en ningún otro tipo de tesis. 
+\\[1em]
+\sede., \submissiondate
+\\[6em]
+\rule{6cm}{0.5pt}\\
+\studentname
+}
+
+%Páginas preámbulo, listado de figuras, tablas y tabla de contenido
+{\pagestyle{plain} \pagenumbering{roman}
+\setlength{\parskip}{1mm}
+\include{frontmatter/Agradecimientos}   
+\include{frontmatter/Abreviaturas}
+\include{frontmatter/ResumenAbstract}
+\tableofcontents 
+\addcontentsline{toc}{chapter}{Table of contents}
+\listoffigures 
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoftables 
+\addcontentsline{toc}{chapter}{List of Tables}
+\clearpage
+}
+
+{\pagenumbering{arabic}
+\setlength{\parskip}{\baselineskip}
+%Incluir secciones del documento de aqui en adelante
+%Use \include para incluir desde una página nueva e \input para incluir sin salto de página
+\include{chapters/Introduction}
+\include{chapters/Goals}
+\include{chapters/Electronics}
+\include{chapters/Gamma_Spectroscopy}
+
+%Inicio del apéndice o anexos
+\begin{appendix}
+\include{appendixes/Apendice}%
+\end{appendix}
+
+%Permite visualizar la bibliografía en la tabla de contenido
+\addcontentsline{toc}{chapter}{References} %Literatura Citada
+
+\let\OLDthebibliography=\thebibliography
+\def\thebibliography#1{\OLDthebibliography{#1}}
+{\scriptsize
+\pagestyle{plain}
+% Nombre del documento donde se almacenan las referencias
+\bibliography{Referencias}
+\nocite{*}
+\cleardoublepage
+}
+}
+
+\end{document}
