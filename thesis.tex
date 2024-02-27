@@ -1,8 +1,8 @@
 % Esta es la Plantilla UNAL en LaTeX
-\documentclass[10pt,spanish,fleqn,openany,twoside,letterpaper]{book}
+\documentclass[12pt,spanish,fleqn,openany,twoside,letterpaper]{book}
 
 %Muestra los márgenes del documento para evitar Warnings
-%Para activar la siguiente línea quite el simbolo % 
+%Para activar la siguiente línea quite el símbolo % 
 %\usepackage[showframe]{geometry}
 
 %Formato de fuentes bibliográficas
@@ -43,7 +43,7 @@
 %Use main para el idioma principal del documento
 \usepackage[main=spanish,english,german,french,portuguese]{babel}
 
-% Carácteres especiales
+% Caracteres especiales
 \usepackage{fontenc}
 
 % Evita ligadura li & fl
@@ -58,11 +58,18 @@
 \usepackage{epsfig,epic,eepic,threeparttable,amscd,here,lscape,tabularx,subfigure}
 \usepackage{tabu,array}
 \usepackage[rgb]{xcolor}
+\usepackage{siunitx}
 
 % Permite ver y configurar los parámetros de la página
 \usepackage{layout}
 %Hyperref permite ver las secciones del texto
 \usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
 
 %Genera los comandos de la página de autoría
 \newcommand{\studentname}{}
@@ -92,8 +99,8 @@
 \renewcommand{\director}{Prof. Luis Fernando Cristancho Mejia}
 \renewcommand{\codirector}{Prof. Spencer Axani}
 \renewcommand{\academictitle}{Físico}
-\renewcommand{\resgroupone}{Grupo de Física Nuclear Universidad Nacional (GFNUN) }
-\renewcommand{\resgrouptwo}{Axani Group (AxLab) }
+\renewcommand{\resgroupone}{Grupo de Física Nuclear Universidad Nacional (GFNUN)}
+\renewcommand{\resgrouptwo}{Axani Group (AxLab)}
 \renewcommand{\researchtopic}{Espectroscopía gamma}
 \renewcommand{\sede}{Sede Bogotá} 
 \renewcommand{\department}{Departamento de Física}
@@ -123,10 +130,11 @@
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 
 % Configurar encabezado y pie de página
-\fancyhead[RO]{\thepage} % Encabezado derecho en páginas impares
-\fancyhead[LO]{\textbf{\leftmark}}   % Encabezado izquierdo en páginas impares
-\fancyhead[RE]{\textbf{\thesisname}}   % Encabezado izquierdo en páginas pares
-\fancyhead[LE]{\thepage}  % Encabezado derecho en páginas pares
+\fancyhead[L]{\fontsize{10}{12} \selectfont Personal Statement}
+\fancyhead[RO]{\fontsize{10}{12} \selectfont \thepage} % Encabezado derecho en páginas impares
+\fancyhead[LO]{\fontsize{10}{12} \selectfont \textbf{\leftmark}}   % Encabezado izquierdo en páginas impares
+\fancyhead[RE]{\fontsize{10}{12} \selectfont \textbf{\thesisname}}   % Encabezado izquierdo en páginas pares
+\fancyhead[LE]{\fontsize{10}{12} \selectfont \thepage}  % Encabezado derecho en páginas pares
 \fancyfoot[C]{}            % Pie de página central vacío
 
 \usepackage{titlesec}
@@ -164,7 +172,7 @@
 \renewcommand{\thetable}{\textbf{\thechapter-\arabic{table}}}
 
 
-%Define la distancia de la primera linea de un parrafo a la margen
+%Define la distancia de la primera linea de un párrafo a la margen
 \parindent0cm 
 
 %Espacio entre lineas
@@ -212,7 +220,7 @@ myedge/.style={->, -{Latex[#1]}}
 	}
 }
 
-%Carga el simbolo de grado y el de Angstrom
+%Carga el símbolo de grado y el de Angstrom
 \newcommand{\angstrom}{\textup{\AA}}
 \newcommand{\grad}{$^{\circ}$}
 
@@ -298,7 +306,7 @@ Albert Einstein
 \end{minipage}
 \end{flushright} 
 
-% Declaracíon de originalidad del texto y del contenido
+% Declaración de originalidad del texto y del contenido
 % No modificar, se hace automáticamente con los comandos ya definidos
 \newpage
 \chapter*{Declaración}\chaptermark{Declaración}
@@ -327,16 +335,21 @@ Albert Einstein
 
 {\pagenumbering{arabic}
 \setlength{\parskip}{\baselineskip}
-%Incluir secciones del documento de aqui en adelante
+%Incluir secciones del documento de aquí en adelante
 %Use \include para incluir desde una página nueva e \input para incluir sin salto de página
-\include{chapters/Introduction}
-\include{chapters/Goals}
-\include{chapters/Electronics}
-\include{chapters/Gamma_Spectroscopy}
+\include{chapters/introduction}
+\include{chapters/physical_aspects}
+\include{chapters/detector_description}
+\include{chapters/detection_methods}
+\include{chapters/electronics}
+\include{chapters/simulation}
+\include{chapters/measurements}
+\include{chapters/future}
+\include{chapters/conclusion}
 
 %Inicio del apéndice o anexos
 \begin{appendix}
-\include{appendixes/Apendice}%
+\include{appendixes/RP_code}%
 \end{appendix}
 
 %Permite visualizar la bibliografía en la tabla de contenido

@@ -1,0 +1,45 @@
+introduction=goals
+2 physical aspects, 
+	radiactivity, gamma, beta, alpha, energy losses, sources, 
+	cosmic radiation
+	particle interaction with matter
+
+3 detector description
+	plastic vs 
+	history
+	power consumption
+	KiCad
+	OLED screen, sensors, LEDs
+	3D printted case
+	
+4 SCINTILLATORS, detection methods
+	single photon detectors
+	pmts
+	SiPM advantages
+
+5 electronics
+	amplifier, peak detector, trigger, microcontroller (code as apendix)
+	dc to dc booster
+	single photons
+
+6 Simulation
+	what geant4 is
+	geometry
+	muons going through the scintillator
+	photons collected vs produced
+	optimum SiPM placement
+	Na22, Cs137
+
+7 Measurements
+	oscilloscope
+	cosmicwatch
+	NIM
+
+8 Ongoing work and future directions
+	differences between spectra
+	adding LYSO radioactivity to Geant4
+
+9 Conclusion
+
+
+
