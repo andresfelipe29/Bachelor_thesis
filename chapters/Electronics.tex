@@ -1,8 +1,23 @@
 \chapter{Electronics}
 
-CosmicWatches have to be mainly low-cost and easy to build, in order to achieve this the components selected for the construction have been carefully curated to make sure this restrictions were met. This however might be greatly responsible for some of the odd features found while testing the detector, like the lack of linearity. The full KiCad project can be found in \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}.
+CosmicWatches have to be mainly low-cost and easy to build, in order to achieve this the components selected for the construction have been carefully curated to make sure this restrictions were met. This however might be greatly responsible for some of the odd features found while testing the detector, like the lack of linearity. The full KiCad project can be found in the GitHub repository: \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}.
 
 \section{Amplifier}
+
+An opamp on its own amplifies the voltage difference between the non-inverting and inverting inputs by its internal gain $A_{int}$, having then $V_{out}=A_{int}(V_+ - V_-)$. In this case however we are interested in controlling the gain of the circuit and therefore the amplification. In order to achieve this we introduce a feedback loop in the opamp through \texttt{R6}, which controls how much of the output voltage is fed back into the opamp. In this case the theoretical amplification is given by $V_{out}=(1+R6/R4)V_{in}$.
+
+\begin{figure}[htb]
+    \centering
+    \begin{circuitikz}
+        \draw
+        (0,0) node[op amp] (opamp) {}
+        (opamp.-) node[left] {$v_-$}
+        (opamp.+) to[short] ++(0, -2) node[](gain){} to[R] ++(-2, 0) node[ground]{}
+        (gain) to[short, *-] ++(0.1, 0) to[R, l=$R_1$] ++(2, 0)
+        to[short] (opamp.out)
+        ;
+        \end{circuitikz}
+\end{figure}
 
 \section{Peak Detector}
 
