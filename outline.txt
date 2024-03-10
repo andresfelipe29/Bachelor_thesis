@@ -5,7 +5,7 @@ introduction=goals
 	particle interaction with matter
 
 3 detector description
-	plastic vs 
+	plastic vs LYSO
 	history
 	power consumption
 	KiCad

@@ -54,12 +54,14 @@
 
 % Otros paquetes de tablas y colores avanzados
 \usepackage{amsmath,graphicx,rotating,float,multirow}
+\usepackage{caption}
 \usepackage{longtable}
 \setlength{\LTcapwidth}{6in}
 \usepackage[utf8]{inputenc}
 \usepackage{epsfig,epic,eepic,threeparttable,amscd,here,lscape,tabularx,subfigure}
 \usepackage{tabu,array}
 \usepackage[rgb]{xcolor}
+
 \usepackage{siunitx} %------unidades------%
 
 % Permite ver y configurar los parámetros de la página
@@ -73,6 +75,9 @@
     urlcolor=blue,
     citecolor=blue,
 }
+\usepackage{cleveref} %cleveref has to be added after hyperref
+
+\crefrangelabelformat{subsection}{#3#1#4-#5\crefstripprefix{#1}{#2}#6}
 
 %Genera los comandos de la página de autoría
 \newcommand{\studentname}{}
