@@ -9,9 +9,9 @@ An op-amp on its own amplifies the voltage difference between the non-inverting 
     \centering
     \begin{circuitikz}[scale=0.8]
         \draw
-        (0,0) node[op amp] (opamp) {}
-        (opamp.-) node[left]{$V_{in}$}
-        (opamp.+) node[left]{} to[short] ++(0, -2) 
+        (0,0) node[op amp,yscale=-1] (opamp) {}
+        (opamp.+) node[left]{$V_{in}$}
+        (opamp.-) node[left]{} to[short] ++(0, -2) 
         node[](gain){} to[R, l_=$R_4$] ++(-3, 0) node[ground]{}
         (gain) to[short, *-] ++(0.1, 0) to[R, l=$R_6$] ++(2.7, 0)
         %to[short] ++(0.1, 0) -|(opamp.out) to[short] ++(1, 0) node[ocirc, label={[yshift=0.3]$V_{out}$}]{}
@@ -33,6 +33,29 @@ In order to measure the voltage in the capacitor, a discharging resistor has to 
 In order to test multiple peak-detector designs, the schematics and PCB shown in \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}, include the connections and footprints necessary to place the components that make the designs illustrated in Subsections \labelcref{sec:basic,sec:basic_buffer,sec:nuclear_phoenix}.
 
 \subsection{Basic Peak Detector}\label{sec:basic}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[scale=0.8]
+        \draw [help lines] (-4,0) grid (5,-4);
+        \draw (0,0) node[op amp,yscale=-1] (opamp) {}
+        (opamp.+) node[left]{$V_{in}$}
+        (opamp.out) node[]{} to[sD, l_=$D_3$] (3.5, 0) coordinate (D3_r)
+        (opamp.-) node[left]{} to[short] ++(0, -2) coordinate (R24_l)
+        (R24_l) to[R, l_=$R_{24}$] (D3_r |- , |- R24_l) coordinate (R24_r)
+        (D3_r) to[short] (R24_r)
+        (D3_r) to[short] ++(1,0) coordinate (C25_u)
+        (C25_u) to[C, l=$C_{25}$] ++(0,-2) node[ground]{}
+        (C25_u) to[short] ++(2,0) to[R, l=$R_{15}$] ++(0,-2) node[ground]{};
+        %\draw (A |- 52,3)(D3_r) -- (R24_r);
+        % to[short] ++(-0.1, 0) -|(R24_r)
+
+        %Nodes
+        \node[shift={(0,+1.5)}] at (opamp) {U6 HLM6658};
+    \end{circuitikz}
+    \caption{Basic peak detector design, also used in previous versions of CosmicWatch detectors.}
+    \label{circ:basic_pd}
+\end{figure}
+
 
 \subsection{Basic Peak Detector + Buffer}\label{sec:basic_buffer}
 
