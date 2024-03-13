@@ -88,11 +88,69 @@ Assuming ideal conditions, a diode is enough to retain the highest input voltage
 
 \subsection{Basic Peak Detector + Buffer}\label{sec:basic_buffer}
 
-
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[scale=0.8]
+        %\draw [help lines] (-4,0) grid (5,-4);
+        \draw (0,0) node[op amp, noinv input up, font=\small] (opamp) {$U6$}
+        (opamp.up) --++(0,0.5) node[vcc]{5\,\textnormal{V}}
+        (opamp.down) --++(0,-0.5) node[vee]{-5\,\textnormal{V}}
+        (opamp.+) node[left]{$V_{in}$}
+        (opamp.out) coordinate(oa_out) to[sD, l_=$D_3$] (3.5, 0) coordinate (D3_r)
+        (opamp.-) -- ++(0, -3) coordinate (ver_1) -- ++(1, 0) coordinate(D5_l)
+        (ver_1) to[R, l_=$R_{14}$, resistors/scale=0.8] ++(0,-2) node[ground]{} 
+        (D5_l) to[sD, l_=$D_5$] (oa_out |- , |- D5_l) coordinate (D5_r)
+        (oa_out) -- (D5_r)
+        (D5_l) -- ++(0,-2) coordinate (R24_l)
+        (D3_r) -- ++(1,0) coordinate (C25_u)
+        (C25_u) to[C, l=$C_{25}$] ++(0,-2) node[ground]{}
+        (C25_u) -- ++(2,0) coordinate (buffer_l)
+        (buffer_l) node[op amp, noinv input up, font=\small, anchor=+] (buffer) {$U7$}
+        (buffer.-) coordinate (buffer_-)
+        (buffer.out) coordinate (buffer_out)
+        (buffer_-) -- (buffer_- |-, |- R24_l) coordinate (R24_r)
+        (R24_l) to[R, l_=$R_{24}$, resistors/scale=0.8] (R24_r)
+        (R24_r) -- (buffer_out |-, |- R24_r) -- (buffer_out)
+        (buffer_out) -- ++(2,0) to[R, l=$R_{29}$, resistors/scale=0.8] ++(0,-2) node[ground]{};
+        %(D3_r) -- (R24_r);
+        %(C25_u) -- ++(2,0) to[R, l=$R_{15}$, resistors/scale=0.8] ++(0,-2) node[ground]{};
+    \end{circuitikz}
+    \caption{Basic peak detector design, Adding a buffer to prevent discharging of the capacitor through the resistor and instead through any load in the circuit, in this case $R_29$.}
+    \label{circ:pd_buffer}
+\end{figure}
 
 \subsection{Nuclear Phoenix}\label{sec:nuclear_phoenix}
 
-\cite{Nucelar_phoenix}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}[scale=0.8]
+        %\draw [help lines] (-4,0) grid (5,-4);
+        \draw (0,0) node[op amp, noinv input up, font=\small] (opamp) {$U6$}
+        (opamp.up) --++(0,0.5) node[vcc]{5\,\textnormal{V}}
+        (opamp.down) --++(0,-0.5) node[vee]{-5\,\textnormal{V}}
+        (opamp.+) node[left]{$V_{in}$}
+        (opamp.out) coordinate(oa_out) to[sD, l_=$D_5$] ++(2, 0) coordinate (D5_r)
+        (D5_r) to[sD, l_=$D_3$] ++(2, 0) coordinate (D3_r)
+        (D5_r) -- ++(0,-4) coordinate (R24_l)
+        (D3_r) -- ++(3,0) coordinate (C25_u)
+        (C25_u) to[C, l=$C_{25}$] ++(0,-2) node[ground]{}
+        (C25_u) -- ++(2,0) coordinate (buffer_l)
+        (opamp.-) coordinate (oa_-)
+        (oa_-) -- ++(-1.5, 0) -- ++(0, 4) coordinate(aux1)
+        (aux1) -- (D3_r |-, |- aux1) -- (D3_r)
+        (buffer_l) node[op amp, noinv input up, font=\small, anchor=+] (buffer) {$U7$}
+        (buffer.-) coordinate (buffer_-)
+        (buffer.out) coordinate (buffer_out)
+        (buffer_-) -- (buffer_- |-, |- R24_l) coordinate (R24_r)
+        (R24_l) to[R, l_=$R_{24}$, resistors/scale=0.8] (R24_r)
+        (R24_r) -- (buffer_out |-, |- R24_r) -- (buffer_out)
+        (buffer_out) -- ++(2,0) to[R, l=$R_{29}$, resistors/scale=0.8] ++(0,-2) node[ground]{};
+        %(D3_r) -- (R24_r);
+        %(C25_u) -- ++(2,0) to[R, l=$R_{15}$, resistors/scale=0.8] ++(0,-2) node[ground]{};
+    \end{circuitikz}
+    \caption{Nuclear Phoenix peak-detector desing. Taken from \cite{Nucelar_phoenix}.}
+    \label{circ:pd_np}
+\end{figure}
 
 \section{Trigger}
 
