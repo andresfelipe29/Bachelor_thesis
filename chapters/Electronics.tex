@@ -250,7 +250,7 @@ In this case, a voltage divider is used to force a positive saturation in the op
         (d4 r) --++(2,0) coordinate(c3 u) to[R, l^=$R_{25}$, resistors/scale=0.8] ++(2,0) coordinate (c4 u)
         (c3 u) to[C, l_=$C_{3}$, resistors/scale=0.8] ++(0,-2)  node[ground]{}
         (c4 u) to[C, l_=$C_{4}$, resistors/scale=0.8] ++(0,-2)  node[ground]{}
-        (c4 u) --++(1,0) node[vcc]{5\,\textnormal{V}}; % FB
+        (c4 u) --++(1,0) node[vcc]{\textnormal{HV}}; % FB
 
         \draw (u1 lx) -- ++ (1,0) coordinate(d4 l)
         (d4 l) -- ++(0,1) to[sD, l^=$D_3$] ($(d4 r) + (0,-1)$) -- (d4 r)
@@ -263,6 +263,16 @@ In this case, a voltage divider is used to force a positive saturation in the op
         (c2 u) to[C, l=$C_{2}$, resistors/scale=0.8] ++(0,-2) node[ground]{}
         (c2 u) --++(1,0) node[vcc]{5\,\textnormal{V}}; % SHDN
     \end{circuitikz}
+    \caption{DC to DC booster circuit. Careful considerations have to be made when placing the MAX5026 IC in order to reduce noise on the power line. It is advised to have a look at the datasheet in \cite{AnalogDevices_DC_DC}, section "Applications Information".}
+    \label{circ:booster}
 \end{figure}
+
+Acording to Onsemi \cite{Onsemi_SiPM}, the operaing voltage of a MicroFJ-300XX-TSV SiPM is 25.2-30.7 V. It is then necessary to boost $V_{cc}$ to the operating range of the SiPM, noted as HV in Fig. \ref{circ:booster}. In order to achive this, a MAX5026 PWM Step-Up DC-DC Converter is used \cite{AnalogDevices_DC_DC}, which has a user-adjustable output voltage of up to 36 V using external feedback resistors.
+
+In the circuit shown in Fig. \ref{circ:booster}, $R_{10}$ and $R_2$ determine the output voltage HV. According to \cite{AnalogDevices_DC_DC}, equation \eqref{eq:booster_fb_resistance} allows to calculate the Value of $R_{10}$ given a desired output voltage HV and a value of $R_2$ between 5 and 50 \unit{\kilo\ohm}.
+
+\begin{equation}
+    R_{10} = R_2\left(\frac{\text{HV}}{V_{REF}}-1\right) \label{eq:booster_fb_resistance}
+\end{equation}
 
 \section{Single photons}
