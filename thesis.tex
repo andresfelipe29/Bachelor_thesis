@@ -1,5 +1,5 @@
 % Esta es la Plantilla UNAL en LaTeX
-\documentclass[12pt,spanish,fleqn,openany,twoside,letterpaper]{book}
+\documentclass[12pt,spanish,openany,twoside,letterpaper]{book}
 
 %Muestra los márgenes del documento para evitar Warnings
 %Para activar la siguiente línea quite el símbolo % 
@@ -41,28 +41,40 @@
 
 \usepackage[nottoc]{tocbibind} %------bibliografía------%
 
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % Caracteres especiales
+
 %Idioma del documento
 %Use main para el idioma principal del documento
-\usepackage[main=spanish,english,german,french,portuguese]{babel}
-
-% Caracteres especiales
-\usepackage{fontenc}
+\usepackage[main=spanish,british,ngerman]{babel}
+\decimalpoint
 
 % Evita ligadura li & fl
 \usepackage{microtype}
 \DisableLigatures{encoding = *, family = *}
 
+\usepackage{lipsum}
+\usepackage{gensymb}
+\newcommand{\lambdabar}{{\mkern 5mu\mathchar '26\mkern -9.75mu\lambda}}
+
 % Otros paquetes de tablas y colores avanzados
-\usepackage{amsmath,graphicx,rotating,float,multirow}
+\usepackage{siunitx} %------unidades------%
+\usepackage{amsmath,amsfonts,amssymb,amstext,amsthm,mathpazo, xfp, latexsym}
+\usepackage{bm} % bold math expressions $\bm{expression}$
+\usepackage{cancel}
+\usepackage{graphicx,float,multirow,multicol,subfigure}
+\graphicspath{{./figures/}}
 \usepackage{caption}
 \usepackage{longtable}
 \setlength{\LTcapwidth}{6in}
-\usepackage[utf8]{inputenc}
-\usepackage{epsfig,epic,eepic,threeparttable,amscd,here,lscape,tabularx,subfigure}
+
+\usepackage[autostyle, english=british]{csquotes}
+%\MakeOuterQuote{"}
+
+\usepackage{epsfig,epic,eepic,threeparttable,amscd,here,lscape,tabularx}
+\usepackage{textcomp}
 \usepackage{tabu,array}
 \usepackage[rgb]{xcolor}
-
-\usepackage{siunitx} %------unidades------%
 
 % Permite ver y configurar los parámetros de la página
 \usepackage{layout}
@@ -187,15 +199,15 @@
 \renewcommand{\baselinestretch}{1}
 
 %Para rotar texto, objetos y tablas seite.
-\usepackage{rotating}
+%\usepackage{rotating}
 
 %Permite incluir mecanismos y reacciones químicas
 %\usepackage{tikz}
 \usepackage{circuitikz}
 \usetikzlibrary{babel}
 \usetikzlibrary{calc}
-\usepackage{chemformula}
-\usepackage{chemfig}
+%\usepackage{chemformula}
+%\usepackage{chemfig}
 
 %\usetikzlibrary{calc,arrows.meta}% per right to e left to
 %\tikzset{
@@ -257,7 +269,7 @@
 \begin{center}
 \begin{figure}
 \centering
-\epsfig{file=figures/EscudoUN2016,scale=1}%
+\epsfig{file=EscudoUN2016,scale=1}%
 \end{figure}
 \vspace{2.5cm}
 \textbf{\Huge \thesisname} \\ 
@@ -352,7 +364,7 @@ Albert Einstein
 \include{chapters/physical_aspects}
 \include{chapters/detector_description}
 \include{chapters/detection_methods}
-\include{chapters/electronics}
+\include{chapters/Electronics}
 \include{chapters/simulation}
 \include{chapters/measurements}
 \include{chapters/future}
