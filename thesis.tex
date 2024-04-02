@@ -62,9 +62,15 @@
 \usepackage{amsmath,amsfonts,amssymb,amstext,amsthm,mathpazo, xfp, latexsym}
 \usepackage{bm} % bold math expressions $\bm{expression}$
 \usepackage{cancel}
-\usepackage{graphicx,float,multirow,multicol,subfigure}
+\usepackage{graphicx,float,multirow,multicol}
 \graphicspath{{./figures/}}
-\usepackage{caption}
+\usepackage{caption, subcaption}
+\DeclareCaptionSubType[alph]{figure}
+\captionsetup[subfigure]{labelformat=simple,justification=centerlast}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\makeatletter
+\renewcommand\p@subfigure{\thefigure}
+\makeatother
 \usepackage{longtable}
 \setlength{\LTcapwidth}{6in}
 

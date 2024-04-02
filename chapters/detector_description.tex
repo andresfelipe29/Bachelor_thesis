@@ -13,6 +13,36 @@
 
 \section{3D printed case}
 
-In order to make the crystal easier to mount on the SiPM PCB it was necessary to design a 3D printed case. With this we made sure that the crystal would not move with respect to the SiPM, preventing scratches and providing a more stable optical coupling with the photomultiplier.
+In order to hold the crystal in place on the SiPM PCB, it was necessary to design a 3D printed case -see Fig. \ref{fig:3d_case_desing} for an image of the 3D desing on inventor. With this we made sure that the crystal would not move with respect to the SiPM, preventing scratches and providing a more stable optical coupling with the photomultiplier.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Detector_description/3d_case_inventor.png}
+    \caption{3D model of the LYSO case made on inventor, the .cad files can be found on the repository \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}.}
+    \label{fig:3d_case_desing}
+\end{figure}
 
 The design keeps in mind that the crystal has to be wrapped in teflon tape to increase reflectivity, which is why it comes in two pieces that come together around the crystal, lowering the risk of tears. Once the crystal is placed in the case it can be kept together by means of electrical tape.
+
+Before using teflon tape, the crystal was wrapped in tin foil, which made tears common (Fig. \ref{fig:tin_foil_tear}) and greatly impacted the quality of the spectra that could be obtained with the detector. 
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{Detector_description/LYSO-wrapped.jpeg}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{Detector_description/tin_foil_tear.jpg}
+    \end{subfigure}
+    \caption{\label{fig:tin_foil_tear}Tin foil tear.}
+\end{figure}
+
+Teflon tape seems to solve the tearing problem. However, with the intention to reduce the risk of tearing the teflon, multiple iterations of the case were desined (Fig. \ref{fig:3d_previous_desings})
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Detector_description/Holder-designs.jpeg}
+    \caption{3D printed cases tested to reduce risk of teflon tearing.}
+    \label{fig:3d_previous_desings}
+\end{figure}
+
