@@ -3,6 +3,12 @@
 %versions of the detector
 \section{History}
 
+``The desktop muon detector was initially built as a Muon Tagging Optical Modules (MTOMs) for PINGU, the proposed low energy upgrade for IceCube experiment'' \cite{CosmicWatch}. Since the first iteration CosmicWatch has had multiple versions, always aiming to reduce size and costs, simplify its construction and provide better documentation for new CosmicWatch users. An indepth review of the detector evolution can be found in \cite{CosmicWatch} under ``About the project/Project evolution''.
+
+The previous versions of CosmicWatch used an Aduino Nano to process the signal comming from the photomultiplier\footnote{see chapter \ref{chap:Electronics} for an indepth description of the inner workings of the detector electronics}, which has only one core. This is a disadvantage when there is a high event rate, due to the fact that one can not sample data while saving previous events.
+
+Up until now only plastic scintillator had been used, due to how affordable and maleable it can be. Sadly, the poor resolution of this kind of scintillator makes it useless for spectroscopy. in addition to this plastics scintillators like BC-404 have a decay time of  
+
 \section{Plastic vs. LYSO}
 
 \section{Power Consumption}
@@ -45,4 +51,3 @@ Teflon tape seems to solve the tearing problem. However, with the intention to r
     \caption{3D printed cases tested to reduce risk of teflon tearing.}
     \label{fig:3d_previous_desings}
 \end{figure}
-

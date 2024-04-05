@@ -1,53 +1,15 @@
 % Esta es la Plantilla UNAL en LaTeX
 \documentclass[12pt,spanish,openany,twoside,letterpaper]{book}
 
-%Muestra los márgenes del documento para evitar Warnings
-%Para activar la siguiente línea quite el símbolo % 
-%\usepackage[showframe]{geometry}
-
-%Formato de fuentes bibliográficas
-%Use el estilo bibliográfico que sea pertinente según el área de estudio APA, IEEE, etc
-
-%Usando el paquete BibLaTeX
-%Cita normal con \cite[página]{} y cita con paréntesis \parencite[página]{}
-
-% Configuración de BibLaTeX
-%\usepackage[backend=biber,style=authoryear,maxcitenames=2,maxbibnames=99,giveninits=true,uniquename=false]{biblatex}
-%\addbibresource{Referencias.bib}
-
-% Cambiar el idioma de las referencias bibliográficas a español
-%\DefineBibliographyStrings{spanish}{%ext install latex-workshop
-%  andothers = {et\addabbrvspace al\adddot},
-%  andmore = {et\addabbrvspace al\adddot},
-%}
-
-% Personalizar el formato de las citas y la bibliografía
-%\DeclareNameAlias{sortname}{family-given}
-%\DeclareDelimFormat{multinamedelim}{\addcomma\space}
-%\DeclareDelimFormat{finalnamedelim}{\addcomma\space\&\space}
-%\DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}
-%\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{\titlecase{#1}}
-%\DeclareFieldFormat{journaltitlecase}{\titlecase{#1}}
-%\DeclareFieldFormat{pages}{#1}
-%\DeclareFieldFormat{volume}{\mkbibbold{#1}}
-%\renewbibmacro{in:}{}
-%\AtEveryBibitem{\clearfield{month}}
-
-%Usando el paquete Natbib
-%Cita normal \cite[página]{} y cita con paréntesis \citep[página]{}
-%\usepackage{natbib}
-%\bibpunct{[}{]}{;}{\&}{.}{}
-%\bibliographystyle{dtvstyle}
-
 \usepackage[nottoc]{tocbibind} %------bibliografía------%
-
-\usepackage[utf8]{inputenc} % allow utf-8 input
-\usepackage[T1]{fontenc}    % Caracteres especiales
 
 %Idioma del documento
 %Use main para el idioma principal del documento
 \usepackage[main=spanish,british,ngerman]{babel}
 \decimalpoint
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % Caracteres especiales
 
 % Evita ligadura li & fl
 \usepackage{microtype}
@@ -55,13 +17,9 @@
 
 \usepackage{lipsum}
 \usepackage{gensymb}
-\newcommand{\lambdabar}{{\mkern 5mu\mathchar '26\mkern -9.75mu\lambda}}
 
 % Otros paquetes de tablas y colores avanzados
 \usepackage{siunitx} %------unidades------%
-\usepackage{amsmath,amsfonts,amssymb,amstext,amsthm,mathpazo, xfp, latexsym}
-\usepackage{bm} % bold math expressions $\bm{expression}$
-\usepackage{cancel}
 \usepackage{graphicx,float,multirow,multicol}
 \graphicspath{{./figures/}}
 \usepackage{caption, subcaption}
@@ -71,10 +29,14 @@
 \makeatletter
 \renewcommand\p@subfigure{\thefigure}
 \makeatother
+\usepackage{amsmath,amsfonts,amssymb,amstext,amsthm, xfp, latexsym}
+% NUNCA INCLUIR EL PAQUETE "mathpazo"
+\usepackage{bm} % bold math expressions $\bm{expression}$
+\usepackage{cancel}
 \usepackage{longtable}
 \setlength{\LTcapwidth}{6in}
 
-\usepackage[autostyle, english=british]{csquotes}
+%\usepackage[autostyle, english=british]{csquotes}
 %\MakeOuterQuote{"}
 
 \usepackage{epsfig,epic,eepic,threeparttable,amscd,here,lscape,tabularx}
@@ -94,6 +56,11 @@
     citecolor=blue,
 }
 \usepackage{cleveref} %cleveref has to be added after hyperref
+
+%Permite incluir código de cualquier lenguaje dentro del texto del documento
+% \usepackage{minted}
+\usepackage{fancyvrb}
+\newenvironment{myverbatim}{\Verbatim}{\endVerbatim}
 
 \crefrangelabelformat{subsection}{#3#1#4-#5\crefstripprefix{#1}{#2}#6}
 
@@ -134,8 +101,8 @@
 
 %Palabras clave del documento - Tener presente los Theasurus https://www.thesaurus.com/
 %Disponible en 3 idiomas aunque se puede extender a francés o otro idioma
-\renewcommand{\palabrasclave}{Use palabras clave que estén en Theasaurus} 
-\renewcommand{\keywords}{Use keywords available in Theasaurus}
+\renewcommand{\palabrasclave}{CosmicWatch, RaspberryPi Pico, Radiación gamma, Centelleo.}
+\renewcommand{\keywords}{CosmicWatch, RaspberryPi Pico, Gamma radiation, Scintillation.}
 %\renewcommand{\schlusselworter}{}
 %\renewcommand{\palavraschave}{}
 
@@ -167,8 +134,8 @@
 % Permite personalizar los títulos de sección y de capítulos
 % hang lo deja en el mismo renglón, display lo despliega
 % Elimina el "Capitulo" y deja solo el número
-%\titleformat{\chapter}[hang]
-%  {\sffamily\Huge\bfseries}{\thechapter}{0.5cm}{\sffamily\Huge}
+\titleformat{\chapter}[hang]
+  {\Huge\bfseries}{\thechapter}{0.5cm}{\Huge}
 %\titleformat{\section}[hang]{\sffamily\LARGE}{\thesection}{0.5cm}{}
 %\titleformat{\subsection}[hang]{\sffamily\Large}{\thesubsection}{0.5cm}{}
 %\titleformat{\subsubsection}[hang]{\sffamily\large}{\thesubsubsection}{0.5cm}{}

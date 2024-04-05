@@ -1,4 +1,5 @@
 \chapter{Electronics}
+\label{chap:Electronics}
 
 CosmicWatches have to be mainly low-cost and easy to build. In order to achieve this, the components selected for the construction have been carefully curated to make sure these restrictions were met. This however might be greatly responsible for some of the odd features found while testing the detector, like the lack of linearity and fluctuations in amplification and peak-detected values of seemingly equal input signals. The full KiCad project can be found in the GitHub repository: \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}. The component numbers shown in this chapter are the ones that would have to be placed on the PCB in order to recreate the example schematics.
 
@@ -133,7 +134,7 @@ In order to avoid negative saturation $D_5$ is added, along with an outer feedba
         %(D3_r) -- (R24_r);
         %(C25_u) -- ++(2,0) to[R, l=$R_{15}$, resistors/scale=0.8] ++(0,-2) node[ground]{};
     \end{circuitikz}
-    \caption{Basic peak detector design, Adding a buffer to prevent discharging of the capacitor through the resistor and instead through any load in the circuit, in this case $R_29$.}
+    \caption{Basic peak detector design, Adding a buffer to prevent discharging of the capacitor through the resistor and instead through any load in the circuit, in this case $R_{29}$.}
     \label{circ:pd_buffer}
 \end{figure}
 
