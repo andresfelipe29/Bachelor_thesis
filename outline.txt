@@ -41,5 +41,9 @@ introduction=goals
 
 9 Conclusion
 
+Questions for Spencer:
+
+1) what does "leaked" mean in the first prototype of CW
+
 
 

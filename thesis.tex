@@ -29,6 +29,7 @@
 \makeatletter
 \renewcommand\p@subfigure{\thefigure}
 \makeatother
+\usepackage{booktabs}
 \usepackage{amsmath,amsfonts,amssymb,amstext,amsthm, xfp, latexsym}
 % NUNCA INCLUIR EL PAQUETE "mathpazo"
 \usepackage{bm} % bold math expressions $\bm{expression}$
@@ -106,6 +107,8 @@
 %\renewcommand{\schlusselworter}{}
 %\renewcommand{\palavraschave}{}
 
+\usepackage{footnote}
+\makesavenoteenv{tabular}
 %Formatting for headers and footers
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -227,6 +230,8 @@
 %Use \sffamily para dejar con letra Sans Serif, sin etiqueta queda LaTeX clásico
 \renewcommand{\listfigurename}{List of Figures}
 \renewcommand{\listtablename}{List of Tables}
+\renewcommand{\figurename}{Fig}
+\renewcommand{\tablename}{Tab}
 \renewcommand{\contentsname}{Table of contents}
 \renewcommand{\chaptername}{Chapter}
 %\renewcommand{\tablename}{\scriptsize \centering \textbf{Tabla}}
