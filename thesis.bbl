@@ -1,0 +1,73 @@
+\begin{thebibliography}{10}
+
+\bibitem{IAEA}
+International Atomic Energy~Agency (IAEA).
+\newblock Live chart of nuclides, nuclear structure and decay data.
+\newblock \url{https://www-nds.iaea.org/relnsd/vcharthtml/VChartHTML.html},
+  2024.
+\newblock Accessed: 2024-04-13.
+
+\bibitem{CosmicWatch}
+P.~Przewłocki \&~K. Frankiewicz.
+\newblock Cosmicwatch.
+\newblock \url{http://www.cosmicwatch.lns.mit.edu/}, 2017.
+\newblock Accessed: 2024-03-05.
+
+\bibitem{Nucelar_phoenix}
+Nuclear Phoenix.
+\newblock Open-gamma-detector.
+\newblock \url{https://github.com/OpenGammaProject/Open-Gamma-Detector}, 2024.
+\newblock Accessed: 2024-03-09.
+
+\bibitem{AnalogDevices_DC_DC}
+Inc Analog~Devices.
+\newblock Max5026, 500khz, 36v output, sot23, pwm step-up dc-dc converters.
+\newblock \url{https://www.analog.com/en/products/max5026.html}, 2024.
+\newblock Accessed: 2024-03-18.
+
+\bibitem{mukhopadhyay2004plastic}
+Sanjoy Mukhopadhyay.
+\newblock Plastic gamma sensors: an application in detection of radioisotopes.
+\newblock In {\em Hard X-Ray and Gamma-Ray Detector Physics V}, volume 5198,
+  pages 62--72. SPIE, 2004.
+
+\bibitem{Luxium_LYSO}
+LLC Luxium~Solutions.
+\newblock Lyso scintillation crystal.
+\newblock
+  \url{https://luxiumsolutions.com/radiation-detection-scintillators/crystal-scintillators/lyso-scintillation-crystals},
+  2023.
+\newblock Accessed: 2024-03-18.
+
+\bibitem{Luxium_plastic}
+LLC Luxium~Solutions.
+\newblock Bc-400, bc-404, bc-408, bc-412, bc-416.
+\newblock
+  \url{https://luxiumsolutions.com/radiation-detection-scintillators/plastic-scintillators/bc400-bc404-bc408-bc412-bc416},
+  2023.
+\newblock Accessed: 2024-04-07.
+
+\bibitem{SaintGobain_NaI}
+Saint-Gobain Ceramics \& Plastics, Inc.
+\newblock {\em Efficiency Calculations for Selected Scintillators}, 2018.
+\newblock Available at
+  \url{https://luxiumsolutions.com/radiation-detection-scintillators/crystal-scintillators/naitl-scintillation-crystals}.
+
+\bibitem{axani2019physics}
+Spencer~N. Axani.
+\newblock The physics behind the cosmicwatch desktop muon detectors, 2019.
+
+\bibitem{datasheet2024rp2040}
+Raspberry Pi Ltd.
+\newblock {\em Raspberry Pi Pico Datasheet, An RP2040-based microcontroller
+  board}, 2024.
+
+\bibitem{Onsemi_SiPM}
+LLC Semiconductor Components~Industries.
+\newblock Silicon photomultipliers (sipm) | j-series.
+\newblock
+  \url{https://www.onsemi.com/products/sensors/photodetectors-sipm-spad/silicon-photomultipliers-sipm/J-SERIES},
+  2024.
+\newblock Accessed: 2024-03-18.
+
+\end{thebibliography}

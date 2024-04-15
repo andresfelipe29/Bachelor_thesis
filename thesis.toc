@@ -1,0 +1,57 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {chapter}{Acknowledgments}{\es@scroman {ii}}{chapter*.3}%
+\contentsline {chapter}{Listado de símbolos y abreviaturas}{\es@scroman {iii}}{chapter*.4}%
+\contentsline {chapter}{Resumen}{\es@scroman {iv}}{chapter*.5}%
+\contentsline {chapter}{Abstract}{\es@scroman {v}}{chapter*.6}%
+\contentsline {chapter}{List of Figures}{\es@scroman {viii}}{chapter*.8}%
+\contentsline {chapter}{List of Tables}{\es@scroman {ix}}{chapter*.9}%
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Physical aspects}{2}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Radioactivity}{2}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Gamma emission}{3}{subsection.2.1.1}%
+\contentsline {subsubsection}{Beta decay}{4}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Light-matter interactions}{5}{subsection.2.1.2}%
+\contentsline {subsubsection}{Compton scattering}{5}{subsection.2.1.2}%
+\contentsline {subsubsection}{Lineal attenuation coeficient}{5}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Cosmic Radiation}{5}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Particle interactions with matter}{5}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Detector description}{6}{chapter.3}%
+\contentsline {section}{\numberline {3.1}History}{6}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Plastic vs. LYSO}{7}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Power Consumption}{8}{section.3.3}%
+\contentsline {section}{\numberline {3.4}KiCad}{8}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Accessories}{8}{section.3.5}%
+\contentsline {section}{\numberline {3.6}3D printed case}{8}{section.3.6}%
+\contentsline {chapter}{\numberline {4}Detection methods}{11}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Scintillation}{11}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Single photon detectors}{11}{section.4.2}%
+\contentsline {section}{\numberline {4.3}PMT's}{11}{section.4.3}%
+\contentsline {section}{\numberline {4.4}SiPM advantages}{11}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Electronics}{12}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Amplifier}{13}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Peak Detector}{13}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Basic Peak Detector}{14}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Preventing negative saturation}{15}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Basic Peak Detector + Buffer}{16}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Nuclear Phoenix}{16}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}Trigger}{17}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Microcontroller}{18}{section.5.4}%
+\contentsline {section}{\numberline {5.5}DC to DC booster}{18}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Single photons}{18}{section.5.6}%
+\contentsline {chapter}{\numberline {6}Geant4 Simulation}{19}{chapter.6}%
+\contentsline {section}{\numberline {6.1}What is Geant4?}{19}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Geometry}{19}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Muons going through the scintillator}{19}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Photons collected vs. produced}{19}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Optimum SiPM placement}{19}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Simulated Spectra}{19}{section.6.6}%
+\contentsline {chapter}{\numberline {7}Measurements}{20}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Rohde\&Schwarz RTO6 oscilloscope}{20}{section.7.1}%
+\contentsline {section}{\numberline {7.2}CosmicWatch electronics}{20}{section.7.2}%
+\contentsline {section}{\numberline {7.3}NIM}{20}{section.7.3}%
+\contentsline {chapter}{\numberline {8}Ongoing work and future directions}{21}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Odd features in Cesium spectra}{21}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Adding LYSO radioactivity to Geant4}{21}{section.8.2}%
+\contentsline {chapter}{\numberline {9}Conclusion}{22}{chapter.9}%
+\contentsline {chapter}{\numberline {A}RaspberryPi Pico code}{23}{appendix.Alph1}%
+\contentsline {chapter}{Bibliography}{24}{appendix*.26}%

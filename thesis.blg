@@ -1,0 +1,59 @@
+This is BibTeX, Version 0.99d (TeX Live 2022)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: thesis.aux
+A level-1 auxiliary file: frontmatter/Agradecimientos.aux
+A level-1 auxiliary file: frontmatter/Abreviaturas.aux
+A level-1 auxiliary file: frontmatter/ResumenAbstract.aux
+A level-1 auxiliary file: chapters/introduction.aux
+A level-1 auxiliary file: chapters/physical_aspects.aux
+A level-1 auxiliary file: chapters/detector_description.aux
+A level-1 auxiliary file: chapters/detection_methods.aux
+A level-1 auxiliary file: chapters/Electronics.aux
+A level-1 auxiliary file: chapters/simulation.aux
+A level-1 auxiliary file: chapters/measurements.aux
+A level-1 auxiliary file: chapters/future.aux
+A level-1 auxiliary file: chapters/conclusion.aux
+A level-1 auxiliary file: appendixes/RP_code.aux
+The style file: unsrt.bst
+Database file #1: bibliography.bib
+You've used 11 entries,
+            1791 wiz_defined-function locations,
+            524 strings with 5801 characters,
+and the built_in function-call counts, 1620 in all, are:
+= -- 153
+> -- 38
+< -- 2
++ -- 20
+- -- 9
+* -- 33
+:= -- 247
+add.period$ -- 39
+call.type$ -- 11
+change.case$ -- 9
+chr.to.int$ -- 0
+cite$ -- 11
+duplicate$ -- 71
+empty$ -- 206
+format.name$ -- 9
+if$ -- 389
+int.to.chr$ -- 0
+int.to.str$ -- 11
+missing$ -- 1
+newline$ -- 63
+num.names$ -- 9
+pop$ -- 59
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 33
+stack$ -- 0
+substring$ -- 24
+swap$ -- 20
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 12
+width$ -- 13
+write$ -- 125
