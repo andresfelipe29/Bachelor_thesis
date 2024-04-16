@@ -5,7 +5,7 @@
 
 ``The desktop muon detector was initially built as a Muon Tagging Optical Modules (MTOMs) for PINGU, the proposed low energy upgrade for IceCube experiment'' \cite{CosmicWatch}. Since the first iteration, CosmicWatch has had multiple versions, always aiming to reduce size and costs, simplify its construction, and provide better documentation for new CosmicWatch users. An in-depth review of the detector evolution can be found in \cite{CosmicWatch} under ``About the project/Project evolution''.
 
-The prototypes of CosmicWatch Fig. \ref{sfig:CW_ver1} used liquid scintillator, this however proved to be inefficient, since it was prone to leaks. The second prototype used a $5\times5\times5$ \unit{\cm\cubed} plastic scintillator in a light-tight reflective aluminum case Fig. \ref{fig:CW_ver2}, this was however too slow, large, and expensive, making it not suitable for students.
+The prototypes of CosmicWatch Fig. \ref{sfig:CW_ver1} used liquid scintillator, this however proved to be inefficient, since it was prone to leaks. The second prototype used a $5\times5\times5$ \unit{\cm\cubed} plastic scintillator in a light-tight reflective aluminum case Fig. \ref{sfig:CW_ver2}, this was however too slow, large, and expensive, making it not suitable for students.
 
 \begin{figure}[H]
   \centering
@@ -63,7 +63,39 @@ Higher densities are good for energy deposition, catching particles and gammas m
 
 \section{KiCad}
 
+KiCad is an opensource software that allows to create circuit schematics, PCB layout, and 3D viewing among other capabilities. It is available in Windows, Linux and iOS, making it perfect for CosmicWatch, since on of the goals is to make it easily available to new users. The KiCad project for CosmicWatch V2 can be found on the repository \href{https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v2}{CosmicWatch-Desktop-Muon-Detector-v2} under ``PCB\_Files''.
+
+\href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB} contains the KiCad files necessary to build the newer version of CosmicWatch, all the necessary footprints can be found in ``MyLibrary.pretty'', including the Raspberry Pi Pico footprints. In order to print the PCB it is necessaty to send the compressed ``Geber'' folder (found under ``CosmicWatch\_detector\_v33'') to a manufacturer, \href{https://www.elecrow.com/pcb-manufacturing.html}{ELECROW} is recommended.
+
 \section{Accessories}
+
+Currently CosmicWatch includes some accessories that make it possible to customize the detector and get more specific measurements, making use of its multiple sensors and features. Drivers and example code necessary to control the accessories listed bellow are included in \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}{CosmicWatch-gamma-spectroscopy-RP} under the ``drivers'' folder.
+
+\subsection{Preassure and Temperature sensor}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.4\textwidth]{Detector_description/bmp280.jpg}
+  \caption{BMP280 sensor PCB example, it can be easily found online. Taken from \href{https://a.co/d/hhF7Vtp}{Amazon}.}
+  \label{fig:bmp280}
+\end{figure}
+
+An absolute barometric pressure sensor \href{https://www.bosch-sensortec.com/products/environmental-sensors/pressure-sensors/bmp280/}{BMP280} can be included in the detector construction to make barometric measurements that can relate to muon counts. Temperature can also affect the SiPM and LYSO response, possibly making this data important while characterizing the detector. The Raspberry Pi Pico has a built in temperature sensor, this however has been found to have some errors dependig on the reference voltage, making its calibration necessary.
+
+The Raspberry Pi Pico reads data from the BMP280 through the I2C protocol, the MicroPython driver can also be found in \href{https://github.com/dafvid/micropython-bmp280}{micropython-bmp280} by David Stenwall, who has made an amaizing description on the use of this sensor in his repository.
+
+\subsection{OLED screen}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.4\textwidth]{Detector_description/ssd1306.jpg}
+  \caption{SSD1306 OLED screen example, it can be easily found online. Taken from \href{https://a.co/d/cGnBDLF}{Amazon}}
+  \label{fig:bssd1306}
+\end{figure}
+
+OLED screens are versitalie and provide a fast way to read data directly from the detector, making it more user friendly and easier to trouble-shoot. An ssd1306 OLED screen can be connected to the detector, the driver is listed in the \href{https://github.com/micropython/micropython-lib/tree/master/micropython/drivers/display}{MicroPython documentation}.
+
+The ``Login'' screen of the detector shows a $128\times 64$ pixelart on bytearray form of the CosmicWatch logo, found under the ``Logos'' in \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}{CosmicWatch-gamma-spectroscopy-RP}.
 
 \section{3D printed case}
 
