@@ -11,7 +11,7 @@
 *.log
 *.lot
 *.out
-*.pdf
+thesis.pdf
 *.run.xml
 *.synctex.gz
 *.toc

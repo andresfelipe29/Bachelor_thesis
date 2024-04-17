@@ -63,13 +63,13 @@ Higher densities are good for energy deposition, catching particles and gammas m
 
 \section{KiCad}
 
-KiCad is an opensource software that allows to create circuit schematics, PCB layout, and 3D viewing among other capabilities. It is available in Windows, Linux and iOS, making it perfect for CosmicWatch, since on of the goals is to make it easily available to new users. The KiCad project for CosmicWatch V2 can be found on the repository \href{https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v2}{CosmicWatch-Desktop-Muon-Detector-v2} under ``PCB\_Files''.
+KiCad is an open-source software that allows the creation of circuit schematics, PCB layout, and 3D viewing among other capabilities. It is available in Windows, Linux, and iOS, making it perfect for CosmicWatch, since one of the goals is to make it easily available to new users. The KiCad project for CosmicWatch V2 can be found on the repository \href{https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v2}{CosmicWatch-Desktop-Muon-Detector-v2} under ``PCB\_Files''.
 
-\href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB} contains the KiCad files necessary to build the newer version of CosmicWatch, all the necessary footprints can be found in ``MyLibrary.pretty'', including the Raspberry Pi Pico footprints. In order to print the PCB it is necessaty to send the compressed ``Geber'' folder (found under ``CosmicWatch\_detector\_v33'') to a manufacturer, \href{https://www.elecrow.com/pcb-manufacturing.html}{ELECROW} is recommended.
+\href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB} contains the KiCad files necessary to build the newer version of CosmicWatch, all the necessary footprints can be found in ``MyLibrary.pretty'', including the Raspberry Pi Pico footprints. In order to print the PCB, it is necessary to send the compressed ``Geber'' folder (found under ``CosmicWatch\_detector\_v33'') to a manufacturer, \href{https://www.elecrow.com/pcb-manufacturing.html}{ELECROW} is recommended.
 
 \section{Accessories}
 
-Currently CosmicWatch includes some accessories that make it possible to customize the detector and get more specific measurements, making use of its multiple sensors and features. Drivers and example code necessary to control the accessories listed bellow are included in \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}{CosmicWatch-gamma-spectroscopy-RP} under the ``drivers'' folder.
+Currently, CosmicWatch includes some accessories that make it possible to customize the detector and get more specific measurements, making use of its multiple sensors and features. Drivers and example code necessary to control the accessories listed below are included in \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}{CosmicWatch-gamma-spectroscopy-RP} under the ``drivers'' folder.
 
 \subsection{Preassure and Temperature sensor}
 
@@ -80,9 +80,9 @@ Currently CosmicWatch includes some accessories that make it possible to customi
   \label{fig:bmp280}
 \end{figure}
 
-An absolute barometric pressure sensor \href{https://www.bosch-sensortec.com/products/environmental-sensors/pressure-sensors/bmp280/}{BMP280} can be included in the detector construction to make barometric measurements that can relate to muon counts. Temperature can also affect the SiPM and LYSO response, possibly making this data important while characterizing the detector. The Raspberry Pi Pico has a built in temperature sensor, this however has been found to have some errors dependig on the reference voltage, making its calibration necessary.
+An absolute barometric pressure sensor \href{https://www.bosch-sensortec.com/products/environmental-sensors/pressure-sensors/bmp280/}{BMP280} can be included in the detector construction to make barometric measurements that can relate to muon counts. Temperature can also affect the SiPM and LYSO response, possibly making this data important while characterizing the detector. The Raspberry Pi Pico has a built-in temperature sensor, this however has been found to have some errors depending on the reference voltage, making its calibration necessary.
 
-The Raspberry Pi Pico reads data from the BMP280 through the I2C protocol, the MicroPython driver can also be found in \href{https://github.com/dafvid/micropython-bmp280}{micropython-bmp280} by David Stenwall, who has made an amaizing description on the use of this sensor in his repository.
+The Raspberry Pi Pico reads data from the BMP280 through the I2C protocol, the MicroPython driver can also be found in \href{https://github.com/dafvid/micropython-bmp280}{micropython-bmp280} by David Stenwall, who has made an amazing description on the use of this sensor in his repository.
 
 \subsection{OLED screen}
 
@@ -93,18 +93,18 @@ The Raspberry Pi Pico reads data from the BMP280 through the I2C protocol, the M
   \label{fig:bssd1306}
 \end{figure}
 
-OLED screens are versitalie and provide a fast way to read data directly from the detector, making it more user friendly and easier to trouble-shoot. An ssd1306 OLED screen can be connected to the detector, the driver is listed in the \href{https://github.com/micropython/micropython-lib/tree/master/micropython/drivers/display}{MicroPython documentation}.
+OLED screens are versatile and provide a fast way to read data directly from the detector, making it more user-friendly and easier to troubleshoot. An ssd1306 OLED screen can be connected to the detector, the driver is listed in the \href{https://github.com/micropython/micropython-lib/tree/master/micropython/drivers/display}{MicroPython documentation}.
 
-The ``Login'' screen of the detector shows a $128\times 64$ pixelart on bytearray form of the CosmicWatch logo, found under the ``Logos'' in \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}{CosmicWatch-gamma-spectroscopy-RP}.
+The ``Log in'' screen of the detector shows a $128\times 64$ pixelart on bytearray form of the CosmicWatch logo, found under the ``Logos'' in \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}{CosmicWatch-gamma-spectroscopy-RP}.
 
 \section{3D printed case}
 
-In order to hold the crystal in place on the SiPM PCB, it was necessary to design a 3D printed case -see Fig. \ref{fig:3d_case_desing} for an image of the 3D design on Inventor. With this we made sure that the crystal would not move relative to the SiPM, preventing scratches and providing a more stable optical coupling with the photomultiplier.
+In order to hold the crystal in place on the SiPM PCB, it was necessary to design a 3D printed case -see Fig. \ref{fig:3d_case_desing} for a schematic of the 3D design on Inventor. With this we made sure that the crystal would not move relative to the SiPM, preventing scratches and providing a more stable optical coupling with the photomultiplier.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Detector_description/3d_case_inventor.png}
-    \caption{3D model of the LYSO case made on Inventor, the .cad files can be found on the repository \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}.}
+    \includegraphics[width=\textwidth]{Detector_description/LYSO-holder-drawing.pdf}
+    \caption{Case model for a $4\times4\times22$ \unit{mm\cubed} LYSO crystal, all dimensions are shown in \unit{\mm}. The \texttt{.stl} and \texttt{.ipt} files for 3D printing can be found on the repository \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}.}
     \label{fig:3d_case_desing}
 \end{figure}
 
