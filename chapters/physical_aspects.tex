@@ -1,6 +1,6 @@
 \chapter{Physical aspects}
 
-Atomic nuclei have multiple energy states, many of which are not stable, forcing them to release some of their energy in order to reach a stable state. One decay however does not always lead to a direct transition into a stable state, it may even require the atom to change into another depending on what way it has released its energy. On the other hand, radiation is not only produced when atoms decay, it is constantly raining down upon us from the cosmos, this kind of radiation can also be detected with a CosmicWatch, making it also necessary to explore. This chapter aims to provide an overview of some of the mechanisms through which nuclei reach stable states and what cosmic radiation is. Chapter \ref{chap:detection_methods} provides an overview of how this can be used to take interesting measurements with CosmicWatch.
+Atomic nuclei have multiple energy states, many of which are not stable, forcing them to release some of their energy in order to reach a stable state. One decay however, does not always lead to a direct transition into a stable state, it may even require the atom to transform into another depending on what way it has released its energy by. The theory on this chapter regarding energy and particle emissions from decaying nuclei is based on the detailed information shown in the first chapters of ``Radiation Detection and Measurement'' by Glenn F. Knoll \cite{knoll2010radiation}. On the other hand, radiation is not only produced when atoms decay, it is constantly raining down upon us from the cosmos, this kind of radiation can also be detected with a CosmicWatch, making it also necessary to explore. This chapter aims to provide an overview of some of the mechanisms through which nuclei reach stable states and what cosmic radiation is. Chapter \ref{chap:detection_methods} provides an overview of how this can be used to take interesting measurements with CosmicWatch.
 
 \section{Radioactivity}
 
@@ -24,7 +24,7 @@ The most common units for activity are the \textit{curie} (Ci) and the \textit{b
     1 \text{~Bq} = 2.703\times10^{-11} \text{~Ci}
 \end{eqnarray}
 
-The time constant $\Gamma$ is often expressed in terms of the atom's lifetime $\tau$ under the relation $\Gamma=1/\tau$. This means that $\tau$ is the time it takes to reduce a sample of $N_0$ by a factor of $1/e$, clearly $N(\tau)=N_0e^{-\Gamma \tau} = N_0/e$. On the other hand there also exists a constant called half-life $T_{1/2}$, which represents the time it takes to reduce the sample by half, Sodium 22 for example has a half-life of 2.605 years. They can both be related by doing $T_{1/2} = \ln (2)\tau$ \cite{knoll2010radiation}.
+The time constant $\Gamma$ is often expressed in terms of the atom's lifetime $\tau$ under the relation $\Gamma=1/\tau$. This means that $\tau$ is the time it takes to reduce a sample of $N_0$ by a factor of $1/e$, clearly $N(\tau)=N_0e^{-\Gamma \tau} = N_0/e$. On the other hand there also exists a constant called half-life $T_{1/2}$, which represents the time it takes to reduce the sample by half, Sodium 22 for example has a half-life of 2.605 years. They can both be related by doing $T_{1/2} = \ln (2)\tau$.
 
 \subsection{Gamma emission}
 
@@ -80,7 +80,7 @@ Alongside the positron/electron, a neutrino/antineutrino is ejected from the nuc
 
 \subsubsection{Electron Capture}
 
-The process of Electron Capture is analogous to $\beta^+$ decay, here an electron from de $K$ shell (or $L$, $M$, \dots) is captured by a proton in the nucleous, which then turns into a neutron while emitting a neutrino with a characteristic energy. The effect of this decay in the nucleous is the same as in $\beta^+$ (Z, A)$\rightarrow$(Z-1, A). The decay scheme is represented below:
+The process of Electron Capture is analogous to $\beta^+$ decay, here an electron from de $K$ shell (or $L$, $M$, \dots) is captured by a proton in the nucleous, which then turns into a neutron while emitting a neutrino with a characteristic energy. The effect of this decay in the nucleous is the same as in $\beta^+$: (Z, A)$\rightarrow$(Z-1, A). The decay scheme is represented below:
 
 \begin{equation}
   \text{EC} :=~ p + e^- \rightarrow ~ n + \nu
@@ -92,7 +92,31 @@ Since this process leaves a vacancy in the lower shells of the electron cloud, a
 
 This section shows a review of the most important processes that govern gamma-ray interactions with matter, them being photoelectric effect, Compton scattering, and pair production.
 
+\subsubsection{photoelectric effect}
+
+This effect was first described by Alber Einstein in \cite{einstein1905heuristic}, is is the emission of electrons from an atom due to the absortion of light. The electrons are emitted with an energy close to that of the absorved photon $E_\gamma$ and is given by equation \eqref{eq:photoelectric}
+\begin{equation}
+  E_{e^-} = E_\gamma - E_b \label{eq:photoelectric}
+\end{equation}
+Where $E_b$ is the binding energy of the electron in the atom. $E_b$ will therefore depend on the electrons original shell, since outter shells have lower binding energies.
+
 \subsubsection{Compton scattering}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.4\textwidth]{physical_aspects/Compton-scattering.pdf}
+  \caption{\label{fig:Compton_scattering_diagram}Gamma-ray Compton scattering diagram.}
+\end{figure}
+
+Compton scattering osccurs most often when a photon interacts with an electron in the sensitive material, it can be understood as a colision between the two, where the electron is considered initialy static and then gains part of the photons energy $E_0$ after deflecting it. Fig \ref{fig:Compton_scattering_diagram} shows an example of a gamma-ray being scattered by an electron, the recoil electron is ejected with an angle $\phi$ while the scattered gamma ray travels with an angle $\theta$. It can be shown that the energy of the scattered photon $E_{1}$ and the recoil electron $E_e$ follow equations \eqref{eq:compton}
+\begin{align}
+  E_{1} &= \frac{E_0}{1+\epsilon(1-\cos\theta)} \label{eq:compton},~ & E_e &= E_0 - E_1 = E_0\frac{\epsilon(1-\cos\theta)}{1+\epsilon(1-\cos\theta)};~ & \epsilon&=\frac{E_0}{m_{e}c^2} 
+\end{align}
+where $m_e c^2$ is the resting energy of the electron (511 \unit{\kilo\eV}). It is easy to see that high scattering angles greatly reduce the photon's energy, meaning that $E_e$ will be higher. For $\theta=\pi$ and $\phi=0$, it is therefore clear that the electron will gain the maximum energy possible, which is lower than $E_0$, this will be inportant while detecting gammas, since the photomultipliers collect the energy carried by electrons, which is further explored in Chapter \ref{chap:detection_methods}.
+
+\subsubsection{Pair production}
+
+This effect is the creation of a particle and its antiparticle from a neutral bosson, most often refer to when an electron and a positron are produced by a photon. In order for this to occur, the initial photon needs to have an energy higher to that of the resting pair ($2m_e c^2=1022$ \unit{\kilo\eV}), any exceding energy will turn into kinetic energy for the pair. 
 
 \subsubsection{Lineal attenuation coeficient}
 
