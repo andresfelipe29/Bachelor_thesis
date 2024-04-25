@@ -1,6 +1,8 @@
 \chapter{Physical aspects}
 
-Atomic nuclei have multiple energy states, many of which are not stable, forcing them to release some of their energy in order to reach a stable state. One decay however, does not always lead to a direct transition into a stable state, it may even require the atom to transform into another depending on what way it has released its energy by. The theory on this chapter regarding energy and particle emissions from decaying nuclei is based on the detailed information shown in the first chapters of ``Radiation Detection and Measurement'' by Glenn F. Knoll \cite{knoll2010radiation}. On the other hand, radiation is not only produced when atoms decay, it is constantly raining down upon us from the cosmos, this kind of radiation can also be detected with a CosmicWatch, making it also necessary to explore. This chapter aims to provide an overview of some of the mechanisms through which nuclei reach stable states and what cosmic radiation is. Chapter \ref{chap:detection_methods} provides an overview of how this can be used to take interesting measurements with CosmicWatch.
+Atomic nuclei have multiple energy states, many of which are not stable, forcing them to release some of their energy in order to reach a stable state. However, one decay does not always lead to a direct transition into a stable state, it may even require the atom to transform into another, depending on what way it has released its energy. The theory in this chapter regarding energy and particle emissions from decaying nuclei is based on the detailed information shown in the first chapters of ``Radiation Detection and Measurement'' by Glenn F. Knoll \cite{knoll2010radiation}. 
+
+Radiation is not only produced when atoms decay, it is constantly raining down upon us from the cosmos, this kind of radiation can also be detected with a CosmicWatch, making it also necessary to explore, the section regarding cosmic rays and showers is greatly inspired in the contents of ``Cosmic Rays'' by Bruno Rossi \cite{brunoRossi}. This chapter thus aims to provide an overview of the radiation to which CosmicWatch is sensitive and some of its production mechanisms. Chapter \ref{chap:detection_methods} provides an overview of how this can be used to take interesting measurements with CosmicWatch.
 
 \section{Radioactivity}
 
@@ -78,9 +80,11 @@ Alongside the positron/electron, a neutrino/antineutrino is ejected from the nuc
     \caption{\label{fig:beta_spectra}positron/electron energy spectra for  \subref{sfig:22Na_beta_spectra} $^{22}$Na $(\beta^+)$ and  \subref{sfig:60Co_beta_spectra} $^{60}$Co $(\beta^-)$. Taken from \cite{IAEA}.}
 \end{figure}
 
+\subsubsection{LYSO self-radiation}\label{sec:self_radiation}
+
 \subsubsection{Electron Capture}
 
-The process of Electron Capture is analogous to $\beta^+$ decay, here an electron from de $K$ shell (or $L$, $M$, \dots) is captured by a proton in the nucleous, which then turns into a neutron while emitting a neutrino with a characteristic energy. The effect of this decay in the nucleous is the same as in $\beta^+$: (Z, A)$\rightarrow$(Z-1, A). The decay scheme is represented below:
+The process of Electron Capture is analogous to $\beta^+$ decay, here an electron from de $K$ shell (or $L$, $M$, \dots) is captured by a proton in the nucleus, which then turns into a neutron while emitting a neutrino with a characteristic energy. The effect of this decay in the nucleus is the same as in $\beta^+$: (Z, A)$\rightarrow$(Z-1, A). The decay scheme is represented below:
 
 \begin{equation}
   \text{EC} :=~ p + e^- \rightarrow ~ n + \nu
@@ -90,15 +94,15 @@ Since this process leaves a vacancy in the lower shells of the electron cloud, a
 
 \subsection{Light-matter interactions}
 
-This section shows a review of the most important processes that govern gamma-ray interactions with matter, them being photoelectric effect, Compton scattering, and pair production.
+This section shows a review of the most important processes that govern gamma-ray interactions with matter, them being the photoelectric effect, Compton scattering, and pair production.
 
 \subsubsection{photoelectric effect}
 
-This effect was first described by Alber Einstein in \cite{einstein1905heuristic}, is is the emission of electrons from an atom due to the absortion of light. The electrons are emitted with an energy close to that of the absorved photon $E_\gamma$ and is given by equation \eqref{eq:photoelectric}
+This effect was first described by Albert Einstein in \cite{einstein1905heuristic}, it is the emission of electrons from an atom due to the absorption of light. The electrons are emitted with an energy close to that of the absorbed photon $E_\gamma$ and is given by equation \eqref{eq:photoelectric}
 \begin{equation}
   E_{e^-} = E_\gamma - E_b \label{eq:photoelectric}
 \end{equation}
-Where $E_b$ is the binding energy of the electron in the atom. $E_b$ will therefore depend on the electrons original shell, since outter shells have lower binding energies.
+Where $E_b$ is the binding energy of the electron in the atom. $E_b$ will therefore depend on the electron's original shell since outer shells have lower binding energies.
 
 \subsubsection{Compton scattering}
 
@@ -108,15 +112,15 @@ Where $E_b$ is the binding energy of the electron in the atom. $E_b$ will theref
   \caption{\label{fig:Compton_scattering_diagram}Gamma-ray Compton scattering diagram.}
 \end{figure}
 
-Compton scattering osccurs most often when a photon interacts with an electron in the sensitive material, it can be understood as a colision between the two, where the electron is considered initialy static and then gains part of the photons energy $E_0$ after deflecting it. Fig \ref{fig:Compton_scattering_diagram} shows an example of a gamma ray being scattered by an electron, the recoil electron is ejected with an angle $\phi$ while the scattered gamma ray travels with an angle $\theta$. It can be shown that the energy of the scattered photon $E_{1}$ and the recoil electron $E_e$ follow equations \eqref{eq:compton}
+Compton scattering occurs most often when a photon interacts with an electron in the sensitive material, it can be understood as a collision between the two, where the electron is considered initially static and then gains part of the photon's energy $E_0$ after deflecting it. Fig \ref{fig:Compton_scattering_diagram} shows an example of a gamma ray being scattered by an electron, the recoil electron is ejected with an angle $\phi$ while the scattered gamma ray travels with an angle $\theta$. It can be shown that the energy of the scattered photon $E_{1}$ and the recoil electron $E_e$ follow equations \eqref{eq:compton}
 \begin{align}
   E_{1} &= \frac{E_0}{1+\epsilon(1-\cos\theta)} \label{eq:compton},~ & E_e &= E_0 - E_1 = E_0\frac{\epsilon(1-\cos\theta)}{1+\epsilon(1-\cos\theta)};~ & \epsilon&=\frac{E_0}{m_{e}c^2} 
 \end{align}
-where $m_e c^2$ is the resting energy of the electron (511 \unit{\kilo\eV}). It is easy to see that high scattering angles greatly reduce the photon's energy, meaning that $E_e$ will be higher. For $\theta=\pi$ and $\phi=0$, it is therefore clear that the electron will gain the maximum energy possible, which is lower than $E_0$, this will be inportant while detecting gammas, since the photomultipliers collect the energy carried by electrons, which is further explored in Chapter \ref{chap:detection_methods}.
+where $m_e c^2$ is the resting energy of the electron (511 \unit{\kilo\eV}). It is easy to see that high scattering angles greatly reduce the photon's energy, meaning that $E_e$ will be higher. For $\theta=\pi$ and $\phi=0$, it is therefore clear that the electron will gain the maximum energy possible, which is lower than $E_0$, this will be important while detecting gammas since photomultipliers collect the energy carried by electrons, which is further explored in Chapter \ref{chap:detection_methods}.
 
 \subsubsection{Pair production}
 
-This effect is the creation of a particle and its antiparticle from a neutral bosson, most often refer to when an electron and a positron are produced by a photon. In order for this to occur, the initial photon needs to have an energy higher to that of the resting pair ($2m_e c^2=1022$ \unit{\kilo\eV}), any exceding energy will turn into kinetic energy for the pair.
+This effect is the creation of a particle and its antiparticle from a neutral boson, most often referred to when an electron and a positron are produced by a photon. In order for this to occur, the initial photon's energy needs to be higher than that of the resting pair ($2m_e c^2=1022$ \unit{\kilo\eV}), any exceeding energy will turn into kinetic energy for the pair.
 
 In the case of $^{22}$Na, as shown in Fig. \ref{sfig:22Na}, there is a transition from an excited state of $^{22}$Ne which emits a 1274.53 \unit{\kilo\eV} gamma, making pair production possible. Electron-positron annihilation is therefore a byproduct of this decay, making it important while studying its spectra.
 
@@ -130,6 +134,102 @@ Once the positron produced by pair production slows down, it will most probably 
 
 \section{Cosmic Radiation}
 
+Cosmic rays are high-energy particles and clusters of particles originating from all around the universe. Cosmic rays are constantly raining down upon us, but the Earth's atmosphere and magnetic field protect us by reducing their energy and deflecting them. However, through various processes, some of these particles can produce new which are now capable of reaching sea level. CosmicWatches can also be used to measure some of these particles and their properties, making them worth studying here.
 
+The particles that initially reach the atmosphere are known as primaries, protons and bare nuclei of heavier elements make up for most of them. Once the primaries reach the atmosphere they interact with oxygen and hydrogen molecules, breaking them apart and producing new particles that will further interact with the atmosphere, creating what is known as a cosmic ray shower. A simplified diagram of cosmic ray showers is shown in Fig. \ref{fig:cosmic-shower-diagram}.
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.9]
+  \tikzset{edge from parent/.style=
+  {draw,
+  edge from parent path={(\tikzparentnode.south)
+  -- +(0,-8pt)
+  -| (\tikzchildnode)}}}
+  \Tree [.{primary}
+  [.{Nuclear collision} 
+    [.$p$ 
+      [.{Hadronic cascade} 
+        [.$\pi^{\pm}$ \edge[dashed] node[]{}; [.{} ] ]
+        [.$\pi^0$ \edge[dashed] node[]{}; [.{} ] ]
+        [.$p(\bar{p})$ \edge[dashed] node[]{}; [.{} ] ]
+        [.$n(\bar{n})$ \edge[dashed] node[]{}; [.{} ] ]
+        [.$K^{\pm}$ \edge[dashed] node[]{}; [.{} ] ]
+        [.$K^{0}$ \edge[dashed] node[]{}; [.{} ] ]
+      ]
+    ]
+    [.$\pi^0$
+      [.{Decay} 
+        [.$\gamma$ 
+          [.{Pair production}
+            [.$e^+$ 
+              [.{Bremsstrahlung}
+                [.$\gamma$ 
+                  [.$e^-$ ]
+                  [.$e^+$ ]
+                ]
+                [.$e^+$ 
+                  [.$\gamma$ ]
+                  [.$e^+$ ]
+                ]
+              ]
+            ]
+            [.$e^-$ \edge[dashed] node[]{}; [.{} ] ]
+          ]
+        ]
+        [.$\gamma$ 
+          [.$e^-$ \edge[dashed] node[]{}; [.{} ] ]
+          [.$e^+$ \edge[dashed] node[]{}; [.{} ] ]
+        ]
+      ] 
+    ]
+    [.$\pi^{\pm}$
+      [.{Decay} 
+        [.$\mu^{\pm}$ 
+          [.{Decay} 
+            [.$e^{\pm}$ ]
+            [.$\nu$ ]
+            [.$\bar{\nu}$ ]
+          ]
+        ]
+        [.$\nu$ ]
+      ] 
+    ]
+    [.$\pi^{\pm}$
+      [.{Hadronic cascade} 
+        [.$\pi^{\pm}$ 
+          [.$\mu^{\pm}$ ]
+          [.$\nu(\bar{\nu})$ ]
+        ]
+        [.$\pi^0$ 
+          [.$\gamma$ \edge[dashed] node[]{}; [.{} ] ]
+          [.$\gamma$ \edge[dashed] node[]{}; [.{} ] ]
+        ]
+      ] 
+    ]
+  ] 
+  ]
+\end{tikzpicture}
+\caption{Cosmic-ray shower evolution diagram. Adapted from \cite{brunoRossi}}
+\label{fig:cosmic-shower-diagram}
+\end{figure}
 
 \section{Particle interactions with matter}
+
+The type of interaction highly depends on the type of particle we are dealing with, as mentioned before for example neutrinos interact very little with matter, making them invisible to CosmicWatches. The general case however is different and can be divided into two parts depending on the particle's mass. Due to how light electrons and positions are $m_ec^2=9.11\times10^{-31}$ kg, their trajectories can be easily modified due to electromagnetic interactions with surrounding atoms. This section shows a brief explanation of some of the processes that particles undergo while releasing their energy. It is also important to note that the main interactions occur between the particle and the orbital electrons in the detector's material, particle-nuclei interaction may also occur, these are however much less common, which is why detectors rely on particle-electron interactions.
+
+\subsection{interactions of heavy charged particles}
+
+Once the charged particle has entered a medium it transfers some of its energy to the electrons, by making them jump to a higher energy state (excitation) or removing them from the atom (ionization) depending on the strength of the interaction. The average energy loss per unit length traveled is known as the stopping power $-dE/dx$, depending on the particle's energy the effects that induce the energy transfer will differ, which is why it can be divided into three regions. The limits of these regions depend on the effective atomic number of the absorber and the mass of the slowing particle \cite{ReviewOfParticlePhysics}, making them specific for every use case scenario.
+
+\subsubsection{sub-relativistic region}
+
+Here, particles have enough energy to remove orbiting electrons from the atom, and the energy loss increases with the distance traveled. In the case of positively charged particles, this may result in electron pickup, effectively decreasing its charge and therefore its electromagnetic interaction with the surrounding medium, making $-dE/dx$ fall off rapidly. The energy loss along a track is known as the Bragg curve, in the example discussed earlier it resembles a peak. 
+
+\subsubsection{ionization region}
+
+Atomic ionization and excitation take great importance in this region. The high velocities prevent particles from picking up electrons, maintaining their charge constant, and effectively losing energy by slowing down. The Bethe-Bloch formula gives a good approximation of the energy loss in this region (further corrections can be made for the other regions). Here, normally above $10^2$ MeV for heavy particles and 1 MeV for fast electrons/positrons, $-dE/dx$ reaches an almost constant minimum of about $2$ \unit{\mega\eV\per{\g\cm\squared}} for light materials \cite[p 32]{knoll2010radiation}. At this minimum, particles are called ``minimum ionizing particles'' since their ionization potential is the lowest, allowing them to travel deeper into the material. Since most muons reaching sea level have energies of around 4 \unit{\giga\eV} \cite[p 380]{ReviewOfParticlePhysics}, this region is particularly relevant for CosmicWatches, meaning that they are most likely to trigger the detector by ionization of the material.
+
+\subsubsection{ultra-relativistic region}
+
+In this regime pair production, Bremsstrahlung, and photonuclear contributions become important. The energy threshold for radiative processes to significant occurs at several hundred \unit{\giga\eV} in the case of muons, it is known as critical energy and is defined as the energy at which radiative and ionization losses are equal.

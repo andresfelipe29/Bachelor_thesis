@@ -75,7 +75,7 @@ Currently, CosmicWatch includes some accessories that make it possible to custom
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.4\textwidth]{Detector_description/bmp280.jpg}
+  \includegraphics[width=0.3\textwidth]{Detector_description/bmp280.jpg}
   \caption{BMP280 sensor PCB example, it can be easily found online. Taken from \href{https://a.co/d/hhF7Vtp}{Amazon}.}
   \label{fig:bmp280}
 \end{figure}
@@ -88,7 +88,7 @@ The Raspberry Pi Pico reads data from the BMP280 through the I2C protocol, the M
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.4\textwidth]{Detector_description/ssd1306.jpg}
+  \includegraphics[width=0.3\textwidth]{Detector_description/ssd1306.jpg}
   \caption{SSD1306 OLED screen example, it can be easily found online. Taken from \href{https://a.co/d/cGnBDLF}{Amazon}}
   \label{fig:bssd1306}
 \end{figure}
@@ -101,33 +101,30 @@ The ``Log in'' screen of the detector shows a $128\times 64$ pixelart on bytearr
 
 In order to hold the crystal in place on the SiPM PCB, it was necessary to design a 3D printed case -see Fig. \ref{fig:3d_case_desing} for a schematic of the 3D design on Inventor. With this we made sure that the crystal would not move relative to the SiPM, preventing scratches and providing a more stable optical coupling with the photomultiplier.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{Detector_description/LYSO-holder-drawing.pdf}
+    \includegraphics[width=.9\textwidth]{Detector_description/LYSO-holder-drawing.pdf}
     \caption{Case model for a $4\times4\times22$ \unit{mm\cubed} LYSO crystal, all dimensions are shown in \unit{\mm}. The \texttt{.stl} and \texttt{.ipt} files for 3D printing can be found on the repository \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}.}
     \label{fig:3d_case_desing}
 \end{figure}
 
 The design keeps in mind that the crystal has to be wrapped in Teflon tape to increase reflectivity, which is why it comes in two pieces that come together around the crystal, lowering the risk of tears. Once the crystal is placed in the case it can be kept together using electrical tape.
 
-Before using Teflon tape, the crystal was wrapped in tin foil, which made tears common (Fig. \ref{fig:tin_foil_tear}) and greatly impacted the quality of the spectra that could be obtained with the detector. 
-
-\begin{figure}[H]
+Before using Teflon tape, the crystal was wrapped in tin foil, which made tears common (Fig. \ref{fig:tin_foil_tear}) and greatly impacted the quality of the spectra that could be obtained with the detector. Teflon tape seems to solve the tearing problem. However, to reduce the risk of tearing the Teflon, multiple iterations of the case were designed (Fig. \ref{fig:3d_previous_desings}).
+\begin{figure}
     \centering
-    \begin{subfigure}[t]{0.45\textwidth}
+    \begin{subfigure}[t]{0.35\textwidth}
       \includegraphics[width=\textwidth]{Detector_description/LYSO-wrapped.jpeg}
     \end{subfigure}
-    \begin{subfigure}[t]{0.45\textwidth}
+    \begin{subfigure}[t]{0.35\textwidth}
       \includegraphics[width=\textwidth]{Detector_description/tin_foil_tear.jpg}
     \end{subfigure}
     \caption{\label{fig:tin_foil_tear}Tin foil tear.}
 \end{figure}
 
-Teflon tape seems to solve the tearing problem. However, to reduce the risk of tearing the Teflon, multiple iterations of the case were designed (Fig. \ref{fig:3d_previous_desings})
-
-\begin{figure}[H]
+\begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]{Detector_description/Holder-designs.jpeg}
+    \includegraphics[width=0.4\textwidth]{Detector_description/Holder-designs.jpeg}
     \caption{3D printed cases tested to reduce the risk of Teflon tears.}
     \label{fig:3d_previous_desings}
 \end{figure}

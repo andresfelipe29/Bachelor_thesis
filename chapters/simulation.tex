@@ -1,13 +1,33 @@
 \chapter{Geant4 Simulation}
 
+In order to provide a new interactive approach to CosmicWatches for new users a scintillation simulation has been devised using the Geant4 toolkit. With this, we intend to showcase some of the physical aspects that may be studied with the detector. This project is still in development and can be found on the GitHub repository \href{https://github.com/spenceraxani/CosmicWatch_Geant4}{CosmicWatch\_Geant4}. This section aims to give a brief explanation of the inner workings of the simulation as well as the Geant4 toolkit.
+
 \section{What is Geant4?}
+
+As defined by the authors \cite{Geant4}, Geant4 is a simulation toolkit based in \texttt{C++}, to model the passage of particles through matter, allowing the creation of custom detector geometries, tracking, and hit recollection, it includes multiple physics models for processes covering a wide range of specialties, such as electromagnetic, hadronic, and optical processes. Its main areas of application are high energy, nuclear, and accelerator physics, as well as medical and space science.
+
+A comprehensive \href{https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/}{installation guide} has been made by the authors, the toolkit is available on Windows, MacOS, and Linux. We recommend building and installing it from source using CMake, since it provides great control over the specific configurations available during installation.
 
 \section{Geometry}
 
+As noted before, Geant4 allows the creation of custom geometries, which in our use case is great, since it provides a platform suitable for testing multiple CosmicWatch configurations as shown in Sections \labelcref{sec:collected_produced,sec:SiPM_placement,sec:Scint_size,sec:cos_squared}.
+
+In general, Geant4 requires a mother volume in which the simulation will take place, in this case, we have chosen a $1\times1\times1$ \unit{\m\cubed} box of \texttt{G4\_AIR}\footnote{This and all other materials used in the simulation, are built from the \textit{Geant4 Material Database}, accessed through the \texttt{G4NistManager} class}. For practical effects, the SiPM is also modeled as a \texttt{G4\_AIR} box of $3\times3\times1$ \unit{\mm\cubed}. The scintillating material is a $5\times5\times1$ \unit{\cm\cubed} box. The sizes of all these elements can of course be changed (as explored in Section \labelcref{sec:Scint_size}) the settings detailed above are just the default configuration in \texttt{headers/construction.hh}. Fig. TALES shows the SiPM and scintillator placement inside the mother volume.
+
+%----------------include detector geometry screenshot
+
+As discussed in \labelcref{sec:self_radiation}, LYSO crystals contain $^{176}$Lu, a naturally occurring radioactive isotope emitting betas. LYSO crystals can absorb their own radiation, resulting in a constant background, this feature however, has not yet been included in the simulation, which is why the scintillating material used is the same as in previous versions of CosmicWatch, a plastic scintillator based on Polyvinyltoluene, the material name in the \textit{Geant4 Material Database} is \texttt{G4\_PLASTIC\_SC\_VINYLTOLUENE}.
+
 \section{Muons going through the scintillator}
 
-\section{Photons collected vs. produced}
+\section{Simulation results}
 
-\section{Optimum SiPM placement}
+\subsection{Photons collected vs. produced}\label{sec:collected_produced}
 
-\section{Simulated Spectra}
+\subsection{Optimum SiPM placement}\label{sec:SiPM_placement}
+
+\subsection{Scintillator sizes}\label{sec:Scint_size}
+
+\subsection{Cosine squared law}\label{sec:cos_squared}
+
+\subsection{Simulated Spectra}
