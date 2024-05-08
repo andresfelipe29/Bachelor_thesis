@@ -41,7 +41,7 @@ The previous versions of CosmicWatch used an Arduino Nano to process the signal 
 
 Up until now, due to how affordable and malleable they can be, only plastic scintillators have been used, particularly Polyvinyltoluene-based scintillators such as BC-400 and BC404. Sadly, it is well known that their poor energy resolution and lack of linearity makes them useless for gamma spectroscopy, at least in small sizes as the ones used for CosmicWatch ($5\times5\times1$ \unit{\cm\cubed}). In addition to this, plastic scintillators have very low light yields $10000$ photons/MeV \cite{mukhopadhyay2004plastic}, making it hard to detect low-energy events. Table \ref{tab:scintillators} compares the general properties of some scintillating materials, better showcasing the advantages of LYSO in particular for gamma spectroscopy in the CosmicWatch context.
 
-\begin{table}[htb]
+\begin{table}[H]
   \caption{General properties of some scintillating materials. Taken from \cite{mukhopadhyay2004plastic,Luxium_LYSO,Luxium_plastic,SaintGobain_NaI}. $^*$Calculated from the attenuation coefficient at 662 \unit{\kilo\eV} shown in \cite[p.~3]{SaintGobain_NaI}}
   \centering
   \begin{tabular}{ l c c c c}
@@ -58,6 +58,34 @@ Up until now, due to how affordable and malleable they can be, only plastic scin
 \end{table}
 
 Higher densities are good for energy deposition, catching particles and gammas more efficiently. Short decay times allow to make fast signal pulses. High light yields make it possible to detect low-energy events. Short attenuation lengths decrease the amount of material necessary to get energy depositions.
+
+LYSO however also presents some challenges due to its composition. The crystal's compound formula is Lu$_{1.8}$Y$_{0.2}$SiO$_5$:Ce, it contains Lutetium 176, a naturally occurring radioactive isotope that decays through $\beta^-$ \cite{Luxium_LYSO}, emitting a continuous background that can be self-absorbed by the crystal. Figure \ref{fig:LYSO_background} shows the energy spectra measured by Luxium Solutions of a one-inch-side cube of LYSO.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Detector_description/LYSO-background.jpg}
+  \caption{Radioactive background of a 1''$\times$1'' LYSO crystal. Taken from \cite{Luxium_LYSO}.}
+  \label{fig:LYSO_background}
+\end{figure}
+
+As described in subsection \ref{sec:beta_decay}, beta decays lead to continuous energy spectra from the released electrons/positrons. In this particular case, $^{176}$Lu decays to an excited state of Hafnium, which can then decay to its ground state through a 3 gamma-ray cascade. The decay scheme is shown in Figure \ref{sfig:176Lu}.
+
+In this case, the main gamma rays emitted have energies 88.34, 201.83 and 306.78 \unit{\kilo\eV}, the shape of the spectra can then be explained if we add to this the electron energy spectrum from the original beta decay (Fig. \ref{sfig:176Lu_beta_spectra}). Multiple studies have already been made to emulate this spectrum using simulations and analytical analysis \cite{LYSO_background,LYSO_background_Geant4}.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=0.8\textwidth]{Detector_description/176Lu-decay.pdf}
+    \caption{\label{sfig:176Lu}Decay scheme for $^{176}$Lu. Only the main decay channels are included for clarity and simplicity.}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{Detector_description/176Lu-beta-spectrum.jpg}
+    \caption{\label{sfig:176Lu_beta_spectra}Beta spectrum from $^{176}$Lu $\beta^-$ decay. Taken from \cite{IAEA}.}
+  \end{subfigure}
+  \caption{\label{fig:LYSO_decay}}
+\end{figure}
+
+These considerations will become important in Chapter \ref{chap:measurements}, where some odd features are found in the measured spectra with various electronic systems.
 
 \section{Power Consumption}
 
@@ -101,7 +129,7 @@ The ``Log in'' screen of the detector shows a $128\times 64$ pixelart on bytearr
 
 In order to hold the crystal in place on the SiPM PCB, it was necessary to design a 3D printed case -see Fig. \ref{fig:3d_case_desing} for a schematic of the 3D design on Inventor. With this we made sure that the crystal would not move relative to the SiPM, preventing scratches and providing a more stable optical coupling with the photomultiplier.
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \includegraphics[width=.9\textwidth]{Detector_description/LYSO-holder-drawing.pdf}
     \caption{Case model for a $4\times4\times22$ \unit{mm\cubed} LYSO crystal, all dimensions are shown in \unit{\mm}. The \texttt{.stl} and \texttt{.ipt} files for 3D printing can be found on the repository \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}.}
