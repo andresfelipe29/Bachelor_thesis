@@ -13,6 +13,7 @@ The prototypes of CosmicWatch Fig. \ref{sfig:CW_ver1} used liquid scintillator, 
     \includegraphics[width=\textwidth]{Detector_description/CW-ver1.jpg}
     \caption{\label{sfig:CW_ver1} First prototype}
   \end{subfigure}
+  \hfill
   \begin{subfigure}[t]{0.45\textwidth}
     \includegraphics[width=\textwidth]{Detector_description/CW-ver2.jpg}
     \caption{\label{sfig:CW_ver2} Second prototype}
@@ -23,13 +24,15 @@ The prototypes of CosmicWatch Fig. \ref{sfig:CW_ver1} used liquid scintillator, 
 Later iterations resemble the current goals of CosmicWatch, they are cheaper, smaller, and easier to build. Versions 1 and 2 (Fig. \ref{sfig:CW_ver3}) introduced some user-friendly features, including battery/USB power with $~0.3$ \unit{\watt} consumption, a software-adjustable trigger threshold, and cost about \$100. V2 in particular introduced the use of SD cards to save data and the capability to connect two CosmicWatches, making it possible to measure coincident events.
 
 \begin{figure}[H]
-  \centering
   \begin{subfigure}[t]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{Detector_description/CW-ver3.jpg}
+    \centering
+    \includegraphics[height=0.45\textwidth]{Detector_description/CW-ver3.jpg}
     \caption{\label{sfig:CW_ver3} Third prototype}
   \end{subfigure}
+  \hfill
   \begin{subfigure}[t]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{Detector_description/CW_ver4.jpeg}
+    \centering
+    \includegraphics[height=0.45\textwidth]{Detector_description/CW_ver4.jpeg}
     \caption{\label{sfig:CW_ver4} CosmicWatch versions 1 and 2}
   \end{subfigure}
   \caption{\label{fig:CW_ver3_ver4}Newer versions of CosmicWatch, designs suitable for students, taken from \cite{CosmicWatch}.}
@@ -78,6 +81,7 @@ In this case, the main gamma rays emitted have energies 88.34, 201.83 and 306.78
     \includegraphics[width=0.8\textwidth]{Detector_description/176Lu-decay.pdf}
     \caption{\label{sfig:176Lu}Decay scheme for $^{176}$Lu. Only the main decay channels are included for clarity and simplicity.}
   \end{subfigure}
+  \hfill
   \begin{subfigure}[t]{0.5\textwidth}
     \includegraphics[width=\textwidth]{Detector_description/176Lu-beta-spectrum.jpg}
     \caption{\label{sfig:176Lu_beta_spectra}Beta spectrum from $^{176}$Lu $\beta^-$ decay. Taken from \cite{IAEA}.}
@@ -87,19 +91,15 @@ In this case, the main gamma rays emitted have energies 88.34, 201.83 and 306.78
 
 These considerations will become important in Chapter \ref{chap:measurements}, where some odd features are found in the measured spectra with various electronic systems.
 
-\section{Power Consumption}
-
-\section{KiCad}
-
-KiCad is an open-source software that allows the creation of circuit schematics, PCB layout, and 3D viewing among other capabilities. It is available in Windows, Linux, and iOS, making it perfect for CosmicWatch, since one of the goals is to make it easily available to new users. The KiCad project for CosmicWatch V2 can be found on the repository \href{https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v2}{CosmicWatch-Desktop-Muon-Detector-v2} under ``PCB\_Files''.
-
-\href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB} contains the KiCad files necessary to build the newer version of CosmicWatch, all the necessary footprints can be found in ``MyLibrary.pretty'', including the Raspberry Pi Pico footprints. In order to print the PCB, it is necessary to send the compressed ``Geber'' folder (found under ``CosmicWatch\_detector\_v33'') to a manufacturer, \href{https://www.elecrow.com/pcb-manufacturing.html}{ELECROW} is recommended.
-
 \section{Accessories}
 
 Currently, CosmicWatch includes some accessories that make it possible to customize the detector and get more specific measurements, making use of its multiple sensors and features. Drivers and example code necessary to control the accessories listed below are included in \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}{CosmicWatch-gamma-spectroscopy-RP} under the ``drivers'' folder.
 
 \subsection{Preassure and Temperature sensor}
+
+An absolute barometric pressure sensor \href{https://www.bosch-sensortec.com/products/environmental-sensors/pressure-sensors/bmp280/}{BMP280} can be included in the detector construction to make barometric measurements that can relate to muon counts. Temperature can also affect the SiPM and LYSO response, possibly making this data important while characterizing the detector. The Raspberry Pi Pico has a built-in temperature sensor, this however has been found to have some errors depending on the reference voltage, making its calibration necessary.
+
+The Raspberry Pi Pico reads data from the BMP280 through the I2C protocol, the MicroPython driver can also be found in \href{https://github.com/dafvid/micropython-bmp280}{micropython-bmp280} by David Stenwall, who has made an amazing description on the use of this sensor in his repository.
 
 \begin{figure}[H]
   \centering
@@ -108,26 +108,59 @@ Currently, CosmicWatch includes some accessories that make it possible to custom
   \label{fig:bmp280}
 \end{figure}
 
-An absolute barometric pressure sensor \href{https://www.bosch-sensortec.com/products/environmental-sensors/pressure-sensors/bmp280/}{BMP280} can be included in the detector construction to make barometric measurements that can relate to muon counts. Temperature can also affect the SiPM and LYSO response, possibly making this data important while characterizing the detector. The Raspberry Pi Pico has a built-in temperature sensor, this however has been found to have some errors depending on the reference voltage, making its calibration necessary.
-
-The Raspberry Pi Pico reads data from the BMP280 through the I2C protocol, the MicroPython driver can also be found in \href{https://github.com/dafvid/micropython-bmp280}{micropython-bmp280} by David Stenwall, who has made an amazing description on the use of this sensor in his repository.
-
 \subsection{OLED screen}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.3\textwidth]{Detector_description/ssd1306.jpg}
-  \caption{SSD1306 OLED screen example, it can be easily found online. Taken from \href{https://a.co/d/cGnBDLF}{Amazon}}
-  \label{fig:bssd1306}
-\end{figure}
 
 OLED screens are versatile and provide a fast way to read data directly from the detector, making it more user-friendly and easier to troubleshoot. An ssd1306 OLED screen can be connected to the detector, the driver is listed in the \href{https://github.com/micropython/micropython-lib/tree/master/micropython/drivers/display}{MicroPython documentation}.
 
 The ``Log in'' screen of the detector shows a $128\times 64$ pixelart on bytearray form of the CosmicWatch logo, found under the ``Logos'' in \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}{CosmicWatch-gamma-spectroscopy-RP}.
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.3\textwidth]{Detector_description/ssd1306.jpg}
+  \caption{SSD1306 OLED screen example, it can be easily found online. Taken from \href{https://a.co/d/cGnBDLF}{Amazon}.}
+  \label{fig:bssd1306}
+\end{figure}
+
+\section{Power Consumption}
+
+This section focuses on the main sources of power consumption in the detector while performing constant sampling of data with the trigger, OLED display updates, LED flashing for detection signaling, and temperature and pressure measurements.
+
+In order to estimate the power consumption, the 2280S-32-6 High Precision Bench Power Supply by Tektronix was used to constantly sample tension and current drawn by the detector. Three different measurements were made in order to compare power consumption on different functioning conditions, one while booting, one with a ``low'' count rate (no radioactive sources near the detector), and one with a $^{54}$Mn source. Figure \ref{fig:I_vs_t} shows the current as a function of time for four minutes of functioning.
+
+There are no appreciable differences in the current drawn when booting is taken into account compared to a normal functioning cycle. There are however significant differences in the average current drawn by the detector while measuring a high count rate, not only due to a higher presence of ``high'' current measurements but also because the ``baseline'' changes appreciably between the two. Figure \ref{fig:P_vs_t} helps illustrate this fact by removing the measurements taken while booting. It is important to note that power and current values are almost identical due to the small fluctuations in tension, the average tension throughout all measurements remained at 4.9997(2) Volts.
+
+The total measuring time was 4 minutes with 26 seconds since the power supply can only record 2500 samples with a sample rate of 9.39 Hz (0.1065 seconds between samples). Using now the average power we find that the power consumption of the detector is $2.7(3)\times10^{-5}$ and $2.5(3)\times10^{-5}$ kWh for high and low count rates respectively. The difference in count rates is better illustrated in Figure \ref{fig:count_rate_for_power}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Detector_description/I_vs_t.pdf}
+  \caption{Current drawn by the detector as a function of time, measured with a 2280S-32-6 Tektronix high precision bench power supply. The $^{54}$Mn source had a 0.612 Mbq activity at the time of measurement.}
+  \label{fig:I_vs_t}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Detector_description/P_vs_t.pdf}
+  \caption{CosmicWatch power consumption as a function of time. Very similar results to Fig. \ref{fig:I_vs_t} due to the small fluctuations in tension.}
+  \label{fig:P_vs_t}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Detector_description/count_rate.pdf}
+  \caption{Count rate before and after the $^{54}$Mn source is brought close to the detector.}
+  \label{fig:count_rate_for_power}
+\end{figure}
+
+\section{KiCad}
+
+KiCad is an open-source software that allows the creation of circuit schematics, PCB layout, and 3D viewing among other capabilities. It is available in Windows, Linux, and iOS, making it perfect for CosmicWatch, since one of the goals is to make it easily available to new users. The KiCad project for CosmicWatch V2 can be found on the repository \href{https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v2}{CosmicWatch-Desktop-Muon-Detector-v2} under ``PCB\_Files''.
+
+\href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB} contains the KiCad files necessary to build the newer version of CosmicWatch, all the necessary footprints can be found in ``MyLibrary.pretty'', including the Raspberry Pi Pico footprints. In order to print the PCB, it is necessary to send the compressed ``Geber'' folder (found under ``CosmicWatch\_detector\_v33'') to a manufacturer, \href{https://www.elecrow.com/pcb-manufacturing.html}{ELECROW} is recommended.
+
 \section{3D printed case}
 
-In order to hold the crystal in place on the SiPM PCB, it was necessary to design a 3D printed case -see Fig. \ref{fig:3d_case_desing} for a schematic of the 3D design on Inventor. With this we made sure that the crystal would not move relative to the SiPM, preventing scratches and providing a more stable optical coupling with the photomultiplier.
+In order to hold the crystal in place on the SiPM PCB, it was necessary to design a 3D printed case, see Fig. \ref{fig:3d_case_desing} for a schematic of the 3D design on Inventor. With this we made sure that the crystal would not move relative to the SiPM, preventing scratches and providing a more stable optical coupling with the photomultiplier.
 
 \begin{figure}
     \centering
@@ -136,9 +169,9 @@ In order to hold the crystal in place on the SiPM PCB, it was necessary to desig
     \label{fig:3d_case_desing}
 \end{figure}
 
-The design keeps in mind that the crystal has to be wrapped in Teflon tape to increase reflectivity, which is why it comes in two pieces that come together around the crystal, lowering the risk of tears. Once the crystal is placed in the case it can be kept together using electrical tape.
+The design keeps in mind that the crystal has to be wrapped in Teflon tape to increase reflectivity, which is why it is built in two pieces that come together around the crystal, lowering the risk of tears. Once the crystal is placed in the case it can be kept together using electrical tape.
 
-Before using Teflon tape, the crystal was wrapped in tin foil, which made tears common (Fig. \ref{fig:tin_foil_tear}) and greatly impacted the quality of the spectra that could be obtained with the detector. Teflon tape seems to solve the tearing problem. However, to reduce the risk of tearing the Teflon, multiple iterations of the case were designed (Fig. \ref{fig:3d_previous_desings}).
+Before using Teflon tape, the crystal was wrapped in tin foil, which made tears common (Fig. \ref{fig:tin_foil_tear}) and greatly impacted the quality of the spectra that could be obtained with the detector. Teflon tape seems to solve the tearing problem and seems to better contain the photons inside the crystal. However, to reduce the risk of tearing the Teflon, multiple iterations of the case were designed (Fig. \ref{fig:3d_previous_desings}), the necessary files to print the case have been added to the \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB} repository.
 \begin{figure}
     \centering
     \begin{subfigure}[t]{0.35\textwidth}

@@ -1,6 +1,74 @@
 \chapter{Measurements}\label{chap:measurements}
 
+In order to test the detector and crystal response, multiple electronic setups were used to obtain spectra from calibrated sources along with other interesting measurements. This chapter summarizes the most important measurements achieved at the time of publication.
+
 \section{Rohde\&Schwarz RTO6 oscilloscope}
+
+The Rohde\&Schwarz RTO6 oscilloscope was the main troubleshooting tool used to test the detector as a whole and measure spectra in order to calibrate the crystal response while coupled with a SiPM. Figure \ref{fig:RS_spectra} shows the spectra obtained with the histogram functionality of the oscilloscope for each isotope used to calibrate the detector. 
+
+\begin{figure}
+    \begin{subfigure}[t]{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{measurements/RS/teflon-bkgd.pdf}
+      \caption{\label{sfig:RS_bkgd}LYSO background.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{measurements/RS/teflon-side-Co60.pdf}
+      \caption{\label{sfig:RS_60Co}$^{60}$Co.}
+    \end{subfigure}
+    \medskip
+    \begin{subfigure}[t]{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{measurements/RS/teflon-side-Na22.pdf}
+      \caption{\label{sfig:RS_22Na}$^{22}$Na.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{measurements/RS/teflon-side-Cs137.pdf}
+      \caption{\label{sfig:RS_137Cs}$^{137}$Cs.}
+    \end{subfigure}
+    \caption{\label{fig:RS_spectra}Spectra measured with the histogram functionality of a Rohde\&Schwarz RTO6 oscilloscope. The $x$ axis measures SiPM pulse areas since the oscilloscope creates histograms based on the area under each pulse such as those shown in \ref{fig:signal_processing}. Each graph features the centroid of the Gaussian fitted to each peak.}
+  \end{figure}
+
+It is important to note here the shape of the background, remembering Figure \ref{fig:LYSO_background}, a sudden increase in intensity should occur at around 290 and 597 \unit{\kilo\eV}, therefore the 511 \unit{\kilo\eV} peak of $^{22}$Na should lie in between these values, while 662 \unit{\kilo\eV} from $^{137}$Cs would lie above the second increase in background counts. These approximations can help us get a notion of what we are seeing in the various spectra illustrated in Fig. \ref{fig:RS_spectra}.
+
+The highest peak in $^{137}$Cs is presumed to be caused by x-ray emissions from lower shell electrons filling the space left by internal conversion electrons, this peak is also featured in Figure \ref{fig:Cs137_description}. One important feature in the cesium spectrum is the relatively high intensities passed the photoelectric peak (at 47.57(1) nVs according to the gaussian fit), this is not due to LYSO background however since these counts greatly exceed the expected background.
+
+Fitting gaussian functions to the main peaks one can get the relation between energy and pulse area (Fig. \ref{sfig:RS_LYSO_calibration_low_peaks}) based on the decay schemes shown in Figure \ref{fig:decay_schemes}. Considering the x-ray and backscattering peaks of $^{137}$Cs, however, seems to cause an overestimation of the energies, as can be seen in Figure \ref{sfig:RS_LYSO_calibrated_spectrum_low_peaks}, where the pair-production peak of sodium, for example, lies at 535.95 keV instead of 511 keV. The calibration shown in Figure \subref{sfig:RS_LYSO_calibration} does not take into account the troublesome peaks of cesium, better estimating high energy peaks, this however results in negative-energy predictions at the lower energy range in the spectrum.
+
+\begin{figure}[H]
+  \begin{subfigure}[t]{\textwidth}
+    \centering
+    \includegraphics[width=.98\textwidth]{measurements/RS/LYSO_calibration_low_peaks.pdf}
+    \caption{\label{sfig:RS_LYSO_calibration_low_peaks}LYSO calibration obtained from the gaussian fits done to the main peaks shown in Fig \ref{sfig:RS_60Co}, \subref{sfig:RS_22Na}, and \subref{sfig:RS_137Cs}.}
+  \end{subfigure}
+  \medskip
+  \begin{subfigure}[t]{\textwidth}
+    \centering
+    \includegraphics[width=.98\textwidth]{measurements/RS/Calibrated_spectrum_low_peaks.pdf}
+    \caption{\label{sfig:RS_LYSO_calibrated_spectrum_low_peaks}Calibrated spectrum obtained from the channel-energy conversion shown in \subref{sfig:RS_LYSO_calibration_low_peaks}.}
+  \end{subfigure}
+  \caption{\label{fig:RS_low_peaks_calibration}Calibration obtained while taking into account the x-ray and backscattering peaks of $^{137}$Cs.}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{subfigure}[t]{\textwidth}
+    \centering
+    \includegraphics[width=.98\textwidth]{measurements/RS/LYSO_calibration.pdf}
+    \caption{\label{sfig:RS_LYSO_calibration}LYSO calibration obtained from the gaussian fits done to the main peaks shown in Fig \ref{sfig:RS_60Co}, \subref{sfig:RS_22Na}, and excluding x-ray and backscattering peaks from \subref{sfig:RS_137Cs}.}
+  \end{subfigure}
+  \medskip
+  \begin{subfigure}[t]{\textwidth}
+    \centering
+    \includegraphics[width=.98\textwidth]{measurements/RS/Calibrated_spectrum.pdf}
+    \caption{\label{sfig:RS_LYSO_calibrated_spectrum}Calibrated spectrum obtained from the channel-energy conversion shown in \subref{sfig:RS_LYSO_calibration}.}
+  \end{subfigure}
+  \caption{\label{fig:RS_calibration}Calibration obtained while disregarding the x-ray and backscattering peaks of $^{137}$Cs.}
+\end{figure}
+
 
 \section{CosmicWatch electronics}
 

@@ -104,7 +104,7 @@ This effect was first described by Albert Einstein in \cite{einstein1905heuristi
 \end{equation}
 Where $E_b$ is the binding energy of the electron in the atom. $E_b$ will therefore depend on the electron's original shell since outer shells have lower binding energies.
 
-\subsubsection{Compton scattering}
+\subsubsection{Compton scattering}\label{sec:compt_scattering}
 
 \begin{figure}[H]
   \centering
@@ -114,7 +114,7 @@ Where $E_b$ is the binding energy of the electron in the atom. $E_b$ will theref
 
 Compton scattering occurs most often when a photon interacts with an electron in the sensitive material, it can be understood as a collision between the two, where the electron is considered initially static and then gains part of the photon's energy $E_0$ after deflecting it. Fig \ref{fig:Compton_scattering_diagram} shows an example of a gamma ray being scattered by an electron, the recoil electron is ejected with an angle $\phi$ while the scattered gamma ray travels with an angle $\theta$. It can be shown that the energy of the scattered photon $E_{1}$ and the recoil electron $E_e$ follow equations \eqref{eq:compton}
 \begin{align}
-  E_{1} &= \frac{E_0}{1+\epsilon(1-\cos\theta)} \label{eq:compton},~ & E_e &= E_0 - E_1 = E_0\frac{\epsilon(1-\cos\theta)}{1+\epsilon(1-\cos\theta)};~ & \epsilon&=\frac{E_0}{m_{e}c^2} 
+  E_{1} &= \frac{E_0}{1+\epsilon(1-\cos\theta)} \label{eq:compton},~ & E_e &= E_0 - E_1 = E_0\frac{\epsilon(1-\cos\theta)}{1+\epsilon(1-\cos\theta)},~ & \epsilon&=\frac{E_0}{m_{e}c^2} 
 \end{align}
 where $m_e c^2$ is the resting energy of the electron (511 \unit{\kilo\eV}). It is easy to see that high scattering angles greatly reduce the photon's energy, meaning that $E_e$ will be higher. For $\theta=\pi$ and $\phi=0$, it is therefore clear that the electron will gain the maximum energy possible, which is lower than $E_0$, this will be important while detecting gammas since photomultipliers collect the energy carried by electrons, which is further explored in Chapter \ref{chap:detection_methods}.
 
@@ -131,6 +131,41 @@ In the case of $^{22}$Na, as shown in Fig. \ref{sfig:22Na}, there is a transitio
 \end{figure}
 
 Once the positron produced by pair production slows down, it will most probably annihilate with an electron in the medium, producing two oppositely traveling gammas both with energy 511 \unit{\kilo\eV}, which combined is equal to the resting masses of both particles (1022 \unit{\kilo\eV}).
+
+\subsection{Gammas inside the detector}
+
+The light-matter interactions discussed in the previous subsection lead to different effects inside the detector that can be seen while measuring spectra. This subsection deals with some of the features that one should look for in a spectrum at the moment of calibrating the detector.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.7\textwidth}
+    \includegraphics[height=6.3cm]{physical_aspects/energiesCs137.pdf}
+    \caption{\label{sfig:spectrum_description}}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.28\textwidth}
+    \includegraphics[height=6cm]{physical_aspects/gamma_interactions.pdf}
+    \caption{\label{sfig:gamma_scattering}}
+  \end{subfigure}
+  \caption{\label{fig:Cs137_description}$^{137}$Cs spectrum highlighting some of the main features that commonly appear in gamma-ray spectra. Black arrows in \subref{sfig:gamma_scattering} represent detected gamma rays, changes in direction are due to Compton scattering. A detailed discussion about the meaning of these processes is given below. Adapted from \cite{Notas-instrumentacion}.}
+\end{figure}
+
+As discussed in subsection \ref{sec:compt_scattering}, incident gamma rays can be deflected by electrons inside the detector in various ways, therefore, the electron energy that will ultimately be detected is not always the same. For example, a gamma ray can deposit all of its energy by being photoelectrically absorbed directly (1 in Fig. \ref{sfig:gamma_scattering}), or, after undergoing multiple Compton scatterings $(2)$. Fractions of the total energy can also be detected since gammas can Compton-scatter multiple times and then escape the detector $(3, 4, 5, 7)$. This is known as Compton background, and can also be used to differentiate radioactive isotopes in gamma spectroscopy.
+
+There are some energies worth noting since they give the Compton background a recognizable shape. They are known as the backscattering and Compton edge energies and their origins are discussed next.
+
+\subsubsection{Compton edge}
+
+Theoretically, the maximum energy a gamma ray can transfer to an electron, according to \eqref{eq:compton}, occurs when the photon is deflected with $\theta=\pi$, this is called the Compton edge, represented here as $E_C$ $(3)$, since no electron should gain energies between $E_C$ and the photoelectric energy.
+\begin{equation}
+  E_C=E_{e\text{max}}=E_0\frac{2\varepsilon}{1+2\varepsilon}
+\end{equation}
+
+\subsubsection{backscattering}
+On the other hand, relatively small energies can also be transferred by gammas to electrons in the detector. This happens when the casing scatters a gamma which is then absorbed inside the sensitive material $(6)$. In this case, the energy deposition is also given by \eqref{eq:compton} but will depend on the backscattering angle:
+\begin{equation}
+    E_B=E_1=\frac{E_0}{1+\varepsilon(1-\cos\theta)}
+\end{equation}
 
 \section{Cosmic Radiation}
 
@@ -245,3 +280,7 @@ In this regime pair production, Bremsstrahlung, and photonuclear contributions b
 Electrons and positrons reaching the Earth's surface have energies around 1 \unit{\giga\eV} and make up a great part of the cosmic radiation at sea level. At this and higher energies, Bremsstrahlung dominates the electron's energy loss, producing gamma rays (as shown in Fig. \ref{fig:cosmic-shower-diagram}) that may lead to further pair production, creating a cycle that will only stop once the pair produced electrons/positrons go bellow their critical energies $E_{ec}$. 
 
 While detecting muons, this electronic background may interfere, since electrons and positrons will be mistaken for muons. Remembering the discussion at the beginning of this chapter about how electrons can be easily deflected due to their extremely low mass, the muon miscount can be avoided by placing the detector under some solid material (such as concrete or any kind of roof), or by using two detectors looking for coincident events, since it would be very unlikely that an electron will deposit energy in both.
+
+\subsection{Coisne squared law}
+
+As mentioned before, particles lose some of their energy while traversing a determined length of material, it is therefore reasonable to expect the intensity of cosmic rays to vary with the direction of incidence, as some may have to travel through more material. The relative intensity of cosmic rays as a function zenith angle follows a cosine squared law, showing that, for example, muons raining directly downward $(\theta=0)$ are more likely to reach sea level, as they are the ones that traverse the least atmosphere, while muons traveling horizontally $(\theta=\pi/2)$ have to go through a lot more air in order to reach the observation point. This idea is better illustrated in Fig. TALES.
