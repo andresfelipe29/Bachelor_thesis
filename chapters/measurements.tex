@@ -43,7 +43,7 @@ Fitting gaussian functions to the main peaks one can get the relation between en
   \begin{subfigure}[t]{\textwidth}
     \centering
     \includegraphics[width=.98\textwidth]{measurements/RS/LYSO_calibration_low_peaks.pdf}
-    \caption{\label{sfig:RS_LYSO_calibration_low_peaks}LYSO calibration obtained from the gaussian fits done to the main peaks shown in Fig \ref{sfig:RS_60Co}, \subref{sfig:RS_22Na}, and \subref{sfig:RS_137Cs}.}
+    \caption{\label{sfig:RS_LYSO_calibration_low_peaks}LYSO calibration from Rohde\&Schwarz oscilloscope. Obtained by fitting gaussian functions to the main peaks shown in Fig \ref{sfig:RS_60Co}, \subref{sfig:RS_22Na}, and \subref{sfig:RS_137Cs}.}
   \end{subfigure}
   \medskip
   \begin{subfigure}[t]{\textwidth}
@@ -51,14 +51,14 @@ Fitting gaussian functions to the main peaks one can get the relation between en
     \includegraphics[width=.98\textwidth]{measurements/RS/Calibrated_spectrum_low_peaks.pdf}
     \caption{\label{sfig:RS_LYSO_calibrated_spectrum_low_peaks}Calibrated spectrum obtained from the channel-energy conversion shown in \subref{sfig:RS_LYSO_calibration_low_peaks}.}
   \end{subfigure}
-  \caption{\label{fig:RS_low_peaks_calibration}Calibration obtained while taking into account the x-ray and backscattering peaks of $^{137}$Cs.}
+  \caption{\label{fig:RS_low_peaks_calibration}Calibrated spectrum taking into account the x-ray and backscattering peaks of $^{137}$Cs.}
 \end{figure}
 
 \begin{figure}[H]
   \begin{subfigure}[t]{\textwidth}
     \centering
     \includegraphics[width=.98\textwidth]{measurements/RS/LYSO_calibration.pdf}
-    \caption{\label{sfig:RS_LYSO_calibration}LYSO calibration obtained from the gaussian fits done to the main peaks shown in Fig \ref{sfig:RS_60Co}, \subref{sfig:RS_22Na}, and excluding x-ray and backscattering peaks from \subref{sfig:RS_137Cs}.}
+    \caption{\label{sfig:RS_LYSO_calibration}LYSO calibration from Rohde\&Schwarz oscilloscope. Excluding x-ray and backscattering peaks from \subref{sfig:RS_137Cs}.}
   \end{subfigure}
   \medskip
   \begin{subfigure}[t]{\textwidth}
@@ -66,10 +66,88 @@ Fitting gaussian functions to the main peaks one can get the relation between en
     \includegraphics[width=.98\textwidth]{measurements/RS/Calibrated_spectrum.pdf}
     \caption{\label{sfig:RS_LYSO_calibrated_spectrum}Calibrated spectrum obtained from the channel-energy conversion shown in \subref{sfig:RS_LYSO_calibration}.}
   \end{subfigure}
-  \caption{\label{fig:RS_calibration}Calibration obtained while disregarding the x-ray and backscattering peaks of $^{137}$Cs.}
+  \caption{\label{fig:RS_calibration}Calibrated spectrum, ignoring the x-ray and backscattering peaks of $^{137}$Cs.}
 \end{figure}
 
 
 \section{CosmicWatch electronics}
 
-\section{NIM}
+\section{NIM modules}
+
+In the same way the CosmicWatch was studied with the Rohde\&Schwarz oscilloscope, NIM modules were used to get a LYSO calibration when coupled with the SiPM, this section shows some of the results obtained.
+
+It is important to note some of the odd features in these spectra. $^{54}$Mn, like $^{137}$Cs, is a monoenergetic source, meaning that it mostly produces only one gamma ray, in this case at 834.848 \unit{\kilo\eV}, which lies slightly above 662 \unit{\kilo\eV} ($^{137}$Cs), therefore, the peak in channel 259 should correspond to the gamma emission from Manganese. However, there is again a very high number of events above this energy. Aside from this, it is also clear that the shape of this peak does not fully adjust to a gaussian distribution, showing that there is an underlying structure that has not been explained. These odd features can also be seen in $^{137}$Cs.
+
+In principle, $^{68}$Ge should have a spectrum very similar to $^{22}$Na, since it also decays through $\beta^+$ to excited states of $^{68}$Ga, which emit high energy gammas. In this case, however, the decay chain most often ends in a stable state of $^{68}$Zn, this means that the only appreciable peak should lie at 511 \unit{\kilo\eV} due to positron annihilation, agreeing with Fig. \ref{sfig:NIM_68Ge}. Notably in Figure \ref{sfig:NIM_68Ge} there are very few counts at energies above 511 \unit{\kilo\eV}, but this must be due to the low activity of the source used. 
+
+\begin{figure}
+  \begin{subfigure}[t]{0.47\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{measurements/NIM/54Mn.pdf}
+    \caption{\label{sfig:NIM_54Mn}$^{54}$Mn.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.47\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{measurements/NIM/68Ge.pdf}
+    \caption{\label{sfig:NIM_68Ge}$^{68}$Ge.}
+  \end{subfigure}
+  \medskip
+  \begin{subfigure}[t]{0.47\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{measurements/NIM/22Na.pdf}
+    \caption{\label{sfig:NIM_22Na}$^{22}$Na.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.47\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{measurements/NIM/137Cs_HA.pdf}
+    \caption{\label{sfig:NIM_137Cs}$^{137}$Cs.}
+  \end{subfigure}
+  \caption{\label{fig:NIM_spectra}Spectra measured with a Time Filter Amplifier and Analog to Digital Converter NIM modules. The $x$ axis measures channels since the ADC creates a histogram based on pulse area. Each graph features the centroid of the Gaussian fitted to each peak.}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{subfigure}[t]{\textwidth}
+    \centering
+    \includegraphics[width=.98\textwidth]{measurements/NIM/LYSO_calibration.pdf}
+    \caption{\label{sfig:NIM_LYSO_calibration}LYSO calibration from NIM modules. Obtained by fitting gaussian functions to the main peaks shown in Fig \ref{sfig:NIM_54Mn} to \subref{sfig:NIM_137Cs}.}
+  \end{subfigure}
+  \medskip
+  \begin{subfigure}[t]{\textwidth}
+    \centering
+    \includegraphics[width=.98\textwidth]{measurements/NIM/Calibrated_spectrum.pdf}
+    \caption{\label{sfig:NIM_LYSO_calibrated_spectrum}Calibrated spectrum obtained from the channel-energy conversion shown in \subref{sfig:NIM_LYSO_calibration}.}
+  \end{subfigure}
+  \caption{\label{fig:NIM_calibration}Calibrated spectrum.}
+\end{figure}
+
+Notably, this new calibration does not result in the prediction of negative energies despite the various flaws in these spectra.
+
+\section{Variable crystal size}\label{sec:LYSO_size}
+
+\begin{figure}
+  \begin{subfigure}[t]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{measurements/LYSO_crystals/LYSO_20_3_3.jpg}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{measurements/LYSO_crystals/LYSO_20_3_3_2.jpg}
+  \end{subfigure}
+  \medskip
+  \begin{subfigure}[t]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{measurements/LYSO_crystals/LYSO_20_10_10.jpg}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{measurements/LYSO_crystals/LYSO_20_10_10_2.jpg}
+  \end{subfigure}
+  \medskip
+  \begin{subfigure}[t]{\textwidth}
+    \centering
+    \includegraphics[width=0.5\textwidth]{measurements/LYSO_crystals/LYSO_10_10_10.jpg}
+  \end{subfigure}
+  \caption{\label{fig:LYSO_crystals}Dimensions of LYSO crystals used to test the CosmicWatch response.}
+\end{figure}

@@ -12,17 +12,29 @@ A comprehensive \href{https://geant4-userdoc.web.cern.ch/UsersGuides/Installatio
 
 As noted before, Geant4 allows the creation of custom geometries, which in our use case is great, since it provides a platform suitable for testing multiple CosmicWatch configurations as shown in Sections \labelcref{sec:collected_produced,sec:SiPM_placement,sec:Scint_size,sec:cos_squared}.
 
-In general, Geant4 requires a mother volume in which the simulation will take place, in this case, we have chosen a $20\times20\times20$ \unit{\cm\cubed} box of \texttt{G4\_AIR}\footnote{This and all other materials used in the simulation, are built from the \textit{Geant4 Material Database}, accessed through the \texttt{G4NistManager} class}. The scintillating material is a $5\times5\times1$ \unit{\cm\cubed} box. The sizes of all these elements can of course be changed (as explored in Section \labelcref{sec:Scint_size}) the settings detailed above are just the default configuration in \texttt{headers/construction.hh}. Fig. TALES shows the SiPM and scintillator placement inside the mother volume.
+In general, Geant4 requires a mother volume in which the simulation will take place, in this case, we have chosen a $20\times20\times20$ \unit{\cm\cubed} box of \texttt{G4\_AIR}\footnote{This and all other materials used in the simulation, are built from the \textit{Geant4 Material Database}, accessed through the \texttt{G4NistManager} class}. The scintillating material is a $5\times5\times1$ \unit{\cm\cubed} box. The sizes of all these elements can of course be changed (as explored in Section \labelcref{sec:Scint_size}) the settings detailed above are just the default configuration in \texttt{headers/construction.hh}. Fig. \ref{fig:geometry} shows the SiPM and scintillator placement inside the mother volume.
 
-%----------------include detector geometry screenshot
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.48\textwidth}
+    \includegraphics[width=\textwidth]{G4_simulations/profile.pdf}
+    \caption{\label{sfig:geometry_profile}Diagonal view.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.48\textwidth}
+    \includegraphics[width=\textwidth]{G4_simulations/front.pdf}
+    \caption{\label{sfig:geometry_front}Front view.}
+  \end{subfigure}
+  \caption{\label{fig:geometry}Scintillator and SiPM placement in the mother volume.}
+\end{figure}
 
-For simplicity, the SiPM is also modeled as a box filled with \texttt{G4\_AIR} with dimensions $3\times3\times1$ \unit{\mm\cubed}. The detected photons specified in the following subsections are counted as they enter the SiPM volume, this volume-check process is done in \texttt{source/stepAction.cc}, and relevant information for every event is saved to a \texttt{ntuple} by the \texttt{G4GenericAnalysisManager} class as defined in \texttt{source/eventAction.cc}. The simulation speed could be improved by employing the \text{G4VHits} and \texttt{G4THitsCollection} classes, which are optimized to record data for every step inside a sensitive volume in the simulation.
+For simplicity, the SiPM is also modeled as a box filled with \texttt{G4\_AIR} with dimensions $3\times3\times1$ \unit{\mm\cubed} attached to the base of the scintillator. The detected photons specified in the following subsections are counted as they enter the SiPM volume, this volume-check process is done in \texttt{source/stepAction.cc}, and relevant information for every event is saved to a \texttt{ntuple} by the \texttt{G4GenericAnalysisManager} class as defined in \texttt{source/eventAction.cc}. The simulation speed could be improved by employing the \text{G4VHits} and \texttt{G4THitsCollection} classes, which are optimized to record data for every step inside a sensitive volume in the simulation.
 
 As discussed in \labelcref{sec:self_radiation}, LYSO crystals contain $^{176}$Lu, a naturally occurring radioactive isotope emitting betas. LYSO crystals can absorb their own radiation, resulting in a constant background, this feature however, has not yet been included in the simulation, which is why the scintillating material used is the same as in previous versions of CosmicWatch, a plastic scintillator based on Polyvinyltoluene, the material name in the \textit{Geant4 Material Database} is \texttt{G4\_PLASTIC\_SC\_VINYLTOLUENE}.
 
 \section{Muons going through the scintillator}
 
-The following simulation results were thought to recreate some of the results typically seen with CosmicWatches, they also give insight into some construction characteristics that can be taken into account while building a detector. In order to speed up the simulation the muons being shot by the simulation have initial energies of 50 \unit{\mega\eV}, much lower to what would be expected at sea level (4 \unit{\giga\eV}). The particle gun used in this simulation is a \texttt{G4GeneralParticleSource}, the setting of this particle gun can be changed in macro files. Figures TALES show some of the geometries the particle source can have.
+The following simulation results were designed to recreate some of the results typically seen with CosmicWatches, they also give insight into some construction characteristics that can be taken into account while building a detector. In order to speed up the simulation, the muons being shot have initial energies of 50 \unit{\mega\eV}, much lower than what would be expected at sea level (4 \unit{\giga\eV}). The particle gun used in this simulation is a \texttt{G4GeneralParticleSource}, the setting of this particle gun can be changed in macro files. Figures TALES show some of the geometries the particle source can have.
 
 \section{Simulation results}
 
@@ -30,7 +42,21 @@ The following simulation results were thought to recreate some of the results ty
 
 \subsection{SiPM placement}\label{sec:SiPM_placement}
 
-The collocation of the SiPM can be a factor to keep in mind while designing new CosmicWatch setups. Generally, the photomultiplier is located on the base of the scintillator as shown in Figure TALES, but it may be useful to place it on one of its sides as shown in Fig. TALES.
+The collocation of the SiPM can be a factor to keep in mind while designing new CosmicWatch setups. Generally, the photomultiplier is located on the base of the scintillator as shown in Figure \ref{fig:geometry}, but it may be useful to place it on one of its sides as shown in Fig. \ref{fig:SiPM_side}.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.48\textwidth}
+    \includegraphics[width=\textwidth]{G4_simulations/SiPM_side_profile.pdf}
+    \caption{\label{sfig:SiPM_side_profile}Diagonal view.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.48\textwidth}
+    \includegraphics[width=\textwidth]{G4_simulations/SiPM_side_front.pdf}
+    \caption{\label{sfig:SiPM_side_front}Side view.}
+  \end{subfigure}
+  \caption{\label{fig:SiPM_side}SiPM placed on the front face of the scintillator.}
+\end{figure}
 
 \begin{figure}[H]
     \centering
@@ -43,16 +69,22 @@ The collocation of the SiPM can be a factor to keep in mind while designing new 
       \includegraphics[width=\textwidth]{G4_simulations/run0_nt_Event_SiPM-placement_photon_count.pdf}
       \caption{\label{sfig:SiPM_place_pcount}SiPM photon count for both setups.}
     \end{subfigure}
-    \caption{\label{fig:SiPM_place_results}The SiPM placement can be easily changed in the simulation by choosing between \texttt{base} and \texttt{side} as values for the construction variable \texttt{SiPMpos} in \texttt{headers/construction.hh}.}
+    \caption{\label{fig:SiPM_place_results}Wenas.}
 \end{figure}
 
 As expected, the energy deposition in the crystal should not depend on the SiPM placement. Surprisingly enough, however, it seems that the photon count is also not affected by this, meaning that the results obtained with both setups should be similar while using the specified scintillator size.
 
 \subsection{Scintillator sizes}\label{sec:Scint_size}
 
-The current architecture of CosmicWatch allows to use of variable scintillator sizes, the first versions of CosmicWatch used 5$\times$5$\times$1 \unit{\cm\cubed} scintillators, while the newer LYSO crystals are much smaller Fig. TALES shows some of the crystals used while testing the detector response.
+The current architecture of CosmicWatch allows to use of variable scintillator sizes, the first versions of CosmicWatch used 5$\times$5$\times$1 \unit{\cm\cubed} scintillators, while the newer LYSO crystals are much smaller, Fig. \ref{fig:LYSO_crystals} shows some of the crystals used while testing the detector response. This simulation aims at understanding the effects of variable sizes in the final results.
 
-\begin{figure}[H]
+\begin{figure}
+  \centering
+    \includegraphics[width=0.47\textwidth]{G4_simulations/Scint_size_10_5_2.pdf}
+  \caption{\label{fig:Scint_10_5_2}Visualization of a bigger scintillator in the mother volume.}
+\end{figure}
+
+\begin{figure}
   \centering
   \begin{subfigure}[t]{0.48\textwidth}
     \includegraphics[width=\textwidth]{G4_simulations/run0_nt_Event_crystal-size_energy_spectra.pdf}
@@ -63,7 +95,7 @@ The current architecture of CosmicWatch allows to use of variable scintillator s
     \includegraphics[width=\textwidth]{G4_simulations/run0_nt_Event_crystal-size_photon_count.pdf}
     \caption{\label{sfig:scint_size_pcount}SiPM photon count for different scintillator sizes.}
   \end{subfigure}
-  \caption{\label{fig:scint_size_results}The scintillator size can be easily chosen inside the simulation by changing the values of \texttt{PScintXBase}, \texttt{PScintYBase}, and \texttt{PScintHeigh} in \texttt{headers/construction.hh}.}
+  \caption{\label{fig:scint_size_results}The scintillator size can be easily chosen inside the simulation by changing the values of \texttt{PScintXLen}, \texttt{PScintYLen}, and \texttt{PScintZLen} in \texttt{headers/construction.hh}.}
 \end{figure}
 
 Figure \ref{sfig:scint_size_edep} shows that bigger SiPM sizes do result in greater energy recollections, however, as Figure \ref{sfig:scint_size_pcount} illustrates, the number of photons that reached the SiPM was on average greater for the $5\times5\times1$ \unit{\cm\cubed} setup. These figures then show that increased scintillator volume does not directly correlate with photon counts in the SiPM, which is ultimately the goal of the detector, to collect as many photons as possible in the photomultiplier to increase energy resolution.
