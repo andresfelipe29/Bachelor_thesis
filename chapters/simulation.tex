@@ -130,6 +130,40 @@ With this simulation, we are trying to understand the detector response as a fun
 
 As can be seen in Figure TALES, muons traveling directly downward have less scintillating material to go through compared to those traveling horizontally, this means that greater zenith angles should result in greater energy depositions, which agrees with the data shown in Figures \ref{sfig:ang_edep} and \subref{sfig:ang_edep_cylinder}. In Figure \ref{sfig:ang_pcount} however, the photon count first decreases to a minimum at around 30$^\circ$ to then steadily increase until 90$^\circ$. Based on what we learned in the previous section \ref{sec:Scint_size} about scintillator sizes, and keeping in mind the detector geometry, one would expect a minimum photon count at the angle where the photons have to travel the greatest distance, which in this case corresponds the scintillator edges an corners, ranging between 78.69 and 81.95 degrees for a $5\times5\times1$ \unit{\cm\cubed} scintillator.
 
-In order to attenuate any possible polar dependencies, the scintillator geometry was changed to a cylinder as shown in Figure TALES. This however, does not seem to have a correlation with the presence of a minimum in photon count at 30$^\circ$, as can be seen in Figure \ref{sfig:ang_pcount_cylinder}.
+In order to attenuate any possible polar dependencies, the scintillator geometry was changed to a cylinder as shown in Figure TALES. This however, does not seem to correlate with the presence of a minimum in photon count at 30$^\circ$, as can be seen in Figure \ref{sfig:ang_pcount_cylinder}.
 
 \subsection{Simulated Spectra}
+
+Contrary to \texttt{G4\_PLASTIC\_SC\_VINYLTOLUENE} and \texttt{G4\_Air}, there is no \texttt{G4\_LYSO}, which in this case is needed to produce gamma-spectra since this plastic scintillator does not produce enough photoelectric events to obtain something similar to the spectra shown in Section \ref{sec:gammas_in_the_detector}. Luckily Geant4 allows to create materials by adding individual elements with their respective percentage in the compound. Table \ref{tab:LYSO_composition} shows the specific percentages for all elements that make up a LYSO. In order to add Cerium doping one can create a new material made of two parts, LYSO and Ce, in this case, one would use the doping percentage to calculate the amount of LYSO in the new compound. It hasn't been possible to find the specific amount of Ce doping in Luxium's LYSO, there are however some publications that reference doping below 1.\% for Saint-Gobain samples \cite{Ce_doping,Ce_dopping_2}\footnote{Luxium and Saint-Gobain's LYSOs are essentially the same since Luxium acquired the scintillation and photonic crystals business of Saint-Gobain.}. All material definitions can be found under the function \texttt{DefineMaterials} of \texttt{MyDetectorConstruction} class in \texttt{source/construction.cc}.
+
+\begin{table}[H]
+  \caption{Atomic mass and composition percentage for all elements in the nominal composition Lu$_{1.8}$Y$_{0.2}$SiO$_5$:Ce.}
+  \centering
+  \begin{tabular}{ c c c c c}
+    \midrule
+     & Lu & Y & Si & O \\
+    \midrule
+    atomic mass [amu] & 174.967 & 88.906 & 28.086 & 15.999 \\
+    \% & 71.447 & 4.034 & 6.371 & 18.148 \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:LYSO_composition}
+\end{table}
+
+Figure \ref{fig:LYSO_size_results} shows the obtained energy spectra and SiPM photon count while shooting a monoenergetic gamma-ray. In Figure \ref{sfig:LYSO_size_edep} we see almost a Dirac delta at 662 \unit{\kilo\eV} since this is the Monte Carlo truth, no noise is introduced while adding the energy deposition. It is interesting, however, to see that the counts drop to zero between the Compton edge at 478 \unit{\kilo\eV} and the photopeak, as one would expect.
+
+In Figure \ref{sfig:LYSO_size_pcount} notably, the photomultiplier seems to collect fewer photons from bigger crystals, this could mean that many of them are being attenuated inside the crystal on their path tho the SiPM.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[t]{0.48\textwidth}
+    \includegraphics[width=\textwidth]{G4_simulations/LYSO_run0_base_crystal-size_energy_spectra.pdf}
+    \caption{\label{sfig:LYSO_size_edep}Energy deposition in a LYSO crystal while shooting a monoenergetic 662 \unit{\kilo\eV} gamma ray.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.48\textwidth}
+    \includegraphics[width=\textwidth]{G4_simulations/LYSO_run0_base_crystal-size_photon_count.pdf}
+    \caption{\label{sfig:LYSO_size_pcount}SiPM photon count while shooting a monoenergetic 662 \unit{\kilo\eV} gamma ray.}
+  \end{subfigure}
+  \caption{\label{fig:LYSO_size_results}Energy deposition and photon count for various LYSO sizes.}
+\end{figure}
