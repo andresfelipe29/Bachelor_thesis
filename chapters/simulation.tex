@@ -4,7 +4,7 @@ In order to provide a new interactive approach to CosmicWatches for new users a 
 
 \section{What is Geant4?}
 
-As defined by the authors \cite{Geant4}, Geant4 is a simulation toolkit based in \texttt{C++}, to model the passage of particles through matter, allowing the creation of custom detector geometries, tracking, and hit recollection, it includes multiple physics models for processes covering a wide range of specialties, such as electromagnetic, hadronic, and optical processes. Its main areas of application are high energy, nuclear, and accelerator physics, as well as medical and space science.
+As defined by the authors \cite{Geant4}, Geant4 is a simulation toolkit based in \texttt{C++}, to model the passage of particles through matter, allowing the creation of custom detector geometries, tracking, and hit recollection, including multiple physics models for processes covering a wide range of specialties, such as electromagnetic, hadronic, and optical processes. Its main areas of application are high energy, nuclear, and accelerator physics, as well as medical and space science.
 
 A comprehensive \href{https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/}{installation guide} has been made by the authors, the toolkit is available on Windows, MacOS, and Linux. We recommend building and installing it from source using CMake, since it provides great control over the specific configurations available during installation. Some great tutorials can also be found online, the simulations shown here are based on the architecture illustrated by Physics Matters in his YouTube series \href{https://youtube.com/playlist?list=PLLybgCU6QCGWgzNYOV0SKen9vqg4KXeVL&si=mdzOyTZS0DYsf_vc}{Geant4 Tutorials}.
 
@@ -12,7 +12,7 @@ A comprehensive \href{https://geant4-userdoc.web.cern.ch/UsersGuides/Installatio
 
 As noted before, Geant4 allows the creation of custom geometries, which in our use case is great, since it provides a platform suitable for testing multiple CosmicWatch configurations as shown in Sections \labelcref{sec:collected_produced,sec:SiPM_placement,sec:Scint_size,sec:cos_squared}.
 
-In general, Geant4 requires a mother volume in which the simulation will take place, in this case, we have chosen a $20\times20\times20$ \unit{\cm\cubed} box of \texttt{G4\_AIR}\footnote{This and all other materials used in the simulation, are built from the \textit{Geant4 Material Database}, accessed through the \texttt{G4NistManager} class}. The scintillating material is a $5\times5\times1$ \unit{\cm\cubed} box. The sizes of all these elements can of course be changed (as explored in Section \labelcref{sec:Scint_size}) the settings detailed above are just the default configuration in \texttt{headers/construction.hh}. Fig. \ref{fig:geometry} shows the SiPM and scintillator placement inside the mother volume.
+In general, Geant4 requires a mother volume in which the simulation will take place, in this case, we have chosen a $10\times10\times10$ \unit{\cm\cubed} box of \texttt{G4\_AIR}\footnote{This and all other materials used in the simulation, are built from the \textit{Geant4 Material Database}, accessed through the \texttt{G4NistManager} class}. The scintillating material is a $5\times5\times1$ \unit{\cm\cubed} box. The sizes of all these elements can of course be changed (as explored in Section \labelcref{sec:Scint_size}) the settings detailed above are just the default configuration in \texttt{headers/construction.hh}. Fig. \ref{fig:geometry} shows the SiPM (grey) and scintillator (blue) placement inside the mother volume, the red rectangle represents the particle source. The particle type, energy, angluar distribution and source shape among other features can be changed through macro comands such as those included in the \texttt{.mac} files under the \texttt{macros/} folder.
 
 \begin{figure}[H]
   \centering
@@ -28,9 +28,19 @@ In general, Geant4 requires a mother volume in which the simulation will take pl
   \caption{\label{fig:geometry}Scintillator and SiPM placement in the mother volume.}
 \end{figure}
 
-For simplicity, the SiPM is also modeled as a box filled with \texttt{G4\_AIR} with dimensions $3\times3\times1$ \unit{\mm\cubed} attached to the base of the scintillator. The detected photons specified in the following subsections are counted as they enter the SiPM volume, this volume-check process is done in \texttt{source/stepAction.cc}, and relevant information for every event is saved to a \texttt{ntuple} by the \texttt{G4GenericAnalysisManager} class as defined in \texttt{source/eventAction.cc}. The simulation speed could be improved by employing the \text{G4VHits} and \texttt{G4THitsCollection} classes, which are optimized to record data for every step inside a sensitive volume in the simulation.
+For simplicity, the SiPM is also modeled as a box filled with \texttt{G4\_AIR} with dimensions $3\times3\times1$ \unit{\mm\cubed} attached to the base of the scintillator. As discussed in \labelcref{sec:self_radiation}, LYSO crystals contain $^{176}$Lu, a naturally occurring radioactive isotope emitting $\beta$ radiation. LYSO crystals can absorb their own radiation, resulting in a constant background, a feature that, however, has not yet been included in the simulation, which is why the scintillating material used is the same as in previous versions of CosmicWatch, a plastic scintillator based on Polyvinyltoluene, the material name in the \textit{Geant4 Material Database} is \texttt{G4\_PLASTIC\_SC\_VINYLTOLUENE}.
 
-As discussed in \labelcref{sec:self_radiation}, LYSO crystals contain $^{176}$Lu, a naturally occurring radioactive isotope emitting betas. LYSO crystals can absorb their own radiation, resulting in a constant background, this feature however, has not yet been included in the simulation, which is why the scintillating material used is the same as in previous versions of CosmicWatch, a plastic scintillator based on Polyvinyltoluene, the material name in the \textit{Geant4 Material Database} is \texttt{G4\_PLASTIC\_SC\_VINYLTOLUENE}.
+\section{Simulation pipeline}
+
+This section explains the thought process behind the simulation, ilustrating the data extracted from Geant4 in order to obtain the results shown in the following Sections.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.47\textwidth]{G4_simulations/Simulation_pipeline.pdf}
+  \caption{\label{fig:sim_pipeline}Graphic representation of the inner workings of the simulation, gamma rays are shown in \textcolor{green}{green} and optical photons in \textcolor{Orchid}{purple}.}
+\end{figure}
+
+Throughout this Chapter, an event is understood as: the emmission of one particle from the particle source and the subsequent interactions that may occur. Figure \ref{fig:sim_pipeline} shows two different events, producing gamma rays (\textcolor{green}{green}) with the same energy, in both cases all the energy is deposited in the crystal and 5 optical photons (\textcolor{Orchid}{purple}) are produced. In the case of the gamma ray on the left, by chance, only one of the produced photons reaches the SiPM; while on the right, three of the produced photons make their way into the photomultiplier. With this in mind, the simulation records the energy deposition and SiPM photon count per event, this data is then analized to understand the consequences of some possible choices in the detector construction, such as SiPM placement and scintillator size, along with other interesting measurements that ilustrate the physical aspects of the detector.
 
 \section{Muons going through the scintillator}
 
@@ -39,6 +49,8 @@ The following simulation results were designed to recreate some of the results t
 \section{Simulation results}
 
 \subsection{Photons collected vs. produced}\label{sec:collected_produced}
+
+The detected photons specified in the following subsections are counted as they enter the SiPM volume, this volume-check process is done in \texttt{source/stepAction.cc}, and relevant information for every event is saved to a \texttt{ntuple} by the \texttt{G4GenericAnalysisManager} class as defined in \texttt{source/eventAction.cc}. The simulation speed could be improved by employing the \text{G4VHits} and \texttt{G4THitsCollection} classes, which are optimized to record data for every step inside a sensitive volume in the simulation.
 
 \subsection{SiPM placement}\label{sec:SiPM_placement}
 
