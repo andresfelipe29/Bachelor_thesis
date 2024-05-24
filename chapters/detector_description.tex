@@ -3,9 +3,9 @@
 %versions of the detector
 \section{History}
 
-``The desktop muon detector was initially built as a Muon Tagging Optical Modules (MTOMs) for PINGU, the proposed low energy upgrade for IceCube experiment'' \cite{CosmicWatch}. Since the first iteration, CosmicWatch has had multiple versions, always aiming to reduce size and costs, simplify its construction, and provide better documentation for new CosmicWatch users. An in-depth review of the detector evolution can be found in \cite{CosmicWatch} under ``About the project/Project evolution''.
+``The desktop muon detector was initially built as a Muon Tagging Optical Modules (MTOMs) for PINGU, the proposed low energy upgrade for IceCube experiment'' \cite{CosmicWatch}. Since the first iteration, CosmicWatch has had multiple versions, always aiming to reduce size and costs, simplify its construction, and provide better documentation for new CosmicWatch users. An in-depth review of the detector evolution can be found in Ref. \cite{CosmicWatch} under ``About the project/Project evolution''.
 
-The prototypes of CosmicWatch Fig. \ref{sfig:CW_ver1} used liquid scintillator, this however proved to be inefficient, since it was prone to leaks. The second prototype used a $5\times5\times5$ \unit{\cm\cubed} plastic scintillator in a light-tight reflective aluminum case Fig. \ref{sfig:CW_ver2}, this was however too slow, large, and expensive, making it not suitable for students.
+The prototypes of CosmicWatch shown in Fig. \ref{sfig:CW_ver1} used liquid scintillator, this however proved to be inefficient, since it was prone to leaks. The second prototype used a $5\times5\times5$ \unit{\cm\cubed} plastic scintillator in a light-tight reflective aluminum case shown in Fig. \ref{sfig:CW_ver2}, this was however too slow, too large, and expensive, making it not suitable for students to work with.
 
 \begin{figure}[H]
   \centering
@@ -18,10 +18,10 @@ The prototypes of CosmicWatch Fig. \ref{sfig:CW_ver1} used liquid scintillator, 
     \includegraphics[width=\textwidth]{Detector_description/CW-ver2.jpg}
     \caption{\label{sfig:CW_ver2} Second prototype}
   \end{subfigure}
-  \caption{\label{fig:CW_ver1_ver2}First versions of CosmicWatch, prototypes for PINGU, taken from \cite{CosmicWatch}.}
+  \caption{\label{fig:CW_ver1_ver2}First versions of CosmicWatch prototypes for PINGU, using liquid \subref{sfig:CW_ver1} and plastic \subref{sfig:CW_ver2} scintillator to measure cosmiic ray particles, taken from \cite{CosmicWatch}.}
 \end{figure}
 
-Later iterations resemble the current goals of CosmicWatch, they are cheaper, smaller, and easier to build. Versions 1 and 2 (Fig. \ref{sfig:CW_ver3}) introduced some user-friendly features, including battery/USB power with $~0.3$ \unit{\watt} consumption, a software-adjustable trigger threshold, and cost about \$100. V2 in particular introduced the use of SD cards to save data and the capability to connect two CosmicWatches, making it possible to measure coincident events.
+Later iterations resemble the current goals of CosmicWatch, they are cheaper, smaller, and easier to build. Versions 1 and 2 (Fig. \ref{sfig:CW_ver3}) introduced some user-friendly features, including battery/USB power with $~0.3$ \unit{\watt} consumption, a software-adjustable trigger threshold, and cost about \$100. v.2 in particular introduced the use of SD cards to save data and the capability to connect two CosmicWatches, making it possible to measure coincident events.
 
 \begin{figure}[H]
   \begin{subfigure}[t]{0.45\textwidth}
@@ -35,10 +35,10 @@ Later iterations resemble the current goals of CosmicWatch, they are cheaper, sm
     \includegraphics[height=0.45\textwidth]{Detector_description/CW_ver4.jpeg}
     \caption{\label{sfig:CW_ver4} CosmicWatch versions 1 and 2}
   \end{subfigure}
-  \caption{\label{fig:CW_ver3_ver4}Newer versions of CosmicWatch, designs suitable for students, taken from \cite{CosmicWatch}.}
+  \caption{\label{fig:CW_ver3_ver4}Newer versions of CosmicWatch, more compact and suitable for student use, introducing user-friendly features like the OLED display, without mentioning the significant decrease in price and accessibility, taken from \cite{CosmicWatch}.}
 \end{figure}
 
-The previous versions of CosmicWatch used an Arduino Nano to process the signal coming from the photomultiplier\footnote{See chapter \ref{chap:Electronics} for an in-depth description of the inner workings of the detector electronics}, which has only one core. This is a disadvantage when there is a high event rate since one can not sample data while saving previous events. The use of a Raspberry Pi Pico is one of the main improvements in upcoming versions of CosmicWatch, its two cores allow to sample data in one thread while the other handles serial communication to save previous events. This will reduce deadtime, making it suitable for high event rates, such as those found around active gamma sources.
+The previous versions of CosmicWatch used an Arduino Nano to process the signal coming from the photomultiplier\footnote{See chapter \ref{chap:Electronics} for an in-depth description of the inner workings of the detector electronics}, which can be a disadvantage when there is a high event rate since one can not sample data while saving previous events. The use of a Raspberry Pi Pico is one of the main improvements in upcoming versions of CosmicWatch, its two cores allow to sample data in one thread while the other handles serial communication to save previous events. This will reduce deadtime, making it suitable for high event rates, such as those found around active gamma sources.
 
 \section{Plastic vs. LYSO}
 
@@ -53,7 +53,7 @@ Up until now, due to how affordable and malleable they can be, only plastic scin
     \midrule
     Density [\unit{\g\per\cm\cubed}] & 7.1 & 1.032 & 3.67 & 7.1\\
     Decay time [\unit{\nano\s}]  & 36 & 2.4 & 250 & 300\\
-    Light yield [\unit{ph\per\mega\eV}] & 33200 & 10000 & 38000 & 9000\\
+    Light yield [\unit{ph\per\kilo\eV}] & 33.2 & 10 & 38 & 9\\
     Attenuation Length at 511 \unit{\kilo\eV} [\unit{\cm}] & 1.2 &  & $3.3^{*}$ & 1.0\\
     \bottomrule
   \end{tabular}
@@ -62,18 +62,7 @@ Up until now, due to how affordable and malleable they can be, only plastic scin
 
 Higher densities are good for energy deposition, catching particles and gammas more efficiently. Short decay times allow to make fast signal pulses. High light yields make it possible to detect low-energy events. Short attenuation lengths decrease the amount of material necessary to get energy depositions.
 
-LYSO however also presents some challenges due to its composition. The crystal's compound formula is Lu$_{1.8}$Y$_{0.2}$SiO$_5$:Ce, it contains Lutetium 176, a naturally occurring radioactive isotope that decays through $\beta^-$ \cite{Luxium_LYSO}, emitting a continuous background that can be self-absorbed by the crystal. Figure \ref{fig:LYSO_background} shows the energy spectra measured by Luxium Solutions of a one-inch-side cube of LYSO.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{Detector_description/LYSO-background.jpg}
-  \caption{Radioactive background of a 1''$\times$1'' LYSO crystal. Taken from \cite{Luxium_LYSO}.}
-  \label{fig:LYSO_background}
-\end{figure}
-
-As described in subsection \ref{sec:beta_decay}, beta decays lead to continuous energy spectra from the released electrons/positrons. In this particular case, $^{176}$Lu decays to an excited state of Hafnium, which can then decay to its ground state through a 3 gamma-ray cascade. The decay scheme is shown in Figure \ref{sfig:176Lu}.
-
-In this case, the main gamma rays emitted have energies 88.34, 201.83 and 306.78 \unit{\kilo\eV}, the shape of the spectra can then be explained if we add to this the electron energy spectrum from the original beta decay (Fig. \ref{sfig:176Lu_beta_spectra}). Multiple studies have already been made to emulate this spectrum using simulations and analytical analysis \cite{LYSO_background,LYSO_background_Geant4}.
+LYSO however also presents some challenges due to its composition. The crystal's compound formula is Lu$_{1.8}$Y$_{0.2}$SiO$_5$:Ce, it contains Lutetium 176, a naturally occurring radioactive isotope that decays through $\beta^-$ \cite{Luxium_LYSO}, emitting a continuous background that can be self-absorbed by the crystal (see Fig. \ref{fig:LYSO_decay}).
 
 \begin{figure}[H]
   \centering
@@ -86,14 +75,23 @@ In this case, the main gamma rays emitted have energies 88.34, 201.83 and 306.78
     \includegraphics[width=\textwidth]{Detector_description/176Lu-beta-spectrum.jpg}
     \caption{\label{sfig:176Lu_beta_spectra}Beta spectrum from $^{176}$Lu $\beta^-$ decay. Taken from \cite{IAEA}.}
   \end{subfigure}
-  \caption{\label{fig:LYSO_decay}}
+  \caption{\label{fig:LYSO_decay}Beta decays lead to continuous energy spectra from the released electrons/positrons. In this particular case, $^{176}$Lu decays to an excited state of Hafnium, which can then decay to its ground state through a 3 gamma-ray cascade with energies 306.48, 201.83 and 88.34 keV.}
 \end{figure}
 
-These considerations will become important in Chapter \ref{chap:measurements}, where some odd features are found in the measured spectra with various electronic systems.
+Figure \ref{fig:LYSO_background} shows the energy spectra measured by Luxium Solutions of a one-inch-side cube of LYSO, in it, there are sudden increases in counts for example at around 300 keV, the decay from the highest level (585.65 keV) of $^{176}$Hf to the second one (290.17 keV) produces a 306.48 keV gamma ray that can be absorbed by the LYSO; on top of this, since this is a $\beta^{-}$ decay, an electron is emitted following the energy distribution shown in \ref{sfig:176Lu_beta_spectra}, this energy is then added to the original 306.48 keV. This is the origin of the background's shape, aside from the individual energies produced by gamma decays of $^{176}$Hf, a tail due to the electron's energy spectra is added, creating these triangle-like shapes.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Detector_description/LYSO-background.jpg}
+  \caption{Radioactive background of a $1''\times1''$ LYSO crystal. Taken from \cite{Luxium_LYSO}.}
+  \label{fig:LYSO_background}
+\end{figure}
+
+Multiple studies have already been carried out to emulate this spectrum using simulations and analytical analysis \cite{LYSO_background,LYSO_background_Geant4}. These considerations will become important in Chapter \ref{chap:measurements}, where some odd features are found in the measured spectra with various electronic systems.
 
 \section{Accessories}
 
-Currently, CosmicWatch includes some accessories that make it possible to customize the detector and get more specific measurements, making use of its multiple sensors and features. Drivers and example code necessary to control the accessories listed below are included in \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}{CosmicWatch-gamma-spectroscopy-RP} under the ``drivers'' folder.
+Currently, CosmicWatch includes some accessories that make it possible to customize the detector and get more specific measurements, making use of its multiple sensors and features. Drivers and example code necessary to control the accessories listed below are included in the repository \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}{CosmicWatch-gamma-spectroscopy-RP} under the \texttt{drivers/} folder.
 
 \subsection{Preassure and Temperature sensor}
 
@@ -125,29 +123,29 @@ The ``Log in'' screen of the detector shows a $128\times 64$ pixelart on bytearr
 
 This section focuses on the main sources of power consumption in the detector while performing constant sampling of data with the trigger, OLED display updates, LED flashing for detection signaling, and temperature and pressure measurements.
 
-In order to estimate the power consumption, the 2280S-32-6 High Precision Bench Power Supply by Tektronix was used to constantly sample tension and current drawn by the detector. Three different measurements were made in order to compare power consumption on different functioning conditions, one while booting, one with a ``low'' count rate (no radioactive sources near the detector), and one with a $^{54}$Mn source. Figure \ref{fig:I_vs_t} shows the current as a function of time for four minutes of functioning.
+In order to estimate the power consumption, the 2280S-32-6 High Precision Bench Power Supply by Tektronix was used to constantly sample tension and current drawn by the detector. Three different measurements were made in order to compare power consumption on different functioning conditions: booting, ``low'' count rate (no radioactive sources near the detector), and high count rate ($^{54}$Mn source nearby). Figure \ref{fig:I_vs_t} shows the current as a function of time.
 
-There are no appreciable differences in the current drawn when booting is taken into account compared to a normal functioning cycle. There are however significant differences in the average current drawn by the detector while measuring a high count rate, not only due to a higher presence of ``high'' current measurements but also because the ``baseline'' changes appreciably between the two. Figure \ref{fig:P_vs_t} helps illustrate this fact by removing the measurements taken while booting. It is important to note that power and current values are almost identical due to the small fluctuations in tension, the average tension throughout all measurements remained at 4.9997(2) Volts.
-
-The total measuring time was 4 minutes with 26 seconds since the power supply can only record 2500 samples with a sample rate of 9.39 Hz (0.1065 seconds between samples). Using now the average power we find that the power consumption of the detector is $2.7(3)\times10^{-5}$ and $2.5(3)\times10^{-5}$ kWh for high and low count rates respectively. The difference in count rates is better illustrated in Figure \ref{fig:count_rate_for_power}.
-
-\begin{figure}
+\begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\textwidth]{Detector_description/I_vs_t.pdf}
+  \includegraphics[width=.9\textwidth]{Detector_description/I_vs_t.pdf}
   \caption{Current drawn by the detector as a function of time, measured with a 2280S-32-6 Tektronix high precision bench power supply. The $^{54}$Mn source had a 0.612 Mbq activity at the time of measurement.}
   \label{fig:I_vs_t}
 \end{figure}
 
-\begin{figure}
+From the mean values of current shown in Fig. \ref{fig:I_vs_t} it is clear that there are no appreciable differences while booting compared to a normal functioning cycle without radioactive sources nearby. There are however significant differences in the average current drawn by the detector while measuring a high count rate, not only due to a higher presence of ``high'' current measurements but also because the ``baseline'' changes appreciably. Figure \ref{fig:P_vs_t} helps illustrate this fact by removing the measurements taken while booting. It is important to note that power and current values are almost identical due to the small fluctuations in tension, the average tension throughout all measurements remained at 4.9997(2) Volts.
+
+The total measuring time was 4 minutes with 26 seconds since the power supply can only record 2500 samples with a sample rate of 9.39 Hz (0.1065 seconds between samples). Using now the average power we find that the power consumption of the detector is $2.7(3)\times10^{-5}$ and $2.5(3)\times10^{-5}$ kWh for high and low count rates respectively. The difference in count rates is better illustrated in Figure \ref{fig:count_rate_for_power}.
+
+\begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\textwidth]{Detector_description/P_vs_t.pdf}
+  \includegraphics[width=.9\textwidth]{Detector_description/P_vs_t.pdf}
   \caption{CosmicWatch power consumption as a function of time. Very similar results to Fig. \ref{fig:I_vs_t} due to the small fluctuations in tension.}
   \label{fig:P_vs_t}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\textwidth]{Detector_description/count_rate.pdf}
+  \includegraphics[width=.9\textwidth]{Detector_description/count_rate.pdf}
   \caption{Count rate before and after the $^{54}$Mn source is brought close to the detector.}
   \label{fig:count_rate_for_power}
 \end{figure}
