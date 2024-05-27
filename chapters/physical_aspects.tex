@@ -30,29 +30,6 @@ The time constant $\Gamma$ is often expressed in terms of the nucleus' lifetime 
 
 \subsection{Gamma emission}
 
-\begin{figure}
-  \centering
-  \begin{subfigure}[t]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{physical_aspects/22Na-decay.pdf}
-    \caption{\label{sfig:22Na}}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.425\textwidth}
-    \includegraphics[width=\textwidth]{physical_aspects/57Co-decay.pdf}
-    \caption{\label{sfig:57Co}}
-  \end{subfigure}
-  \medskip
-  \centering
-  \begin{subfigure}[t]{0.425\textwidth}
-    \includegraphics[width=\textwidth]{physical_aspects/60Co-decay.pdf}
-    \caption{\label{sfig:60Co}}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.425\textwidth}
-    \includegraphics[width=\textwidth]{physical_aspects/137Cs-decay.pdf}
-    \caption{\label{sfig:137Cs}}
-  \end{subfigure}
-  \caption{\label{fig:decay_schemes}Decay schemes for some isotopes used while testing the CosmicWatch. Only the main decay channels are included for clarity and simplicity. Energies [\unit{\kilo\eV}] for every level are shown in black. Branching ratios and decay mechanisms are shown in \textcolor{blue}{blue}. Gamma decays are represented with a \textcolor{red}{red} arrow also with its corresponding branching ratio.}
-\end{figure}
-
 Unstable nuclei have multiple channels to release their energy through, the conditions that determine what channels a nucleus can use are not studied here, but rather the subsequent effects of such channels. A nucleus can decay by emitting gamma rays, alpha particles, neutrons, or protons, it can also undergo beta $\beta^{\pm}$ decay, Internal Conversion, and Electron Capture among others. This work will focus on beta decay and Electron Capture since these are the preferred channels of decay of the radioactive sources used to test CosmicWatch.
 
 \subsubsection{Beta decay} \label{sec:beta_decay}
@@ -63,7 +40,9 @@ There are two types of beta decay, they are represented by the following reactio
   \beta^- &:=~ ^A_ZX \rightarrow ~ ^A_{Z+1}Y + e^- + \bar{\nu},
 \end{align}
 
-where the symbols follow the nuclear notation, $X$ and $Y$ represent the initial and final elements, $A$ is the atomic number, $Z$ the nuclear charge, $e^{\pm}$ are a positron or electron, and $\nu/\bar{\nu}$ are a neutrino/antineutrino, Fig. \ref{fig:decay_schemes} shows some examples of these processes. Note for instance the case of $^{22}_{11}$Na Fig. \ref{sfig:22Na}, it undergoes $\beta^+$ $90\%$ of the time it decays, by the nuclear notation one can tell that the initial and final elements are Sodium and Neon respectively. In this process, a proton turns into a neutron, which is why the product element has $Z=11-1=10$ while maintaining $A=22$. It is important to also note that the total charge has to be conserved after the reaction occurs, which is why a positron $e^+$ is produced.
+where the symbols follow the nuclear notation, $X$ and $Y$ represent the initial and final elements, $A$ is the atomic number, $Z$ the nuclear charge, $e^{\pm}$ are a positron or electron, and $\nu/\bar{\nu}$ are a neutrino/antineutrino.
+
+Fig. \ref{fig:decay_schemes} shows some examples of these processes. Note for instance the case of $^{22}_{11}$Na Fig. \ref{sfig:22Na}, it undergoes $\beta^+$ $90\%$ of the time it decays, by the nuclear notation one can tell that the initial and final elements are Sodium and Neon respectively. In this process, a proton turns into a neutron, which is why the product element has $Z=11-1=10$ while maintaining $A=22$. It is important to also note that the total charge has to be conserved after the reaction occurs, which is why a positron $e^+$ is produced.
 
 Alongside the positron/electron, a neutrino/antineutrino is ejected from the nucleus which, due to its extremely small interaction probability with matter, can not be detected. However, the negligible neutrino/antineutrino-matter interactions do not mean that their presence in the reaction does not have effects. The energy of the system also has to be conserved, since the particles $e^{\pm}$ and $\nu/\bar{\nu}$ are all ejected from the nucleus, higher or smaller portions of the total energy can be taken by the neutrino/antineutrino, which leaves multiple possible energy values for the positron/electron, resulting in continuous energy spectra.
 
@@ -80,8 +59,6 @@ Alongside the positron/electron, a neutrino/antineutrino is ejected from the nuc
     \caption{\label{fig:beta_spectra}positron/electron energy spectra for  \subref{sfig:22Na_beta_spectra} $^{22}$Na $(\beta^+)$ and  \subref{sfig:60Co_beta_spectra} $^{60}$Co $(\beta^-)$. Taken from \cite{IAEA}.}
 \end{figure}
 
-\subsubsection{LYSO self-radiation}\label{sec:self_radiation}
-
 \subsubsection{Electron Capture}
 
 The process of Electron Capture is analogous to $\beta^+$ decay, here an electron from de $K$ shell (or $L$, $M$, \dots) is captured by a proton in the nucleus, which then turns into a neutron while emitting a neutrino with a characteristic energy. The effect of this decay in the nucleus is the same as in $\beta^+$: (Z, A)$\rightarrow$(Z-1, A). The decay scheme is represented below:
@@ -91,6 +68,29 @@ The process of Electron Capture is analogous to $\beta^+$ decay, here an electro
 \end{equation}
 
 Since this process leaves a vacancy in the lower shells of the electron cloud, an electron in an upper shell can decay to fill the space, resulting in the emission of characteristic X-rays.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[t]{0.425\textwidth}
+    \includegraphics[width=\textwidth]{physical_aspects/22Na-decay.pdf}
+    \caption{\label{sfig:22Na}}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.425\textwidth}
+    \includegraphics[width=\textwidth]{physical_aspects/54Mn-decay.pdf}
+    \caption{\label{sfig:54Mn}}
+  \end{subfigure}
+  \medskip
+  \centering
+  \begin{subfigure}[t]{0.425\textwidth}
+    \includegraphics[width=\textwidth]{physical_aspects/60Co-decay.pdf}
+    \caption{\label{sfig:60Co}}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.425\textwidth}
+    \includegraphics[width=\textwidth]{physical_aspects/137Cs-decay.pdf}
+    \caption{\label{sfig:137Cs}}
+  \end{subfigure}
+  \caption{\label{fig:decay_schemes}Decay schemes for some isotopes used while testing the CosmicWatch. Only the main decay channels are included for clarity and simplicity. Energies [\unit{\kilo\eV}] for every level are shown in black. Branching ratios and decay mechanisms are shown in \textcolor{blue}{blue}. Gamma decays are represented with a \textcolor{red}{red} arrow also with its corresponding branching ratio.}
+\end{figure}
 
 \subsection{Light-matter interactions}
 
