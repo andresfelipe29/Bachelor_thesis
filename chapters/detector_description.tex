@@ -40,7 +40,7 @@ Later iterations resemble the current goals of CosmicWatch, they are cheaper, sm
 
 The previous versions of CosmicWatch used an Arduino Nano to process the signal coming from the photomultiplier\footnote{See chapter \ref{chap:Electronics} for an in-depth description of the inner workings of the detector electronics}, which can be a disadvantage when there is a high event rate since one can not sample data while saving previous events. The use of a Raspberry Pi Pico is one of the main improvements in upcoming versions of CosmicWatch, its two cores allow to sample data in one thread while the other handles serial communication to save previous events. This will reduce deadtime, making it suitable for high event rates, such as those found around active gamma sources.
 
-\section{Plastic vs. LYSO}
+\section{Plastic vs. LYSO}\label{sec:self_radiation}
 
 Up until now, due to how affordable and malleable they can be, only plastic scintillators have been used, particularly Polyvinyltoluene-based scintillators such as BC-400 and BC404. Sadly, it is well known that their poor energy resolution and lack of linearity makes them useless for gamma spectroscopy, at least in small sizes as the ones used for CosmicWatch ($5\times5\times1$ \unit{\cm\cubed}). In addition to this, plastic scintillators have very low light yields $10000$ photons/MeV \cite{mukhopadhyay2004plastic}, making it hard to detect low-energy events. Table \ref{tab:scintillators} compares the general properties of some scintillating materials, better showcasing the advantages of LYSO in particular for gamma spectroscopy in the CosmicWatch context.
 
