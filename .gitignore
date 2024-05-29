@@ -15,3 +15,4 @@ thesis.pdf
 *.run.xml
 *.synctex.gz
 *.toc
+/figures/G4_simulations/large_files/

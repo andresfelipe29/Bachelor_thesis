@@ -1,12 +1,13 @@
 \chapter{Electronics}
 \label{chap:Electronics}
 
-CosmicWatches have to be mainly low-cost and easy to build. In order to achieve this, the components selected for the construction have been carefully curated to make sure these restrictions were met. This however might be greatly responsible for some of the odd features found while testing the detector, like the lack of linearity and fluctuations in amplification and peak-detected values of seemingly equal input signals. The full KiCad project can be found in the GitHub repository: \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}. The component numbers shown in this chapter are the ones that would have to be placed on the PCB in order to recreate the example schematics.
+CosmicWatches have to be mainly low-cost and easy to build. In order to achieve this, the components selected for the construction have been carefully curated to make sure these restrictions were met. Some of these components, however, have been found to introduce odd behaviors in the signal processing, representing some difficulties while testing the detector, some examples are the lack of linearity and fluctuations in amplification and peak-detected values of seemingly equal input signals. The full KiCad project can be found in the GitHub repository: \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}. The component labels shown in this chapter are also the ones used in the KiCad project, meaning that they represent the components that would have to be placed on the PCB in order to recreate the example schematics.
 
-\begin{figure}[H]
+The processing of a pulse coming out of the SiPM has to go through two main stages, amplification and peak detection, Fig. \ref{fig:signal_processing} showcases these stages. The brightest SiPM pulses seen so far do not exceed 200 mV, which covers a very small portion of the ADC range on the RP Pico (0-3.3 V \cite[p.~18]{datasheet2024rp2040}). Amplification of the signal therefore allows for better resolution.
+\begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{Electronics/CW-signals.pdf}
-    \caption{Signal processing inside the detector.}
+    \includegraphics[width=0.73\textwidth]{Electronics/CW-signals.pdf}
+    \caption{Signal processing done by the CosmicWatch electronics.}
     \label{fig:signal_processing}
 \end{figure}
 
@@ -34,8 +35,6 @@ CosmicWatches have to be mainly low-cost and easy to build. In order to achieve 
     \label{circ:amplifier}
 \end{figure}
 
-The processing of a pulse coming out of the SiPM has to go through two main stages, amplification and peak detection, Fig. \ref{fig:signal_processing} showcases these stages. The brightest SiPM pulses seen so far do not exceed 200 mV, which covers a very small portion of the ADC range on the RP Pico (0-3.3 V \cite[p.~18]{datasheet2024rp2040}). Amplification of the signal therefore allows for better resolution.
-
 An op-amp on its own amplifies the voltage difference between the non-inverting (pin $+$) and inverting (pin $-$) inputs by its internal gain $A_{int}$, having then $V_{out}=A_{int}(V_+ - V_-)$. In this case, however, we are interested in controlling the gain of the circuit and therefore the amplification. In order to achieve this we introduce a feedback loop in the op-amp through $R4$ and $R6$, which controls how much of the output voltage is fed back into the op-amp. The theoretical amplification is therefore given by $V_{out}=(1+R6/R4)V_{in}$. A simple schematic showcasing the component arrangement is shown in Fig. \ref{circ:amplifier}.
 
 \section{Peak Detector}
@@ -44,9 +43,9 @@ Since the LYSO crystal is so fast (36 ns of decay time \cite{Luxium_LYSO}) the A
 
 The idea behind the peak detector is to store charge in a capacitor ($C_{25}$) through a diode ($D_3$), retaining the highest voltage the input signal has reached. A diode is placed before the capacitor so that once the signal's voltage goes below the peak voltage, the diode will be reverse biased, therefore preventing current from flowing while maintaining the voltage on the capacitor.
 
-In order to measure the voltage in the capacitor, a discharging resistor has to be added ($R_{15}/R_{19}$). The time it takes the capacitor to discharge is given by $t=RC$. Although for example in the case of CosmicWatch-V2's peak detector, the values of $R_{14}$ and $R_{24}$ also play a role in the discharging time, which has proved not to be as trivial as calculating the equivalent resistance $R_t$ of all three and simply take $t=R_tC$.
+In order to measure the voltage in the capacitor, a discharging resistor has to be added ($R_{15}/R_{19}$). The time it takes the capacitor to discharge is given by $t=RC$. Although for example, in the case of CosmicWatch-V2's peak detector, the values of $R_{14}$ and $R_{24}$ also play a role in the discharging time, which has proved not to be as trivial as calculating the equivalent resistance $R_t$ of all three and simply take $t=R_tC$.
 
-The schematic and PCB shown in the repository \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}, include the connections and footprints necessary to place the components that make the designs illustrated in Subsections \labelcref{sec:basic,sec:pd_V2,sec:basic_buffer,sec:nuclear_phoenix}. Different results were found while testing these peak detector setups.
+The schematic and PCB shown in the repository \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}, include the connections and footprints necessary to place the components that make the designs illustrated in Sections \labelcref{sec:basic,sec:pd_V2,sec:basic_buffer,sec:nuclear_phoenix}. Different results were found while testing these peak detector setups.
 
 \subsection{Basic Peak Detector}\label{sec:basic}
 
