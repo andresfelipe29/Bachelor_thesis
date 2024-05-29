@@ -123,7 +123,7 @@ In order to avoid negative saturation $D_5$ is added, along with an outer feedba
         (D3_r) -- ++(1,0) coordinate (C25_u)
         (C25_u) to[C, l=$C_{25}$] ++(0,-2) node[ground]{}
         (C25_u) -- ++(2,0) coordinate (buffer_l)
-        (buffer_l) node[op amp, noinv input up, font=\small, anchor=+] (buffer) {$U_7$}
+        (buffer_l) node[op amp, noinv input up, font=\small, anchor=+] (buffer) {$U_4$}
         (buffer.-) coordinate (buffer_-)
         (buffer.out) coordinate (buffer_out)
         (buffer_-) -- (buffer_- |-, |- R24_l) coordinate (R24_r)
@@ -158,7 +158,7 @@ This design follows the same principles as the one shown in the previous subsect
         (opamp.-) coordinate (oa_-)
         (oa_-) -- ++(-1.5, 0) -- ++(0, 4) coordinate(aux1)
         (aux1) -- (D3_r |-, |- aux1) -- (D3_r)
-        (buffer_l) node[op amp, noinv input up, font=\small, anchor=+] (buffer) {$U_7$}
+        (buffer_l) node[op amp, noinv input up, font=\small, anchor=+] (buffer) {$U_4$}
         (buffer.-) coordinate (buffer_-)
         (buffer.out) coordinate (buffer_out)
         (buffer_-) -- (buffer_- |-, |- R30_l) coordinate (R30_r)
@@ -180,7 +180,7 @@ NuclearPhoenix is a physics student who has developed a gamma detector that also
     \centering
     \begin{circuitikz}[scale=0.7]
         %\draw [help lines] (-4,0) grid (5,-4);
-        \draw (0,0) node[op amp, noinv input up, font=\small] (opamp) {$U_6$}
+        \draw (0,0) node[op amp, noinv input up, font=\small] (opamp) {$U_4$}
         (opamp.up) --++(0,0.5) node[vcc]{5\,\textnormal{V}}
         (opamp.down) --++(0,-0.5) node[vee]{-5\,\textnormal{V}}
         (opamp.out) --++(1,0) node[above]{$V_{out}$}
