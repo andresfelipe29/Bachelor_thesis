@@ -268,12 +268,10 @@ In this case, a voltage divider is used to force a positive saturation in the op
     \label{circ:booster}
 \end{figure}
 
-Acording to Onsemi \cite{Onsemi_SiPM}, the operaing voltage of a MicroFJ-300XX-TSV SiPM is 25.2-30.7 V. It is then necessary to boost $V_{cc}$ to the operating range of the SiPM, noted as HV in Fig. \ref{circ:booster}. In order to achive this, a MAX5026 PWM Step-Up DC-DC Converter is used \cite{AnalogDevices_DC_DC}, which has a user-adjustable output voltage of up to 36 V using external feedback resistors.
+According to Onsemi \cite{Onsemi_SiPM}, the operating voltage of a MicroFJ-300XX-TSV SiPM lies between 25.2 and 30.7 V. It is then necessary to boost $V_{cc}$ to the operating range of the SiPM, noted as $HV$ in Fig. \ref{circ:booster}. In order to achieve this, a MAX5026 PWM Step-Up DC-DC Converter is used \cite{AnalogDevices_DC_DC}, which has a user-adjustable output voltage of up to 36 V using external feedback resistors.
 
-In the circuit shown in Fig. \ref{circ:booster}, $R_{10}$ and $R_2$ determine the output voltage HV. According to \cite{AnalogDevices_DC_DC}, equation \eqref{eq:booster_fb_resistance} allows to calculate the Value of $R_{10}$ given a desired output voltage HV and a value of $R_2$ between 5 and 50 \unit{\kilo\ohm}.
+In the circuit shown in Fig. \ref{circ:booster}, $R_{10}$ and $R_2$ determine the output voltage $HV$. According to Ref. \cite{AnalogDevices_DC_DC}, equation \eqref{eq:booster_fb_resistance} allows to calculate the Value of $R_{10}$ given a desired output voltage $HV$ and a value of $R_2$ between 5 and 50 \unit{\kilo\ohm}.
 
 \begin{equation}
-    R_{10} = R_2\left(\frac{\text{HV}}{V_{REF}}-1\right) \label{eq:booster_fb_resistance}
+    R_{10} = R_2\left(\frac{HV}{V_{REF}}-1\right) \label{eq:booster_fb_resistance}
 \end{equation}
-
-\section{Single photons}

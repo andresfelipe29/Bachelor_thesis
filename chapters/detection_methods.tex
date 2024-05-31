@@ -3,8 +3,6 @@
 %versions of the detector
 \section{Scintillation}
 
-\section{Single photon detectors}
-
 \section{PMTs}
 
 Photomultipliers are very useful tools in particle detection. Since some detection methods rely on the measurement of photons it is very important to make use of every single one. Some PMs are capable of creating measurable electrical signals from single photon interactions, provoking an electron avalanche that can be easily read with various devices. Photomultiplier Tubes are the most common light amplifiers paired with scintillators, they are however bulky and require very high voltages to operate. An in-depth description of this and other types of Photomultipliers can be found in Ref. \cite{knoll2010radiation} Chap. 9.
@@ -17,7 +15,7 @@ A Silicon Photomultiplier is an array of Geiger-mode avalanche-photodiodes. To m
 
 SiPMs however, also have some disadvantages, since they are based on the transport of photoelectrons, the output can vary with temperature, as high temperatures can create electron-hole pairs that will be read as a photon interaction. These events are called dark pulses and represent a random noise in the signal.
 
-The SiPM used and tested throughout this work is a MicroFJ-300XX-TSV by Onsemi \cite{Onsemi_SiPM} (Fig. \ref{fig:Onsemi_SiPM}), which has an active area of $3.07 \times 3.07$ \unit{\mm\squared} and a microcell size of 35 \unit{\micro\m}. In this case, the operating voltage ranges between 25.2 and 30.7 \unit{\V}, which can be obtained using a DC to DC booster (see Section \ref{sec:DC_DC}), no longer requiring the high voltages of PMTs. We are currently operating at an Over-voltage of 4 V, which according to Ref. \cite{Onsemi_SiPM} produces a relatively high dark count rate (50-150 \unit{\kilo\Hz\per\mm\squared} at 21 $^\circ$C), potentially affecting energy resolution.
+The SiPM used and tested throughout this work is a MicroFJ-300XX-TSV by Onsemi \cite{Onsemi_SiPM} (Fig. \ref{fig:Onsemi_SiPM}), which has an active area of $3.07 \times 3.07$ \unit{\mm\squared} and a microcell size of 35 \unit{\micro\m}. In this case, the operating voltage ranges between 25.2 and 30.7 \unit{\V}, which can be obtained using a DC to DC booster (see Section \ref{sec:DC_DC}), no longer requiring the high voltages of PMTs. We are currently operating at a Breakdown Voltage of around 24 V and an Over-voltage of 4 V, which according to Ref. \cite{Onsemi_SiPM} produces a relatively high dark count rate (50-150 \unit{\kilo\Hz\per\mm\squared} at 21 $^\circ$C), potentially affecting energy resolution.
 
 \begin{figure}[H]
     \centering

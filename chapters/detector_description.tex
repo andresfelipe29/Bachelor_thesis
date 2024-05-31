@@ -132,56 +132,65 @@ CosmicWatches are meant to be portable, this means that serial communication wit
 
 \section{Power Consumption}
 
-This section focuses on the main sources of power consumption in the detector while performing constant sampling of data with the trigger, OLED display updates, LED flashing for detection signaling, and temperature and pressure measurements.
+This section shows the power consumption of the detector under three different working conditions, further studies on the consumption of every component could be carried out if the values presented below are too high for more specific use case scenarios.
 
-In order to estimate the power consumption, the 2280S-32-6 High Precision Bench Power Supply by Tektronix was used to constantly sample tension and current drawn by the detector. Three different measurements were made in order to compare power consumption on different functioning conditions: booting, ``low'' count rate (no radioactive sources near the detector), and high count rate ($^{54}$Mn source nearby). Figure \ref{fig:I_vs_t} shows the current as a function of time.
+In order to estimate the power consumption, a Tektronix 2280S-32-6 High Precision Bench Power Supply by was used to constantly sample tension and current drawn by the detector. Three different measurements were made in order to compare power consumption on different functioning conditions: booting, ``low'' count rate (no radioactive sources near the detector), and high count rate ($^{54}$Mn source nearby), all while running the \texttt{main.py} script included in Appendix \ref{app:RP_Pico_code}. The power supply takes samples every 0.1065 seconds, with this it is then possible to visualize the current drawn as a function of time. Figure \ref{fig:I_vs_t} shows the measured values for all three cases in a scatter plot, making it clear that the current drawn tends to lie at smaller values, at around 65 mA, but there are also however many samples that lie above the baseline. The horizontal lines show the mean current drawn throughout the measurement, the average tension for all measurements remained almost constant at 4.9997(2) Volts, and the total measuring time was 4 minutes with 26 seconds.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=.9\textwidth]{Detector_description/I_vs_t.pdf}
-  \caption{Current drawn by the detector as a function of time, measured with a 2280S-32-6 Tektronix high precision bench power supply. The $^{54}$Mn source had a 0.612 Mbq activity at the time of measurement.}
+  \caption{Scatter plot of current-draw samples as a function of time, measured with a Tektronix 2280S-32-6 high precision bench power supply. The $^{54}$Mn source used to increase the count rate had a 0.612 Mbq activity at the time of measurement.}
   \label{fig:I_vs_t}
 \end{figure}
 
-From the mean values of current shown in Fig. \ref{fig:I_vs_t} it is clear that there are no appreciable differences while booting compared to a normal functioning cycle without radioactive sources nearby. There are however significant differences in the average current drawn by the detector while measuring a high count rate, not only due to a higher presence of ``high'' current measurements but also because the ``baseline'' changes appreciably. Figure \ref{fig:P_vs_t} helps illustrate this fact by removing the measurements taken while booting. It is important to note that power and current values are almost identical due to the small fluctuations in tension, the average tension throughout all measurements remained at 4.9997(2) Volts.
-
-The total measuring time was 4 minutes with 26 seconds since the power supply can only record 2500 samples with a sample rate of 9.39 Hz (0.1065 seconds between samples). Using now the average power we find that the power consumption of the detector is $2.7(3)\times10^{-5}$ and $2.5(3)\times10^{-5}$ kWh for high and low count rates respectively. The difference in count rates is better illustrated in Figure \ref{fig:count_rate_for_power}.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=.9\textwidth]{Detector_description/P_vs_t.pdf}
-  \caption{CosmicWatch power consumption as a function of time. Very similar results to Fig. \ref{fig:I_vs_t} due to the small fluctuations in tension.}
-  \label{fig:P_vs_t}
-\end{figure}
+ Using now the average power we find that the power consumption of the detector is $2.7(3)\times10^{-5}$ and $2.5(3)\times10^{-5}$ kWh for high and low count rates respectively. The difference in count rates is better illustrated in Figure \ref{fig:count_rate_for_power}. Results are summarized in Tab. \ref{tab:Power_consumption}.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=.9\textwidth]{Detector_description/count_rate.pdf}
-  \caption{Count rate before and after the $^{54}$Mn source is brought close to the detector.}
+  \caption{Event rate before and after the Manganese source is brought close to the detector.}
   \label{fig:count_rate_for_power}
 \end{figure}
+
+\begin{table}[H]
+  \caption{Power consumption data for three different CosmicWatch operating conditions while running the \texttt{main.py} script included in Appendix \ref{app:RP_Pico_code}.}
+  \centering
+  \begin{tabular}{ c c c c c }
+    \midrule
+     & $\Bar{I}$ [mA] & $\Bar{V}$ [V] & $\Bar{P}$ [mWh] & event rate [c/s] \\
+    \midrule
+    Booting & 67(7) & \multirow{3}{*}{4.9997(2)} & 25(3) & 7 \\
+    Low event rate & 67(7) & & 25(3) & 7 \\
+    High event rate & 72(9) & & 27(3) & 113 \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:Power_consumption}
+\end{table}
 
 \section{KiCad}
 
 KiCad is an open-source software that allows the creation of circuit schematics, PCB layout, and 3D viewing among other capabilities. It is available in Windows, Linux, and iOS, making it perfect for CosmicWatch, since one of the goals is to make it easily available to new users. The KiCad project for CosmicWatch V2 can be found on the repository \href{https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v2}{CosmicWatch-Desktop-Muon-Detector-v2} under ``PCB\_Files''.
 
-\href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB} contains the KiCad files necessary to build the newer version of CosmicWatch, all the necessary footprints can be found in ``MyLibrary.pretty'', including the Raspberry Pi Pico footprints. In order to print the PCB, it is necessary to send the compressed ``Geber'' folder (found under ``CosmicWatch\_detector\_v33'') to a manufacturer, \href{https://www.elecrow.com/pcb-manufacturing.html}{ELECROW} is recommended.
+\href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB} contains the KiCad files necessary to build the newer version of CosmicWatch, all the necessary footprints can be found in ``MyLibrary.pretty'', including the Raspberry Pi Pico footprints. In order to print the PCB, it is necessary to send the compressed ``Geber'' folder (found under ``CosmicWatch\_detector\_v33'') to a manufacturer, \href{https://www.elecrow.com/pcb-manufacturing.html}{ELECROW} is recommended. The full pdf schematic can be found below.
+
+\includepdf[width=\paperheight, landscape=true]{Detector_description/CosmicWatch_schematic.pdf}
 
 \section{3D printed case}
 
-In order to hold the crystal in place on the SiPM PCB, it was necessary to design a 3D printed case, see Fig. \ref{fig:3d_case_desing} for a schematic of the 3D design on Inventor. With this we made sure that the crystal would not move relative to the SiPM, preventing scratches and providing a more stable optical coupling with the photomultiplier.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=.9\textwidth]{Detector_description/LYSO-holder-drawing.pdf}
-    \caption{Case model for a $4\times4\times22$ \unit{mm\cubed} LYSO crystal, all dimensions are shown in \unit{\mm}. The \texttt{.stl} and \texttt{.ipt} files for 3D printing can be found on the repository \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}.}
-    \label{fig:3d_case_desing}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.9\textwidth]{Detector_description/LYSO-holder-drawing.pdf}
+  \caption{Case model for a $4\times4\times22$ \unit{mm\cubed} LYSO crystal, all dimensions are shown in \unit{\mm}. The \texttt{.stl} and \texttt{.ipt} files for 3D printing can be found on the repository \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}.}
+  \label{fig:3d_case_desing}
 \end{figure}
+
+In order to hold the crystal in place on the SiPM PCB, it was necessary to design a 3D printed case, see Fig. \ref{fig:3d_case_desing} for a schematic of the 3D design on Inventor. With this we made sure that the crystal would not move relative to the SiPM, preventing scratches and providing a more stable optical coupling with the photomultiplier.
 
 The design keeps in mind that the crystal has to be wrapped in Teflon tape to increase reflectivity, which is why it is built in two pieces that come together around the crystal, lowering the risk of tears. Once the crystal is placed in the case it can be kept together using electrical tape.
 
 Before using Teflon tape, the crystal was wrapped in tin foil, which made tears common (Fig. \ref{fig:tin_foil_tear}) and greatly impacted the quality of the spectra that could be obtained with the detector. Teflon tape seems to solve the tearing problem and seems to better contain the photons inside the crystal. However, to reduce the risk of tearing the Teflon, multiple iterations of the case were designed (Fig. \ref{fig:3d_previous_desings}), the necessary files to print the case have been added to the \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB} repository.
-\begin{figure}
+
+\begin{figure}[H]
     \centering
     \begin{subfigure}[t]{0.35\textwidth}
       \includegraphics[width=\textwidth]{Detector_description/LYSO-wrapped.jpeg}
@@ -192,7 +201,7 @@ Before using Teflon tape, the crystal was wrapped in tin foil, which made tears 
     \caption{\label{fig:tin_foil_tear}Tin foil tear.}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.4\textwidth]{Detector_description/Holder-designs.jpeg}
     \caption{3D printed cases tested to reduce the risk of Teflon tears.}

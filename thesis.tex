@@ -45,6 +45,8 @@
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
+\usepackage{pdfpages} %-------include pdf as full page-------%
+
 \lstdefinestyle{mystyle}{
     backgroundcolor=\color{backcolour},   
     commentstyle=\color{codegreen},
@@ -118,8 +120,8 @@
 \renewcommand{\thesisname}{CosmicWatch: The Desktop Muon Detectors, exploring gamma-ray spectroscopy}
 \renewcommand{\issuedate}{2024}
 \renewcommand{\submissiondate}{Fecha entrega}
-\renewcommand{\director}{Prof. Luis Fernando Cristancho Mejia}
-\renewcommand{\codirector}{Prof. Spencer Axani}
+\renewcommand{\director}{Prof. Fernando Cristancho Mejia}
+\renewcommand{\codirector}{Prof. Spencer Nicholas Gaelan Axani}
 \renewcommand{\academictitle}{Físico}
 \renewcommand{\resgroupone}{Grupo de Física Nuclear Universidad Nacional (GFNUN)}
 \renewcommand{\resgrouptwo}{Axani Group (AxLab)}
@@ -301,9 +303,9 @@
 \small Tesis presentada como requisito parcial para optar por el título de: \\
 {\bfseries \academictitle}\\
 \vspace{2.5cm}
-Director(a): \\
+Director: \\
 \director \\
-Codirector(a): \\
+Codirector: \\
 \codirector \\
 \vspace{2.5cm}
 Línea de investigación: \\ 
@@ -326,14 +328,21 @@ Universidad Nacional de Colombia \\
 \noindent
 \\[10em]
 %Modificar la cita que se quiere agregar
-{\Large Cita 01.}
+{\Large The Road goes ever on and on,\\
+Down from the door where it began.\\
+Now far ahead the Road has gone,\\
+And I must follow, if I can,\\
+Pursuing it with eager feet,\\
+Until it joins some larger way\\
+Where many paths and errands meet.\\
+And whither then? I cannot say.}
 \\[3em]
-Autor
-\\ \textit{Fuente}
+J.R.R. Tolkien
+\\ %\textit{Fuente}
 \\[10em]
 %Para anular la adición de una segunda cita anule las siguientes lineas desde acá mediante comentario (%)
 %{\Large \textit{Wenn du es nicht einfach erkl\"{a}ren kannst, hast du es nicht genug verstanden} - Si no eres capaz de explicar algo claramente, es que aún no lo has entendido lo suficiente.}
-\\[3em]
+%\\[3em]
 %Albert Einstein
 %Hasta acá!
 \end{minipage}
@@ -355,7 +364,7 @@ Autor
 {\pagestyle{plain} \pagenumbering{roman}
 \setlength{\parskip}{1mm}
 \include{frontmatter/Agradecimientos}   
-\include{frontmatter/Abreviaturas}
+%\include{frontmatter/Abreviaturas}
 \include{frontmatter/ResumenAbstract}
 \tableofcontents 
 %\addcontentsline{toc}{chapter}{Table of contents}
@@ -383,6 +392,7 @@ Autor
 %Inicio del apéndice o anexos
 \begin{appendix}
 \include{appendixes/RP_code}%
+\include{appendixes/Links}%
 \end{appendix}
 
 %Permite visualizar la bibliografía en la tabla de contenido
