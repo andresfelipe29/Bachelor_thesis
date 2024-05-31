@@ -3,13 +3,14 @@
 
 CosmicWatches have to be mainly low-cost and easy to build. In order to achieve this, the components selected for the construction have been carefully curated to make sure these restrictions were met. Some of these components, however, have been found to introduce odd behaviors in the signal processing, representing some difficulties while testing the detector, some examples are the lack of linearity and fluctuations in amplification and peak-detected values of seemingly equal input signals. The full KiCad project can be found in the GitHub repository: \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}. The component labels shown in this chapter are also the ones used in the KiCad project, meaning that they represent the components that would have to be placed on the PCB in order to recreate the example schematics.
 
-The processing of a pulse coming out of the SiPM has to go through two main stages, amplification and peak detection, Fig. \ref{fig:signal_processing} showcases these stages. The brightest SiPM pulses seen so far do not exceed 200 mV, which covers a very small portion of the ADC range on the RP Pico (0-3.3 V \cite[p.~18]{datasheet2024rp2040}). Amplification of the signal therefore allows for better resolution.
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.73\textwidth]{Electronics/CW-signals.pdf}
     \caption{Signal processing done by the CosmicWatch electronics.}
     \label{fig:signal_processing}
 \end{figure}
+
+The processing of a pulse coming out of the SiPM has to go through two main stages, amplification and peak detection, Fig. \ref{fig:signal_processing} showcases these stages. The brightest SiPM pulses seen so far do not exceed 200 mV, which covers a very small portion of the ADC range on the RP Pico (0-3.3 V \cite[p.~18]{datasheet2024rp2040}). Amplification of the signal therefore allows for better resolution. As Fig. \ref{fig:signal_processing} illustrates, a SiPM pulse fully decays approximately after 50 \unit{\micro\s}, this means that the microprocessor will most likely not sample the actual peak value, it could even read the voltage long after the pulse has decayed depending on the response time. In order to give the microprocessor enough time to get an accurate reading of the amplitude, the amplified pulse is stretched in time (\textcolor{orange}{orange signal}), making sure that the sampled voltage is near the peak value even if the reading is delayed.
 
 \section{Amplifier}
 
@@ -45,7 +46,7 @@ The idea behind the peak detector is to store charge in a capacitor ($C_{25}$) t
 
 In order to measure the voltage in the capacitor, a discharging resistor has to be added ($R_{15}/R_{19}$). The time it takes the capacitor to discharge is given by $t=RC$. Although for example, in the case of CosmicWatch-V2's peak detector, the values of $R_{14}$ and $R_{24}$ also play a role in the discharging time, which has proved not to be as trivial as calculating the equivalent resistance $R_t$ of all three and simply take $t=R_tC$.
 
-The schematic and PCB shown in the repository \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}, include the connections and footprints necessary to place the components that make the designs illustrated in Sections \labelcref{sec:basic,sec:pd_V2,sec:basic_buffer,sec:nuclear_phoenix}. Different results were found while testing these peak detector setups.
+The schematic and PCB shown in the repository \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-PCB}{CosmicWatch-gamma-spectroscopy-PCB}, include the connections and footprints necessary to place the components that make the designs illustrated in Sections \labelcref{sec:basic,sec:pd_V2,sec:basic_buffer,sec:nuclear_phoenix}. Different results were found while testing these peak detector setups, none of them, however, were capable of holding the true value of the amplified pulse and did not respond linearly. In our case, the nonlinearity meant that a 2 mV increase in SiPM pulses bellow 50 mV produced an appreciable change in the peak detected signal, while for bigger pulses (above 50 mV) a significant change occurred only after a 10mV increase. These problems need to be addressed in order produce good spectra since this greatly affects energy resolution.
 
 \subsection{Basic Peak Detector}\label{sec:basic}
 
@@ -71,7 +72,7 @@ The schematic and PCB shown in the repository \href{https://github.com/anvargasl
     \label{circ:basic_pd}
 \end{figure}
 
-Assuming ideal conditions, a diode is enough to retain the highest input voltage reached. Semiconductor diodes however don't behave ideally, they introduce a voltage drop that will keep the voltage stored in $C_{25}$ at a lower potential than that of $V_{in}$. In order to prevent this, an op-amp $(U_6)$\footnote{Currently the only op-amp that has behaved reasonably well is the LT1807 by Analog Devices Inc. The LMH6658  by Texas Instruments seems to have trouble driving even small capacitors.} is placed before the diode. In the configuration shown in Fig. \ref{circ:basic_pd}, the opamp will try to output the necessary current to equilibrate the inverting input voltage (pin $-$) to what it sees in the non-inverting input (pin $+$), to achieve this $U_6$ has to go one diode drop above $V_{in}$.
+Assuming ideal conditions, a diode is enough to retain the highest input voltage reached. Semiconductor diodes however don't behave ideally, they introduce a voltage drop that will keep the voltage stored in $C_{25}$ at a lower potential than that of $V_{in}$. In order to prevent this, an op-amp $(U_6)$\footnote{Currently, the only op-amp that has behaved reasonably well is the LT1807 by Analog Devices Inc. The LMH6658  by Texas Instruments seems to have trouble driving even small capacitors.} is placed before the diode. In the configuration shown in Fig. \ref{circ:basic_pd}, the opamp will try to output the necessary current to equilibrate the inverting input voltage (pin $-$) to what it sees in the non-inverting input (pin $+$), to achieve this $U_6$ has to go one diode drop above $V_{in}$.
 
 \subsection{Preventing negative saturation}\label{sec:pd_V2}
 
@@ -196,7 +197,7 @@ NuclearPhoenix is a physics student who has developed a gamma detector that also
     \label{circ:trigger}
 \end{figure}
 
-In this case, a voltage divider is used to force a positive saturation in the op-amp once the amplified signal reaches a threshold voltage, generating a "digital 1"\: that can be used to trigger the detector. The threshold, or $V_{REF}$ as noted in Fig. \ref{circ:trigger}, is given by equation \eqref{eq:v_ref}.
+In this case, a voltage divider is used to force a positive saturation in the op-amp once the amplified signal reaches a threshold voltage, generating a "digital 1"\: that is the used to trigger an ADC reading of the peak detected signal. The threshold, or $V_{REF}$ as noted in Fig. \ref{circ:trigger}, is given by equation \eqref{eq:v_ref}.
 
 \begin{equation}
     V_{REF}=\frac{R_{18}}{R_{22}+R_{16}+R_{18}} V_{cc} \label{eq:v_ref}

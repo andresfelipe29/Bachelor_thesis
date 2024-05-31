@@ -91,9 +91,9 @@ Multiple studies have already been carried out to emulate this spectrum using si
 
 \section{Accessories}
 
-Currently, CosmicWatch includes some accessories that make it possible to customize the detector and get more specific measurements, making use of its multiple sensors and features. Drivers and example code necessary to control the accessories listed below are included in the repository \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}{CosmicWatch-gamma-spectroscopy-RP} under the \texttt{drivers/} folder.
+Currently, CosmicWatch includes some accessories that make it possible to customize the detector and get more specific measurements by making use of its multiple sensors and features. Drivers and example code necessary to control the accessories listed below are included in the repository \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}{CosmicWatch-gamma-spectroscopy-RP} under the \texttt{drivers/} folder and in Appendix \ref{app:RP_Pico_code}.
 
-\subsection{Preassure and Temperature sensor}
+\subsection{Pressure and Temperature sensor}
 
 An absolute barometric pressure sensor \href{https://www.bosch-sensortec.com/products/environmental-sensors/pressure-sensors/bmp280/}{BMP280} can be included in the detector construction to make barometric measurements that can relate to muon counts. Temperature can also affect the SiPM and LYSO response, possibly making this data important while characterizing the detector. The Raspberry Pi Pico has a built-in temperature sensor, this however has been found to have some errors depending on the reference voltage, making its calibration necessary.
 
@@ -102,7 +102,7 @@ The Raspberry Pi Pico reads data from the BMP280 through the I2C protocol, the M
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.3\textwidth]{Detector_description/bmp280.jpg}
-  \caption{BMP280 sensor PCB example, it can be easily found online. Taken from \href{https://a.co/d/hhF7Vtp}{Amazon}.}
+  \caption{BMP280 sensor PCB example.}
   \label{fig:bmp280}
 \end{figure}
 
@@ -115,8 +115,19 @@ The ``Log in'' screen of the detector shows a $128\times 64$ pixelart on bytearr
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.3\textwidth]{Detector_description/ssd1306.jpg}
-  \caption{SSD1306 OLED screen example, it can be easily found online. Taken from \href{https://a.co/d/cGnBDLF}{Amazon}.}
-  \label{fig:bssd1306}
+  \caption{SSD1306 OLED screen example.}
+  \label{fig:ssd1306}
+\end{figure}
+
+\section{MicroSD card socket}
+
+CosmicWatches are meant to be portable, this means that serial communication with a computer may not always be available, for this reason a MicroSD card socket is implemented, allowing the used to record data at any time. The drivers to control this socket can also be found in the \href{https://github.com/micropython/micropython-lib/tree/master/micropython/drivers/storage/sdcard}{MicroPython documentation}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.3\textwidth]{Detector_description/SD_card_socket.jpg}
+  \caption{MicroSD card socket example.}
+  \label{fig:sd_card}
 \end{figure}
 
 \section{Power Consumption}

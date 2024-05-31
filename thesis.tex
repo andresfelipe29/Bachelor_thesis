@@ -38,14 +38,40 @@
 \usepackage{longtable}
 \setlength{\LTcapwidth}{6in}
 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=1
+}
+
+\lstset{style=mystyle}
+
 %\usepackage[autostyle, english=british]{csquotes}
 %\MakeOuterQuote{"}
 
 \usepackage{epsfig,epic,eepic,threeparttable,amscd,here,lscape,tabularx}
 \usepackage{textcomp}
 \usepackage{tabu,array}
-%\usepackage[rgb]{xcolor}
-\usepackage[dvipsnames]{xcolor}
 
 % Permite ver y configurar los parámetros de la página
 \usepackage{layout}

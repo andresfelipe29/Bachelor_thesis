@@ -1,0 +1,1 @@
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QIt also allows to print a pixel art of the CosmicWatch logo as a bootscreen.\\E$"}

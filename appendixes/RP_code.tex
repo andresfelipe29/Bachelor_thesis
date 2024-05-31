@@ -1,1 +1,25 @@
-\chapter{RaspberryPi Pico code}
+\chapter{RaspberryPi Pico code}\label{app:RP_Pico_code}
+
+All code included here can be found in the repository \\ \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}.
+
+\section{ADC Calibration}
+
+In Chapter \ref{chap:Electronics} we explored the amplification and peak detection stages along with some of their shortcomings, in order to attenuate the effects of the peak-detector's nonlinearity a calibration of the ADC channels must be done, this allows to correlate the incoming SiPM pulse amplitude with a specific ADC reading.
+
+In order to calibrate the detector response one can use an Arbitrary Function Generator, the easiest way to recreate a SiPM pulse with one of these tools is to save it with an oscilloscope and then upload it to the generator. If this is not possible, one can use a square pulse shape and adjust the rise and fall times in order to produce a signal that resembles a SiPM pulse (make sure that the amplifier responds similarly for the simulated signal). The artificial pulse can be fed to the detector through the SMA connector (make sure to disconnect the PM before doing this).
+
+The code shown bellow can be used to calibrate the detector. The list \texttt{Voltages} contains preliminary pulse amplitudes to be used for calibration, five samples are taken for every pulse in the \texttt{read\_ADC} interrupt routine, this is done for \texttt{buffer\_size=100} pulses before continuing with the next amplitude (a five-second window is given to the user to change the amplitude before continuing). Make sure that the pulse frequency is not too high, this might cause pulses to fall on top of each other and therefore producing a poor calibration.
+
+\lstinputlisting[language=python]{./appendixes/code/calibration.py}
+
+\section{Ring Buffer}
+
+The main goal of the code is to take full advantage of both cores in the Pico, in order to do this a ring buffer class has been implemented in order to make sure that core 0 will not overwrite unsaved data that is yet to be read by core 1. This module is adapted to our use case from the original code by Peter Hinch under MIT license found at \href{https://github.com/peterhinch/micropython-async/blob/master/v3/primitives/ringbuf_queue.py}{micropython-async}.
+
+\lstinputlisting[language=python]{./appendixes/code/RingbufQueue.py}
+
+\section{OLED module}
+
+In order to facilitate the use of the SSD1306 OLED display a small module for text display and erase has been included. It also allows to print a pixel art of the CosmicWatch logo as a bootscreen. Please note that some lines in the file have been omitted since they contain some very long bytearrays.
+
+\lstinputlisting[language=python,linerange={1-32,34-104}]{./appendixes/code/OLED.py}
