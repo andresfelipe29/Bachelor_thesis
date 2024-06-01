@@ -128,19 +128,19 @@ As expected, the energy deposition in the crystal and the number of optical phot
 
 With this simulation, we are trying to understand the detector response as a function of the zenith angle $\theta$, studying the energy deposition in the scintillating material and photon count in the SiPM depending on the trajectory of the particle once it enters the detector. As shown in Figure \ref{fig:ang_dist_cyl_event}, a spherical particle source was used to shoot particles from all directions toward the center of the scintillating crystal, however, this does not recreate the cosine squared law, as the particle source is isotropic, meaning that it does not have a preferred direction to shoot particles from. In order to recreate a cosine squared distribution the simulation data was multiplied by the function $\cos^2\theta$.
 
-\begin{figure}[H]
-  \centering
-  \begin{subfigure}[t]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{G4_simulations/ang_dist_cylinder_event_side.pdf}
-    \caption{\label{sfig:ang_dist_cyl}}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[t]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{G4_simulations/ang_dist_cylinder_event.pdf}
-    \caption{\label{sfig:ang_dist_cyl_side}}
-  \end{subfigure}
-  \caption{\label{fig:ang_dist_cyl_event}Spherical \gps~ shooting muons (\textcolor{red}{red} tracks) toward the center of a cylindrical plastic scintillator, the \textcolor{green}{green} tracks represent the optical photons produced from particle interactions.}
-\end{figure}
+%\begin{figure}[H]
+%  \centering
+%  \begin{subfigure}[t]{0.48\textwidth}
+%    \includegraphics[width=\textwidth]{G4_simulations/ang_dist_cylinder_event_side.pdf}
+%    \caption{\label{sfig:ang_dist_cyl}}
+%  \end{subfigure}
+%  \hfill
+%  \begin{subfigure}[t]{0.48\textwidth}
+%    \includegraphics[width=\textwidth]{G4_simulations/ang_dist_cylinder_event.pdf}
+%    \caption{\label{sfig:ang_dist_cyl_side}}
+%  \end{subfigure}
+%  \caption{\label{fig:ang_dist_cyl_event}Spherical \gps~ shooting muons (\textcolor{red}{red} tracks) toward the center of a cylindrical plastic scintillator, the \textcolor{green}{green} tracks represent the optical photons produced from particle interactions.}
+%\end{figure}
 
 As can be seen in Figure \ref{sfig:ang_dist_cyl_side}, muons traveling directly downward have less scintillating material to go through compared to those traveling horizontally, this means that greater zenith angles should result in greater energy depositions, which agrees with the data shown in Figures \ref{sfig:ang_edep} and \subref{sfig:ang_edep_cylinder}. In Figure \ref{sfig:ang_pcount} however, the photon counts first decrease to a minimum at around 30$^\circ$ before steadily increasing until 90$^\circ$. Based on what we learned in section \ref{sec:collected_produced} about scintillator sizes, and keeping in mind the detector geometry, one could expect a minimum photon count at the angle where the photons have to travel the greatest distance within the scintillator, which in this case corresponds to the scintillator edges and corners, ranging between 78.69 and 81.95 degrees for a $5\times5\times1$ \unit{\cm\cubed} scintillator. In order to attenuate any possible polar dependencies, the scintillator geometry was changed to a cylinder as shown in Figure \ref{fig:ang_dist_cyl_event}. This however, does not seem to correlate with the presence of a minimum in photon count at 30$^\circ$, as can be seen in Figure \ref{sfig:ang_pcount_cylinder}. The cause of this feature is yet to be explained.
 

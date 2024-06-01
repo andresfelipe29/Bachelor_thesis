@@ -3,6 +3,17 @@
 %versions of the detector
 \section{Scintillation}
 
+This section summarizes some key aspects for our use case scenario taken from Chapter 8 of Ref. \cite{knoll2010radiation}, where an in depth exploration of various scintillating materials and their properties is presented. LYSO:Ce belongs to the family of inorganic scintillating materials, while plastic scintillators belong to the organic family. Scintillation in general arises from the de-excitation of electrons in higher energy states inside the material, inorganic scintillators however, have only discrete energy states to jump between. The lower energy state is known as the Valence band and represents the energy of those electrons which are bound to the crystal lattice, the conduction band on the other hand, is the upper electron energy level in which they are free to travel across the crystal. Energy absorption inside the crystal therefore occurs when an electron is promoted across the band gap towards the conduction band, de-excitation of these electrons back into the valence band is not very common, and the photons emitted from this transition are often highly energetic, leaving them outside the visible range.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{detection_methods/Scintillation.pdf}
+    \caption{Electronic energy level structure in activated inorganic scintillators, adapted from \cite[Ch.~8]{knoll2010radiation}.}
+    \label{fig:Scintillation}
+\end{figure}
+
+In order to increase the production of optical photons and probability of de-excitation to lower energy states, some inorganic crystals are activated with small amounts of other elements, these activators induce energy states in between the band gap at specific places in the crystal lattice, creating new channels through which the electrons can fall back into the valence band. In our case LYSO:Ce, therefore represents a Cerium-activated LYSO crystal. Cerium in particular possesses a short decay time, between 20 and 80 ns, making the crystal faster than some inorganics but also slow compared to organic scintillators with decay times of just a few nanoseconds.
+
 \section{PMTs}
 
 Photomultipliers are very useful tools in particle detection. Since some detection methods rely on the measurement of photons it is very important to make use of every single one. Some PMs are capable of creating measurable electrical signals from single photon interactions, provoking an electron avalanche that can be easily read with various devices. Photomultiplier Tubes are the most common light amplifiers paired with scintillators, they are however bulky and require very high voltages to operate. An in-depth description of this and other types of Photomultipliers can be found in Ref. \cite{knoll2010radiation} Chap. 9.

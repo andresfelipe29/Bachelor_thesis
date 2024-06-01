@@ -206,6 +206,28 @@ In this case, a voltage divider is used to force a positive saturation in the op
 %add code as appendix
 \section{Microcontroller}
 
+The core of this project lies on the RaspberryPi Pico microcontroller, its two cores allow us to acquire SiPM pulse data while simultaneously saving it to a file and display it on the OLED screen along with time, count rate, temperature and pressure information. In addition to this, the Pico can be controlled with MicroPython, a smaller version of the Python3 programming language, which can make the code easier to understand and modify by new CosmicWatch users, specially students who might be new to electronics.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{Electronics/RP_Schematic.pdf}
+    \caption{RaspberryPi Pico connections in the detector.}
+    \label{fig:RP_schematic}
+\end{figure}
+
+Figure \ref{fig:RP_schematic} shows the Pico connections in the setup used for this work, we will do a small introduction to the general functionalities of these connections.
+
+\begin{itemize}
+    \item \textbf{2-7}: Control the MicroSD card socket which uses the Serial Peripheral Interface (SPI) communication protocol.
+    \item \textbf{16-17,36}: Pins 16 and 17 are used to display information on the OLED screen in addition to measure pressure and temperature data from the BMP280 sensor using the I2C communication protocol, each accessory has a different address that enables the use of multiple devices through the same connection. Power for these accessories is provided by pin 36
+    \item \textbf{19-20}: The LEDs that signal single and coincident events are connected to these pins, resistors $R_{37}$ and $R_{17}$ can be changed to reduce power consumption.
+    \item \textbf{21 and 27}: Pin 21 is connected to the output of the trigger circuit, in the code this activates the \texttt{read\_ADC} interrupt-routine which makes an ADC reading of the peak detected signal, with this we aim at reducing the error in the voltage measured due to the discharge of capacitor $C_{25}$. \\Pin 27 is controlled by the code and is in charge of resetting the trigger, this is achieved by fully discharging $C_{25}$ through the mosfet labeled $Q1$ in the schematic, thus preventing the accumulation of charge from various pulses that may arrive in a time window smaller than the natural discharging of the capacitor.
+    \item \textbf{25-26}: The coincident pins are used by the \texttt{CoincidentMode} function in \texttt{run.py} to determine the role of the detector when it runs in coincidence mode.
+    \item \textbf{30}: This pin is connected to the reset button, once it is pressed the detector stops any tasks it might be running and will automatically run the \texttt{main.py} script.
+    \item \textbf{31}: All ADC readings of the peak detected signal are done through this pin.
+    \item \textbf{39-40}: The circuit connected to these pins is designed to produce a low noise power supply for the various integrated circuits used in this project, $D_1$ in particular is placed in a way that prevents current from flowing into the Pico.
+\end{itemize}
+
 \section{DC to DC booster} \label{sec:DC_DC}
 
 \begin{figure}[H]

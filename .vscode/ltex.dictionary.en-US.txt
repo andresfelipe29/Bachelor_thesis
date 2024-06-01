@@ -16,3 +16,5 @@ LYSOs
 opamp
 Tektronix
 MicroSD
+de-excitation
+MicroPython
