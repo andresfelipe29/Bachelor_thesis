@@ -60,7 +60,7 @@ The upper graph in Figure \ref{fig:LYSO_PScint_phot_count} shows a histogram of 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=.98\textwidth]{G4_simulations/PScint_photon_count/run0PScint.pdf}
+  \includegraphics[width=.98\textwidth]{G4_simulations/PScint_photon_count/PScint_scint_size.pdf}
   \caption{\label{fig:LYSO_PScint_phot_count}Energy deposition histograms for two sizes of plastics scintillator. The photon production inside the scintillator and photomultiplier photon counts are also compared for both sizes.}
 \end{figure}
 
@@ -96,7 +96,7 @@ The placement of the SiPM can be a factor to keep in mind while designing new Co
     \caption{\label{fig:SiPM_place_results}}
 \end{figure}
 
-As expected, the energy deposition in the crystal and the number of optical photons produced do not depend on the SiPM placement. Surprisingly enough, however, it seems that the photon count is also not affected by this, meaning that the results obtained with both setups should be similar while using the specified scintillator size.
+The text width is now \the\textwidth. As expected, the energy deposition in the crystal and the number of optical photons produced do not depend on the SiPM placement. Surprisingly enough, however, it seems that the photon count is also not affected by this, meaning that the results obtained with both setups should be similar while using the specified scintillator size.
 
 %\subsection{Scintillator sizes}\label{sec:Scint_size}
 
@@ -128,41 +128,41 @@ As expected, the energy deposition in the crystal and the number of optical phot
 
 With this simulation, we are trying to understand the detector response as a function of the zenith angle $\theta$, studying the energy deposition in the scintillating material and photon count in the SiPM depending on the trajectory of the particle once it enters the detector. As shown in Figure \ref{fig:ang_dist_cyl_event}, a spherical particle source was used to shoot particles from all directions toward the center of the scintillating crystal, however, this does not recreate the cosine squared law, as the particle source is isotropic, meaning that it does not have a preferred direction to shoot particles from. In order to recreate a cosine squared distribution the simulation data was multiplied by the function $\cos^2\theta$.
 
-%\begin{figure}[H]
-%  \centering
-%  \begin{subfigure}[t]{0.48\textwidth}
-%    \includegraphics[width=\textwidth]{G4_simulations/ang_dist_cylinder_event_side.pdf}
-%    \caption{\label{sfig:ang_dist_cyl}}
-%  \end{subfigure}
-%  \hfill
-%  \begin{subfigure}[t]{0.48\textwidth}
-%    \includegraphics[width=\textwidth]{G4_simulations/ang_dist_cylinder_event.pdf}
-%    \caption{\label{sfig:ang_dist_cyl_side}}
-%  \end{subfigure}
-%  \caption{\label{fig:ang_dist_cyl_event}Spherical \gps~ shooting muons (\textcolor{red}{red} tracks) toward the center of a cylindrical plastic scintillator, the \textcolor{green}{green} tracks represent the optical photons produced from particle interactions.}
-%\end{figure}
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.48\textwidth}
+    \includegraphics[width=\textwidth]{G4_simulations/ang_dist_cylinder_event_side.png}
+    \caption{\label{sfig:ang_dist_cyl}}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.48\textwidth}
+    \includegraphics[width=\textwidth]{G4_simulations/ang_dist_cylinder_event.png}
+    \caption{\label{sfig:ang_dist_cyl_side}}
+  \end{subfigure}
+  \caption{\label{fig:ang_dist_cyl_event}Spherical \gps~ shooting muons (\textcolor{red}{red} tracks) toward the center of a cylindrical plastic scintillator, the \textcolor{green}{green} tracks represent the optical photons produced from particle interactions.}
+\end{figure}
 
 As can be seen in Figure \ref{sfig:ang_dist_cyl_side}, muons traveling directly downward have less scintillating material to go through compared to those traveling horizontally, this means that greater zenith angles should result in greater energy depositions, which agrees with the data shown in Figures \ref{sfig:ang_edep} and \subref{sfig:ang_edep_cylinder}. In Figure \ref{sfig:ang_pcount} however, the photon counts first decrease to a minimum at around 30$^\circ$ before steadily increasing until 90$^\circ$. Based on what we learned in section \ref{sec:collected_produced} about scintillator sizes, and keeping in mind the detector geometry, one could expect a minimum photon count at the angle where the photons have to travel the greatest distance within the scintillator, which in this case corresponds to the scintillator edges and corners, ranging between 78.69 and 81.95 degrees for a $5\times5\times1$ \unit{\cm\cubed} scintillator. In order to attenuate any possible polar dependencies, the scintillator geometry was changed to a cylinder as shown in Figure \ref{fig:ang_dist_cyl_event}. This however, does not seem to correlate with the presence of a minimum in photon count at 30$^\circ$, as can be seen in Figure \ref{sfig:ang_pcount_cylinder}. The cause of this feature is yet to be explained.
 
 \begin{figure}[H]
   \centering
   \begin{subfigure}[t]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{G4_simulations/run0-ang_dis_nt_Event_energy_spectra.pdf}
+    \includegraphics[width=\textwidth]{G4_simulations/ang_dist/PScint_ang_dist_square_run0_nt_Event_energy_spectra.pdf}
     \caption{\label{sfig:ang_edep}Energy deposition in the detector as a function of zenith angle.}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{G4_simulations/run0-ang_dis_nt_Event_photon_count.pdf}
+    \includegraphics[width=\textwidth]{G4_simulations/ang_dist/PScint_ang_dist_square_run0_nt_Event_photon_count.pdf}
     \caption{\label{sfig:ang_pcount}SiPM photon as a function of zenith angle.}
   \end{subfigure}
   \medskip
   \begin{subfigure}[t]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{G4_simulations/test_nt_Event_energy_spectra.pdf}
+    \includegraphics[width=\textwidth]{G4_simulations/ang_dist/PScint_ang_dist_cylinder_run0_nt_Event_energy_spectra.pdf}
     \caption{\label{sfig:ang_edep_cylinder}Energy deposition in the detector as a function of zenith angle with a cylindrical scintillator.}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.48\textwidth}
-    \includegraphics[width=\textwidth]{G4_simulations/test_nt_Event_photon_count.pdf}
+    \includegraphics[width=\textwidth]{G4_simulations/ang_dist/PScint_ang_dist_cylinder_run0_nt_Event_photon_count.pdf}
     \caption{\label{sfig:ang_pcount_cylinder}SiPM photon as a function of zenith angle with a cylindrical scintillator.}
   \end{subfigure}
   \caption{\label{fig:ang_results}Data in blue is the raw output of the simulation while shooting muons directly toward the center of the scintillator. Data in orange is the normalization of the simulation output using a cosine squared law.}
