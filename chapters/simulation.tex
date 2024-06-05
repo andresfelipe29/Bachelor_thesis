@@ -1,4 +1,4 @@
-\chapter{Geant4 Simulations}
+\chapter{Geant4 Simulations}\label{chap:G4_simulations}
 
 In order to provide a new interactive approach to CosmicWatches for new users a scintillation simulation has been devised using the Geant4 toolkit. With this, we intend to showcase some of the physical aspects that may be studied with the detector. This project is still in development and can be found on the GitHub repository \href{https://github.com/spenceraxani/CosmicWatch_Geant4}{CosmicWatch\_Geant4}. This section aims to give a brief explanation of the inner workings of the simulation as well as the Geant4 toolkit.
 
@@ -25,7 +25,7 @@ In general, Geant4 requires a mother volume in which the simulation will take pl
     \includegraphics[width=\textwidth]{G4_simulations/front.pdf}
     \caption{\label{sfig:geometry_front}Front view.}
   \end{subfigure}
-  \caption{\label{fig:geometry}Scintillator and SiPM placement in the mother volume.}
+  \caption{\label{fig:geometry}Scintillator and SiPM placement in the mother volume, SiPM placed on the base of the scintillator (base setup).}
 \end{figure}
 
 \section{Simulation pipeline}
@@ -67,8 +67,7 @@ The upper graph in Figure \ref{fig:LYSO_PScint_phot_count} shows a histogram of 
 \subsection{SiPM placement}\label{sec:SiPM_placement}
 
 The placement of the SiPM can be a factor to keep in mind while designing new CosmicWatch setups. Generally, the photomultiplier is located on the base of the scintillator as shown in Figure \ref{fig:geometry}, but it may be useful to place it on one of its sides as shown in Fig. \ref{fig:SiPM_side}.
-
-\begin{figure}[H]
+\begin{figure}
   \centering
   \begin{subfigure}[t]{0.48\textwidth}
     \includegraphics[width=\textwidth]{G4_simulations/SiPM_side_profile.pdf}
@@ -79,24 +78,16 @@ The placement of the SiPM can be a factor to keep in mind while designing new Co
     \includegraphics[width=\textwidth]{G4_simulations/SiPM_side_front.pdf}
     \caption{\label{sfig:SiPM_side_front}Side view.}
   \end{subfigure}
-  \caption{\label{fig:SiPM_side}SiPM placed on the front face of the scintillator.}
+  \caption{\label{fig:SiPM_side}SiPM placed on the front face of the scintillator (side steup).}
 \end{figure}
+
+As expected, the energy deposition in the crystal and the number of optical photons produced do not depend on the SiPM placement. Surprisingly enough, however, it seems that the photons reaching the SiPM are also not affected by this, meaning that the results obtained with both setups should be similar while using the specified scintillator size. It is important to note here that the number of photons detected is one order of magnitude bellow the photons produced, this shows once again the great attenuation optical photons undergo in the scintillator.
 
 \begin{figure}[H]
-    \centering
-    \begin{subfigure}[t]{0.48\textwidth}
-      \includegraphics[width=\textwidth]{G4_simulations/run0_nt_Event_SiPM-placement_energy_spectra.pdf}
-      \caption{\label{sfig:SiPM_place_edep}Energy deposition in the detector for different photomultiplier placements.}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.48\textwidth}
-      \includegraphics[width=\textwidth]{G4_simulations/run0_nt_Event_SiPM-placement_photon_count.pdf}
-      \caption{\label{sfig:SiPM_place_pcount}SiPM photon count for both setups.}
-    \end{subfigure}
-    \caption{\label{fig:SiPM_place_results}}
+  \centering
+  \includegraphics[width=\textwidth]{G4_simulations/SiPM_placement/PScint_SiPM_placement.pdf}
+  \caption{\label{fig:LYSO_PScint_phot_count}Energy deposition histograms for two SiPM placements. The photon production inside the scintillator and photomultiplier photon counts are also compared for both setups.}
 \end{figure}
-
-The text width is now \the\textwidth. As expected, the energy deposition in the crystal and the number of optical photons produced do not depend on the SiPM placement. Surprisingly enough, however, it seems that the photon count is also not affected by this, meaning that the results obtained with both setups should be similar while using the specified scintillator size.
 
 %\subsection{Scintillator sizes}\label{sec:Scint_size}
 
@@ -146,22 +137,22 @@ As can be seen in Figure \ref{sfig:ang_dist_cyl_side}, muons traveling directly 
 
 \begin{figure}[H]
   \centering
-  \begin{subfigure}[t]{0.48\textwidth}
+  \begin{subfigure}[t]{0.49\textwidth}
     \includegraphics[width=\textwidth]{G4_simulations/ang_dist/PScint_ang_dist_square_run0_nt_Event_energy_spectra.pdf}
     \caption{\label{sfig:ang_edep}Energy deposition in the detector as a function of zenith angle.}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[t]{0.48\textwidth}
+  \begin{subfigure}[t]{0.49\textwidth}
     \includegraphics[width=\textwidth]{G4_simulations/ang_dist/PScint_ang_dist_square_run0_nt_Event_photon_count.pdf}
     \caption{\label{sfig:ang_pcount}SiPM photon as a function of zenith angle.}
   \end{subfigure}
   \medskip
-  \begin{subfigure}[t]{0.48\textwidth}
+  \begin{subfigure}[t]{0.49\textwidth}
     \includegraphics[width=\textwidth]{G4_simulations/ang_dist/PScint_ang_dist_cylinder_run0_nt_Event_energy_spectra.pdf}
     \caption{\label{sfig:ang_edep_cylinder}Energy deposition in the detector as a function of zenith angle with a cylindrical scintillator.}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[t]{0.48\textwidth}
+  \begin{subfigure}[t]{0.49\textwidth}
     \includegraphics[width=\textwidth]{G4_simulations/ang_dist/PScint_ang_dist_cylinder_run0_nt_Event_photon_count.pdf}
     \caption{\label{sfig:ang_pcount_cylinder}SiPM photon as a function of zenith angle with a cylindrical scintillator.}
   \end{subfigure}
@@ -170,7 +161,7 @@ As can be seen in Figure \ref{sfig:ang_dist_cyl_side}, muons traveling directly 
 
 \subsection{Simulated Spectra}\label{sec:simulated_spectra}
 
-In order to showcase some differences between LYSO and plastic scintillators we have included some simulation results for both LYSO and \texttt{Polyvinyltoluene}. The analysis presented below corresponds to ten thousand events where the \gps shoots 662 \unit{\kilo\eV} gamma-rays.
+In order to showcase some differences between LYSO and plastic scintillators we have included some simulation results for both LYSO and \texttt{Polyvinyltoluene}. The analysis presented below corresponds to ten thousand events where the \gps~ shoots 662 \unit{\kilo\eV} gamma-rays.
 
 As discussed in Section \ref{sec:self_radiation}, LYSO crystals contain $^{176}$Lu, a naturally occurring radioactive isotope emitting $\beta$ radiation which can be absorbed by the crystal, this results in a constant background, this feature, however, has not yet been included in the simulation and is part of our future work.
 

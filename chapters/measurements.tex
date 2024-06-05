@@ -79,6 +79,16 @@ In general, the $\chi^2$ results for the multiple fits performed were much bette
 
 \section{CosmicWatch electronics}
 
+In an attempt to achieve the fastest response possible after a SiPM pulse is sent to the peak detector, an interrupt routine (\texttt{read\_ADC} in \texttt{run.py}) was used to stop all executions happening in core zero, this is supposed to ensure that the Pico's ADC would read the peak detected signal and the capacitor would be discharged in the shortest time, preventing event loses and pileup with other signals. Figure \ref{fig:measurement_speed}, however, showcases the delay after an incoming SiPM pulse has been detected and processed by the detector, it can be seen that the peak detector's capacitor is discharged by the TriggerReset pin about 75 \unit{\micro\s} after the detector is triggered, this means that the ADC reading could have been done at any moment in that time window. The difference in voltage in the peak detected signal at its maximum and right before the capacitor is discharged, is about 176 \unit{\mV}, which may cause great changes in the channel saved by the ADC.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{measurements/CW/Trigger_reset.pdf}
+  \caption{\label{fig:measurement_speed}Trigger and measurement time delay after a SiPM pulse.}
+\end{figure}
+
+
+
 \section{NIM modules}
 
 In the same way the CosmicWatch was studied with the Rohde\&Schwarz oscilloscope, NIM modules were used to get a LYSO calibration when coupled to the SiPM, this section shows some of the results obtained.
