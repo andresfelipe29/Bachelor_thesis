@@ -79,13 +79,57 @@ In general, the $\chi^2$ results for the multiple fits performed were much bette
 
 \section{CosmicWatch electronics}
 
-In an attempt to achieve the fastest response possible after a SiPM pulse is sent to the peak detector, an interrupt routine (\texttt{read\_ADC} in \texttt{run.py}) was used to stop all executions happening in core zero, this is supposed to ensure that the Pico's ADC would read the peak detected signal and the capacitor would be discharged in the shortest time, preventing event loses and pileup with other signals. Figure \ref{fig:measurement_speed}, however, showcases the delay after an incoming SiPM pulse has been detected and processed by the detector, it can be seen that the peak detector's capacitor is discharged by the TriggerReset pin about 75 \unit{\micro\s} after the detector is triggered, this means that the ADC reading could have been done at any moment in that time window. The difference in voltage in the peak detected signal at its maximum and right before the capacitor is discharged, is about 176 \unit{\mV}, which may cause great changes in the channel saved by the ADC.
+\subsection{ADC shortcomings}
+
+\subsubsection{Resolution}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.98\textwidth]{measurements/CW/raw_adc.pdf}
+  \caption{\label{fig:CW_raw}Histogram of ADC reading per channel, showcasing some odd features in the ADC.}
+\end{figure}
+
+As specified in the RP2040 datasheet \cite[sec.~4.9]{datasheet2024rp2040}, the RaspberryPi Pico has a 12-bit ADC, which means that it maps the 0 to 3.3 \unit{\V} range onto a number between 0 and $2^{12}=4096$. Figure \ref{fig:CW_raw} shows a histogram of ADC readings taken with \texttt{spectra.py} (Ap. \ref{sec:spectra.py}), this histogram shows, however, that the ADC outputs data well above 4096, this happens because, as mentioned in the \href{https://docs.micropython.org/en/latest/library/machine.ADC.html#machine.ADC}{MicroPython documentation for the ADC class}, in the function \texttt{ADC.read\_u16} ``the return value represents the raw reading taken by the ADC, scaled such that the minimum value is 0 and the maximum value is 65535.'' This explains why there are so many channels with zero counts in the inset of Fig. \ref{fig:CW_raw}. By rescaling the ADC output to twelve bits we get the data shown in Fig. \ref{fig:CW_scaled}, where the number of channels was therefore reduced from $2^{16}$ to $2^{12}$, thus removing the channels where there were zero counts recorded.
+
+One important issue represented in the inset of Fig. \ref{fig:CW_scaled} is the periodic drop in counts every 8 channels for all measurements, while channel 512 presents an extremely high number of events. The real number of channels in the ADC results important because it determines the resolution of our analog reader, otherwise known as the Least Significant Bit (LSB), which determines the smallest variation in the input signal that the ADC can recognize, the LSB of our ADC can be approximated as shown in equation \eqref{eq:LSB},
+
+\begin{equation}\label{eq:LSB}
+  1~\text{LSB} = \frac{\text{V}_\text{REF}}{2^N} = \frac{3.3 \unit{\V}}{2^{12}} \approx 805~\unit{\micro\V}
+\end{equation}
+
+this means that ideally, every channel should cover a 805 \unit{\micro\V} range, however, that is not the case in our hardware. The Integral Non-Linearity (INL) and Differential Non-Linearity determine the actual resolution of each channel and therefore the ADC response, in this case, we are specially worried about the DNL, Fig. \ref{fig:RP2040_DNL} shows the DNL of every channel in the Pico's ADC.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.98\textwidth]{measurements/CW/scaled_raw_adc.pdf}
+  \caption{\label{fig:CW_scaled}Histogram of ADC reading per channel, rescaled to 12-bits.}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.98\textwidth]{measurements/CW/RP2040_DNL.png}
+  \caption{\label{fig:RP2040_DNL}RP2040 ADC Differential Non-Linearity, taken from \cite{datasheet2024rp2040}.}
+\end{figure}
+
+In simple terms, if a channel has a DNL$<0$ its actual LSB will be smaller than the expected value. Channels 512, 1536, 2560, and 3584 are therefore important to notice, their extremely high DNL values mean that they cover a wider voltage range (at 512, DNL$~\approx9$, therefore LSB$(512)=(1+9)$LSB$~\approx 8.05$ \unit{\m\V}), this explains the sudden spike in counts at 512 and the small peak at 1536 in Fig. \ref{fig:CW_scaled}. With this in mind, an approximation of the number of events expected with LSB$~=1$ can be obtained if we divide it by $1+~$DNL (this has been done for all spectra shown from now on that have been measured with the PICO's ADC). From Fig. \ref{fig:RP2040_DNL} it is also clear that there are no significant drops in the DNL every 8 channels, which leaves open the question about the periodic lower counts discussed earlier.
+
+The RP2040 documentation \cite{datasheet2024rp2040} suggests some changes that can be done to the Pico board that may improve resolution, like reducing the voltage reference (currently set at 3.3V), since this would make the LSB smaller and would take better advantage of our 12-bit resolution.
+
+\subsubsection{Response time}
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{measurements/CW/Trigger_reset.pdf}
   \caption{\label{fig:measurement_speed}Trigger and measurement time delay after a SiPM pulse.}
 \end{figure}
+
+In an attempt to achieve the fastest response possible after a SiPM pulse is sent to the peak detector, an interrupt routine (\texttt{read\_ADC} in \texttt{run.py}) was used to stop all processes and focus on reading the ADC, this is supposed to ensure that the Pico's ADC would read the peak detected signal and the capacitor would be discharged in the shortest time, preventing event loses and pileup with other incoming pulses. 
+
+Figure \ref{fig:measurement_speed} showcases the delay after an incoming SiPM pulse has been detected and processed by the detector, it can be seen that the peak detector's capacitor is discharged by the TriggerReset pin about 76 \unit{\micro\s} after the detector is triggered, this means that the ADC reading could have happened at any moment in that time window. The difference in voltage in the peak detected signal at its maximum and right before the capacitor is discharged is about 176 \unit{\mV}, according to our theoretical LSB, this voltage drop represents a 218 channel difference in the ADC reading.
+
+Increasing the time response could greatly improve the detector's resolution, since it would minimize the time delay between incoming pulses and ADC readings.
+
+\section{Measured spectra}
 
 
 
@@ -95,7 +139,7 @@ In the same way the CosmicWatch was studied with the Rohde\&Schwarz oscilloscope
 
 \subsection{Odd features}
 
-While testing the detector response some odd features were found in the measured spectra, they are yet to be understood and present an interesting study case, Figure \ref{fig:NIM_odd_features} showcases some of the spectra obtained that illustrate these anomalies. 
+While testing the detector response some odd features were found in the measured spectra, they are yet to be understood and present an interesting study case, Figure \ref{fig:NIM_odd_features} showcases some of the spectra obtained that illustrate these anomalies.
 
 $^{54}$Mn, is a monoenergetic source, meaning that it only produces one gamma ray, in this case at 835 \unit{\kilo\eV}, which lies slightly above 662 \unit{\kilo\eV} ($^{137}$Cs), therefore, the peak in channel 259 in Fig. \ref{sfig:NIM_odd_54Mn} should correspond to the gamma emission from Manganese. However, there is again a very high number of events above the photopeak, which is not expected, since 835 \unit{\kilo\eV} is the maximum energy one should see in this spectrum. Aside from this, it is also clear that the shape of this peak does not fully adjust to a gaussian distribution, showing that there is an underlying structure that has not been explained. These odd features can also be seen in $^{137}$Cs.
 
