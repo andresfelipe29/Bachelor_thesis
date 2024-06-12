@@ -2,7 +2,7 @@
 
 In order to test the detector and crystal response, multiple electronic setups were used to obtain spectra from calibrated sources. This chapter summarizes the most important measurements achieved while testing the CosmicWatch, showcasing some features that are yet to be understood. It is important to note that for every measured spectrum a background radiation measurement was also performed and all calibrations were made while subtracting the background. In the plots, sometimes the background is presented to showcase the counts of a spectrum relative to it, when the background is not included in the plot it means that it has been subtracted from that specific spectrum.
 
-\section{CosmicWatch electronics}
+\section{CosmicWatch electronics}\label{sec:CW_measurements}
 
 \subsection{ADC shortcomings}\label{sec:ADC_shortcomings}
 
@@ -60,7 +60,11 @@ Increasing the time response could greatly improve the detector's resolution sin
 
 Figure \ref{fig:source_position} shows how the radioactive sources were positioned relative to the detector, it is done this way for two reasons: first, it ensures the gamma rays will have a longer travel path inside the crystal, and second, the small distance seems to produce the best results for low activities, such as those of Manganese, Yttrium, and Cesium, on the other hand, the Sodium source was placed 15 \unit{\cm} away from the detector due to its large activity, since moving it closer only increased Compton counts, although a more thorough analysis could be made in order to find an optimum source position.
 
-\begin{figure}
+Figure \ref{fig:CW_spectra} shows the spectra obtained for four different calibrated sources (the same used while testing the CosmicWatch with NIM modules in Sec. \ref{sec:NIM_modules}) while running the \texttt{spectra.py} script on the Pico for one hour. These spectra take into account the ADC shortcomings showcased in Sec. \ref{sec:ADC_shortcomings}, therefore, the channels range from 0 to 4095, the periodically low counts were ``erased'' by grouping the data every 8 channels, and the large DNL in channels 511 and 1536 was removed by taking the average of the previous and next channel. 
+
+Contrary to the spectra shown in sections \ref{sec:RTO6} and \ref{sec:NIM_modules}, in this case, not all of the photopeaks cover enough channels to fit a gaussian to them, this was only possible for Sodium and Cesium, as showcased in Fig. \ref{fig:CW_spectra}. In the case of Manganese and Yttrium, we can only estimate the centroid to lie at the channel with the most counts in their respective photopeaks, which means that it will have an 8-channel error due to the channel-grouping discussed earlier, doing this we get the calibration shown in Fig. \ref{sfig:CW_LYSO_calibration}.
+
+\begin{figure}[H]
   \begin{subfigure}[t]{0.48\textwidth}
     \centering
     \includegraphics[width=\textwidth]{measurements/CW/22Na.pdf}
@@ -87,13 +91,11 @@ Figure \ref{fig:source_position} shows how the radioactive sources were position
   \caption{\label{fig:CW_spectra}Spectra measured with the Raspberry Pi Pico using the \texttt{spectra.py} script found in Appendix \ref{sec:spectra.py}.}
 \end{figure}
 
-Figure \ref{fig:CW_spectra} shows the spectra obtained for four different calibrated sources (the same used while testing the CosmicWatch with NIM modules in Sec. \ref{sec:NIM_modules}) while running the \texttt{spectra.py} script on the Pico for one hour. These spectra take into account the ADC shortcomings showcased in Sec. \ref{sec:ADC_shortcomings}, therefore, the channels range from 0 to 4095, the periodically low counts were ``erased'' by grouping the data every 8 channels, and the large DNL in channels 511 and 1536 was removed by taking the average of the previous and next channel. 
-
-Contrary to the spectra shown in sections \ref{sec:RTO6} and \ref{sec:NIM_modules}, in this case, not all of the photopeaks cover enough channels to fit a gaussian to them, this was only possible for Sodium and Cesium, as showcased in Fig. \ref{fig:CW_spectra}. In the case of Manganese and Yttrium, we can only estimate the centroid to lie at the channel with the most counts in their respective photopeaks, which means that it will have an 8-channel error due to the channel-grouping discussed earlier, doing this we get the calibration shown in Fig. \ref{sfig:CW_LYSO_calibration}.
+As mentioned in subsection \ref{sec:Non-linearity}, the detector's response to variations in SiPM pulse amplitudes is not linear, making necessary the use of an eleven-degree polynomial to represent the peak detector's behavior. Since it was only possible to measure four gamma-ray peaks, it is not possible to use the polynomial calibration showcased in \ref{fig:nonlinearity}, it is for this reason that we have limited our calibration to a linear fit. The lack of a true representation of the detector's nonlinearity is most likely the reason why we find negative energy values in Figure \ref{sfig:CW_joint_spectra}.
 
 Since it was not possible to perform a gaussian fit for all peaks, we can not show an FWHM versus energy comparison which would provide a clear picture of the detector's resolution. Instead, we will have to conform with just the energy resolution at 511 keV, which in this case is 36.5$\%$. Further work needs to be done to increase resolution, some possible alternatives are explored in Chapter \ref{chap:future}.
 
-\begin{figure}
+\begin{figure}[H]
   \begin{subfigure}[t]{\textwidth}
     \centering
     \includegraphics[width=.98\textwidth]{measurements/CW/LYSO_calibration.pdf}
@@ -183,6 +185,7 @@ In general, the $\chi^2$ results for the multiple fits performed were much bette
   \caption{\label{fig:RS_FWHM}FWHM as a function of energy from spectra obtained with a Rohde\&Schwarz RTO6 oscilloscope.}
 \end{figure}
 
+\newpage
 \section{NIM modules}\label{sec:NIM_modules}
 
 In the same way the CosmicWatch was studied with the Rohde\&Schwarz oscilloscope, NIM modules were used to get a LYSO calibration when coupled to the SiPM, this section shows some of the results obtained.
@@ -235,13 +238,13 @@ In principle, $^{68}$Ge should have a spectrum very similar to $^{22}$Na, in thi
   \caption{\label{fig:NIM_odd_features}Spectra measured with a Timing Filter Amplifier and Analog to Digital Converter NIM modules. Each graph features the isotope used, its activity at the time of measurement, and the centroid of the Gaussian fitted to each peak. The $x$ axis gives channels since the ADC creates a histogram based on pulse area. Some odd features can be seen in these spectra, like the large number of counts above the Cesium and Manganese photopeaks.}
 \end{figure}
 
-The Cesium spectrum shown in Fig. \ref{sfig:NIM_odd_137Cs} was taken while placing the source 10 cm away from the detector, trying to reduce the count rate due to the large activity of the source, nonetheless, this resulted in an oddly shaped photopeak, as showcased in the comparatively large FWHM at 662 keV shown in Fig \ref{fig:NIM_odd_FWHM}.  
+The Cesium spectrum shown in Fig. \ref{sfig:NIM_odd_137Cs} was taken while placing the source 10 cm away from the detector, trying to reduce the count rate due to the large activity of the source, nonetheless, this resulted in an oddly shaped photopeak, and therefore a comparatively large FWHM
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=.98\textwidth]{measurements/NIM/odd_features/FWHM.pdf}
-  \caption{\label{fig:NIM_odd_FWHM}FWHM obtained from gaussian fits to the photo- and positron-annihilation peaks shown in \ref{fig:NIM_odd_features}.}
-\end{figure}
+%\begin{figure}[H]
+%  \centering
+%  \includegraphics[width=.98\textwidth]{measurements/NIM/odd_features/FWHM.pdf}
+%  \caption{\label{fig:NIM_odd_FWHM}FWHM obtained from gaussian fits to the photo- and positron-annihilation peaks shown in \ref{fig:NIM_odd_features}.}
+%\end{figure}
 
 \subsection{Calibration}
 
