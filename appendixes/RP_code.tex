@@ -2,6 +2,8 @@
 
 All code included here can be found in the repository \\ \href{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}{https://github.com/anvargasl/CosmicWatch-gamma-spectroscopy-RP}.
 
+In order to use the code included here please note that the drivers necessary to control the MicroSD card, temperature sensor, and OLED screen are inside a folder named \texttt{drivers}, which is then included in the path with \texttt{usys.path.insert(1, r"/drivers/")}.
+
 \section{ADC Calibration}\label{app:calibration}
 
 In Chapter \ref{chap:Electronics} we explored the amplification and peak detection stages along with some of their shortcomings, in order to attenuate the effects of the peak detector's nonlinearity a calibration of the ADC channels must be done, this allows to correlate the incoming SiPM pulse amplitude with a specific ADC reading.
@@ -10,7 +12,8 @@ In order to calibrate the detector response one can use an Arbitrary Function Ge
 
 The code shown below can be used to calibrate the detector. The list \texttt{Voltages} contains preliminary pulse amplitudes to be used for calibration, five samples are taken for every pulse in the \texttt{read\_ADC} interrupt routine, this is done for \texttt{buffer\_size=100} pulses before continuing with the next amplitude (a five-second window is given to the user to change the amplitude before continuing). Make sure that the pulse frequency is not too high, this might cause pulses to fall on top of each other and therefore produce a poor calibration.
 
-\lstinputlisting[language=python]{./appendixes/code/calibration.py}
+\newpage
+\lstinputlisting[language=python,linerange={3-}]{./appendixes/code/calibration.py}
 
 \section{Ring Buffer}
 
@@ -20,10 +23,24 @@ The main goal of the code is to take full advantage of both cores in the Pico, i
 
 \section{Spectra}\label{sec:spectra.py}
 
-\lstinputlisting[language=python]{./appendixes/code/spectra.py}
+It is a common practice to set a time length in which the detector will take measurements to create a spectrum, this allows us to also measure a background spectrum that can then be subtracted from the spectra where we are trying to study a calibrated gamma source for example, thus making decreasing the effects that surrounding materials and radiation might have on our measurements. While using LYSOs background spectra are quite important due to the inherent radioactivity of the crystal, which makes a study case of its own. The \texttt{spectra.py} script is therefore designed to record ADC readings for \texttt{measure\_t} minutes. In this case, we make use of the \texttt{RingbufQueue} class explored before, \texttt{core0} writes to the buffer while \texttt{core1} reads from it and saves the data to \texttt{spectrum.txt} in the MicroSD card.
+
+In order to achieve a fast ADC reading after the trigger goes high the interrupt routine \texttt{read\_ADC} is used, although it is important to note that the buffer is not edited in this routine, it only overwrites the \texttt{readings} list once \texttt{core0} is not busy writing in the buffer, which is determined by the \texttt{interrupt\_flag}.
+
+\lstinputlisting[language=python,linerange={3-}]{./appendixes/code/spectra.py}
 
 \section{OLED module}
 
-In order to facilitate the use of the SSD1306 OLED display a small module for text display and erase has been included. It also allows the printing of pixel art of the CosmicWatch logo as a bootscreen. Please note that some lines in the file have been omitted since they contain some very long bytearrays.
+In order to facilitate the use of the SSD1306 OLED display a small module for text display and erase has been included. It also allows the printing of pixel art of the CosmicWatch logo as a bootscreen. Please note that some lines in the file have been omitted since they contain some very long bytearrays (CosmicWatch, Micropython and Raspberry Pi logos).
 
-\lstinputlisting[language=python,linerange={1-32,34-104}]{./appendixes/code/OLED.py}
+\lstinputlisting[language=python,linerange={3-32,34-104}]{./appendixes/code/OLED.py}
+
+\section{Count rate}
+
+The \texttt{run.py} script is a more ``standard'' CosmicWatch routine, it allows the use of two detectors in coincidence mode and records data regarding time of acquisition, ADC reading, temperature, pressure, and dead time. It is important to note that the coincidence communication is done through an ethernet cable, which in the current design is connected to the same \textit{sda} and \textit{sla} connections as the OLED screen and temperature sensor (GPIO pins 12 and 13 respectively) since these accessories often have a standard I2C address, this may lead to potential errors. In the case of the accessories used here, it is common for them to have a resistor that can be moved in order to change its I2C address, doing this will prevent any possible miscommunications in the current setup, and for this reason \texttt{run.py} includes the \texttt{addr\_dict} dictionary to differentiate between screens. In the future, this problem will be completely resolved by changing the \textit{sda} and \textit{sla} pins used for coincidence communication.
+
+Some limitations were found while working with interrupts and displaying data on the OLED screens, for this reason, \texttt{spectra.py} does not include any display functionality, and \texttt{run.py} relies on constant sampling of the peak detected signal to ensure a fast response. This is a problem that may be solved with the \texttt{C++} SDK.
+
+Right now the script is set to run indefinitely, this can be changed however by replacing the \texttt{while True} condition in \texttt{core0/1\_thread} for \texttt{while e\_count < tot\_events}, this will kill the data recording after saving \texttt{tot\_events}.
+
+\lstinputlisting[language=python,linerange={3-}]{./appendixes/code/run.py}
