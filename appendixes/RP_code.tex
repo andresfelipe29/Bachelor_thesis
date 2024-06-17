@@ -41,6 +41,6 @@ The \texttt{run.py} script is a more ``standard'' CosmicWatch routine, it allows
 
 Some limitations were found while working with interrupts and displaying data on the OLED screens, for this reason, \texttt{spectra.py} does not include any display functionality, and \texttt{run.py} relies on constant sampling of the peak detected signal to ensure a fast response. This is a problem that may be solved with the \texttt{C++} SDK.
 
-Right now the script is set to run indefinitely, this can be changed however by replacing the \texttt{while True} condition in \texttt{core0/1\_thread} for \texttt{while e\_count < tot\_events}, this will kill the data recording after saving \texttt{tot\_events}.
+Right now the script is set to run indefinitely, this can be changed however by replacing the ``\texttt{while True}'' condition in \texttt{core0/1\_thread} for ``\texttt{while e\_count < tot\_events}'', this will kill the data recording after saving \texttt{tot\_events}.
 
-\lstinputlisting[language=python,linerange={3-}]{./appendixes/code/run.py}
+\lstinputlisting[language=python,linerange={3-302}]{./appendixes/code/run.py}
