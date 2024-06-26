@@ -140,7 +140,7 @@ In order to avoid negative saturation $D_5$ is added, along with an outer feedba
 
 This design follows the same principles as the one shown in the previous subsection. However, in this case, a buffer is added to introduce high impedance and prevent the capacitor from discharging through the resistor and instead through any load that may be applied after the circuit.
 
-\subsection{Nuclear Phoenix}\label{sec:nuclear_phoenix}
+\subsection{NuclearPhoenix's design}\label{sec:nuclear_phoenix}
 
 \begin{figure}[H]
     \centering
@@ -169,15 +169,15 @@ This design follows the same principles as the one shown in the previous subsect
         %(D3_r) -- (R24_r);
         %(C25_u) -- ++(2,0) to[R, l=$R_{15}$, resistors/scale=0.8] ++(0,-2) node[ground]{};
     \end{circuitikz}
-    \caption{Nuclear Phoenix peak-detector design. Taken from \cite{Nucelar_phoenix}.}
+    \caption{NuclearPhoenix's peak-detector design. Taken from \cite{Nucelar_phoenix}.}
     \label{circ:pd_np}
 \end{figure}
 
-NuclearPhoenix is a physics student who has developed a gamma detector that also utilizes a Raspberry Pi Pico and a Silicon photomultiplier, his schematics also include a peak detection circuit which is shown in Fig. \ref{circ:pd_np}, his project can be found in \href{https://nuclearphoenix.xyz/hardware/ogd/}{Open Gamma Detector}. This design aims to prevent leakage current across $D_3$, this discharges the capacitor at a faster rate than intended once the peak voltage has been reached. In this case, $R_30$ is feeding back the peak voltage value to $D_3$, therefore creating a 0 V difference across the diode, preventing any leakage current from flowing out of $C_{25}$ and into the output of the op-amp.
+There is physics student that goes by the alias of NuclearPhoenix, who has developed a gamma detector that also utilizes a Raspberry Pi Pico and a Silicon photomultiplier, his schematics also include a peak detection circuit which is shown in Fig. \ref{circ:pd_np}, his project can be found in \href{https://nuclearphoenix.xyz/hardware/ogd/}{Open Gamma Detector}. This design aims to prevent leakage current across $D_3$, this discharges the capacitor at a faster rate than intended once the peak voltage has been reached. In this case, $R_{30}$ is feeding back the peak voltage value to $D_3$, therefore creating a 0 V difference across the diode, preventing any leakage current from flowing out of $C_{25}$ and into the output of the op-amp.
 
 \subsection{Nonlinearity}\label{sec:Non-linearity}
 
-The aforementioned nonlinearity between SiPM pulses and the peak detected signal is best showcased in Figure \ref{fig:nonlinearity}. In this case, it is clear that the ADC reading steadily increases up until about 100 \unit{m\V} pulses, after that it starts to plateau, which means that the peak detector is saturating and can no longer differentiate pulse amplitudes. In order to approximate the detector's response, we had to fit an eleven-degree polynomial to the points measured, this means that we would need at least 12 gamma-ray peaks to be able to use this calibration, which in our case has not been possible due to resolution and gamma-sources limitations, for this reason Section \ref{sec:CW_measurements} uses a linear fit to approximate the detector's response. The measured points were taken with the script \texttt{calibration.py}, listed in Appendix \ref{app:calibration}.
+The aforementioned nonlinearity between SiPM pulses and the peak detected signal is best illustrated in Figure \ref{fig:nonlinearity}. In this case, it is clear that the ADC reading steadily increases up until about 100 \unit{m\V} pulses, after that it starts to plateau, which means that the peak detector is saturating and can no longer differentiate pulse amplitudes. In order to approximate the detector's response, we had to fit an eleven-degree polynomial to the points measured, this means that we would need at least 12 gamma-ray peaks to be able to use this calibration, which in our case has not been possible due to resolution and gamma-sources limitations, for this reason Section \ref{sec:CW_measurements} uses a linear fit to approximate the detector's response. The measured points were taken with the script \texttt{calibration.py}, listed in Appendix \ref{app:calibration}.
 
 \begin{figure}[H]
     \centering

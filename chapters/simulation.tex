@@ -81,7 +81,7 @@ The placement of the SiPM can be a factor to keep in mind while designing new Co
   \caption{\label{fig:SiPM_side}SiPM placed on the front face of the scintillator (side steup).}
 \end{figure}
 
-As expected, the energy deposition in the crystal and the number of optical photons produced do not depend on the SiPM placement. Surprisingly enough, however, it seems that the photons reaching the SiPM are also not affected by this, meaning that the results obtained with both setups should be similar while using the specified scintillator size. It is important to note here that the number of photons detected is one order of magnitude bellow the photons produced, this shows once again the great attenuation optical photons undergo in the scintillator.
+As expected, the energy deposition in the crystal and the number of optical photons produced do not depend on the SiPM placement. Surprisingly enough, however, it seems that the photons reaching the SiPM are also not affected by this, meaning that the results obtained with both setups should be similar while using the specified scintillator size. It is important to note here that the number of photons detected is one order of magnitude below the photons produced, this shows once again the great attenuation of intensity of optical photons in the scintillator.
 
 \begin{figure}[H]
   \centering
@@ -89,35 +89,11 @@ As expected, the energy deposition in the crystal and the number of optical phot
   \caption{\label{fig:LYSO_PScint_phot_count}Energy deposition histograms for two SiPM placements. The photon production inside the scintillator and photomultiplier photon counts are also compared for both setups.}
 \end{figure}
 
-%\subsection{Scintillator sizes}\label{sec:Scint_size}
-
-%The current architecture of CosmicWatch allows to use of variable scintillator sizes, the first versions of CosmicWatch used 5$\times$5$\times$1 \unit{\cm\cubed} scintillators, while the newer LYSO crystals are much smaller, Fig. \ref{fig:LYSO_crystals} shows some of the crystals used while testing the detector response. This simulation aims at understanding the effects of variable sizes in the final results.
-
-%Figure \ref{sfig:scint_size_edep} shows that bigger scintillator sizes do result in greater energy recollections, however, as Figure \ref{sfig:scint_size_pcount} illustrates, the number of photons that reached the SiPM was on average greater for the $5\times5\times1$ \unit{\cm\cubed} setup. These figures then show that increased scintillator volumes may decrease photon recollection, which is ultimately the goal of the detector, to collect as many photons as possible in the photomultiplier to increase energy resolution.
-
-%\begin{figure}[H]
-%  \centering
-%    \includegraphics[width=0.47\textwidth]{G4_simulations/Scint_size_10_5_2.pdf}
-%  \caption{\label{fig:Scint_10_5_2}Visualization of a bigger scintillator in the mother volume.}
-%\end{figure}
-
-%\begin{figure}[H]
-%  \centering
-%  \begin{subfigure}[t]{0.48\textwidth}
-%    \includegraphics[width=\textwidth]{G4_simulations/run0_nt_Event_crystal-size_energy_spectra.pdf}
-%    \caption{\label{sfig:scint_size_edep}Energy deposition in the detector for different scintillator sizes.}
-%  \end{subfigure}
-%  \hfill
-%  \begin{subfigure}[t]{0.48\textwidth}
-%    \includegraphics[width=\textwidth]{G4_simulations/run0_nt_Event_crystal-size_photon_count.pdf}
-%    \caption{\label{sfig:scint_size_pcount}SiPM photon count for different scintillator sizes.}
-%  \end{subfigure}
-%  \caption{\label{fig:scint_size_results}The scintillator size can be easily modified inside the simulation by changing the values of \texttt{ScintXLen}, \texttt{ScintYLen}, and \texttt{ScintZLen} in \texttt{headers/construction.hh}, some suggested values are listed in the code.}
-%\end{figure}
-
 \subsection{Angular distributions}\label{sec:cos_squared}
 
-With this simulation, we are trying to understand the detector response as a function of the zenith angle $\theta$, studying the energy deposition in the scintillating material and photon count in the SiPM depending on the trajectory of the particle once it enters the detector. As shown in Figure \ref{fig:ang_dist_cyl_event}, a spherical particle source was used to shoot particles from all directions toward the center of the scintillating crystal, however, this does not recreate the cosine squared law, as the particle source is isotropic, meaning that it does not have a preferred direction to shoot particles from. In order to recreate a cosine squared distribution the simulation data was multiplied by the function $\cos^2\theta$.
+With this simulation, we are trying to understand the detector response as a function of the zenith angle $\theta$, by studying the energy deposition in the scintillating material and photon count in the SiPM depending on the trajectory of the particle once it enters the detector.
+
+As can be seen in Figure \ref{sfig:ang_dist_cyl_side}, muons traveling vertically ($\theta=0^\circ, 180^\circ$) have less scintillating material to go through compared to those traveling horizontally ($\theta=90^\circ$). With this in mind, as $\theta$ approaches $90^\circ$, we should see greater energy depositions, which agrees with the data shown in Figures \ref{fig:ang_results}. Based on what we learned in Section \ref{sec:collected_produced} about scintillator sizes, and keeping in mind the detector geometry, one would expect the maximum energy deposit from muons that travel the greatest distance within the material, which in this case corresponds to muons entering the scintillator through its edges and corners ($78.69^\circ\leq\theta\leq 81.95^\circ$ for a $5\times5\times1$ \unit{\cm\cubed} scintillator).
 
 \begin{figure}[H]
   \centering
@@ -130,10 +106,12 @@ With this simulation, we are trying to understand the detector response as a fun
     \includegraphics[width=\textwidth]{G4_simulations/ang_dist_cylinder_event.png}
     \caption{\label{sfig:ang_dist_cyl_side}}
   \end{subfigure}
-  \caption{\label{fig:ang_dist_cyl_event}Spherical \gps~ shooting muons (\textcolor{red}{red} tracks) toward the center of a cylindrical plastic scintillator, the \textcolor{green}{green} tracks represent the optical photons produced from particle interactions.}
+  \caption{\label{fig:ang_dist_cyl_event}Spherical \gps~ shooting muons (\textcolor{red}{red} tracks) toward the center of a cylindrical plastic scintillator, the \textcolor{green}{green} tracks represent the optical photons produced from particle interactions. The zenith angle $\theta$ is measured from the $z$ axes.}
 \end{figure}
 
-As can be seen in Figure \ref{sfig:ang_dist_cyl_side}, muons traveling directly downward have less scintillating material to go through compared to those traveling horizontally, this means that greater zenith angles should result in greater energy depositions, which agrees with the data shown in Figures \ref{sfig:ang_edep} and \subref{sfig:ang_edep_cylinder}. In Figure \ref{sfig:ang_pcount} however, the photon counts first decrease to a minimum at around 30$^\circ$ before steadily increasing until 90$^\circ$. Based on what we learned in section \ref{sec:collected_produced} about scintillator sizes, and keeping in mind the detector geometry, one could expect a minimum photon count at the angle where the photons have to travel the greatest distance within the scintillator, which in this case corresponds to the scintillator edges and corners, ranging between 78.69 and 81.95 degrees for a $5\times5\times1$ \unit{\cm\cubed} scintillator. In order to attenuate any possible polar dependencies, the scintillator geometry was changed to a cylinder as shown in Figure \ref{fig:ang_dist_cyl_event}. This however, does not seem to correlate with the presence of a minimum in photon count at 30$^\circ$, as can be seen in Figure \ref{sfig:ang_pcount_cylinder}. The cause of this feature is yet to be explained.
+In order to attenuate any possible polar dependencies, the scintillator geometry was changed to a cylinder as shown in Figure \ref{fig:ang_dist_cyl_event}. The only significant difference in the results of both setups, is a more uniform energy deposition and photon count in the region $80^\circ<\theta< 100^\circ$ for the cylinder (which corresponds to muons hitting the scintillator through the side), this is due to the almost constant distance traveled by the muons in the cylinder compared to the square case.
+
+One important remark must be made here, as shown in Figure \ref{fig:ang_dist_cyl_event}, a spherical particle source was used to shoot particles from all directions toward the center of the scintillating crystal, however, this does not recreate the cosine squared law, as the particle source is isotropic, meaning that it does not have a preferred direction to shoot particles from. In order to recreate a cosine squared distribution, the average number of photons and energy deposition per event data as a function of $\theta$, was multiplied by the function $\cos^2\theta$.
 
 \begin{figure}[H]
   \centering
@@ -161,11 +139,11 @@ As can be seen in Figure \ref{sfig:ang_dist_cyl_side}, muons traveling directly 
 
 \subsection{Simulated Spectra}\label{sec:simulated_spectra}
 
-In order to showcase some differences between LYSO and plastic scintillators we have included some simulation results for both LYSO and \texttt{Polyvinyltoluene}. The analysis presented below corresponds to ten thousand events where the \gps~ shoots 662 \unit{\kilo\eV} gamma-rays.
+In order to showcase some differences between LYSO and plastic scintillators we have included some simulation results for both LYSO and \texttt{Polyvinyltoluene}. The analysis presented below corresponds $10^4$ events where the \gps~ shoots 662 \unit{\kilo\eV} gamma-rays.
 
 As discussed in Section \ref{sec:self_radiation}, LYSO crystals contain $^{176}$Lu, a naturally occurring radioactive isotope emitting $\beta$ radiation which can be absorbed by the crystal, this results in a constant background, this feature, however, has not yet been included in the simulation and is part of our future work.
 
-Contrary to \texttt{G4\_PLASTIC\_SC\_VINYLTOLUENE} and \texttt{G4\_Air}, there is no \texttt{G4\_LYSO}, which in this case is needed to produce gamma-spectra since this plastic scintillator does not produce enough photoelectric events to obtain something similar to the spectra shown in Section \ref{sec:gammas_in_the_detector}. Luckily Geant4 allows creating materials by adding individual elements with their respective percentage in the compound. Table \ref{tab:LYSO_composition} shows the specific percentages for all elements that make up a LYSO. In order to add Cerium doping one can create a new material made of two parts, LYSO and Ce, in this case, one would use the doping percentage to calculate the amount of LYSO in the new compound. It hasn't been possible to find the specific amount of Ce doping in Luxium's LYSO, there are however some publications that reference doping below 1.\% for Saint-Gobain samples \cite{Ce_doping,Ce_dopping_2}\footnote{Luxium and Saint-Gobain's LYSOs are essentially the same since Luxium acquired the scintillation and photonic crystals business of Saint-Gobain.}. All material definitions can be found under the function \texttt{DefineMaterials} of \texttt{MyDetectorConstruction} class in \texttt{source/construction.cc}.
+Contrary to \texttt{G4\_PLASTIC\_SC\_VINYLTOLUENE} and \texttt{G4\_Air}, there is no \texttt{G4\_LYSO}, which in this case is needed to produce gamma-spectra since this plastic scintillator does not produce enough photoelectric events to obtain something similar to the spectra shown in Section \ref{sec:gammas_in_the_detector}. Luckily Geant4 allows creating materials by adding individual elements with their respective percentage in the compound. Table \ref{tab:LYSO_composition} shows the specific percentages for all elements that make up a LYSO. In order to add Cerium doping one can create a new material made of two parts, LYSO and Ce, in this case, one would use the doping percentage to calculate the amount of LYSO in the new compound. It hasn't been possible to find the specific amount of Ce doping in Luxium's LYSO, there are however some publications that reference doping below 1\% for Saint-Gobain samples \cite{Ce_doping,Ce_dopping_2}\footnote{Luxium and Saint-Gobain's LYSOs are essentially the same since Luxium acquired the scintillation and photonic crystals business of Saint-Gobain.}. All material definitions can be found under the function \texttt{DefineMaterials} of \texttt{MyDetectorConstruction} class in \texttt{source/construction.cc}.
 
 \begin{table}[H]
   \caption{Atomic mass and composition percentage for all elements in the nominal composition Lu$_{1.8}$Y$_{0.2}$SiO$_5$:Ce.}
