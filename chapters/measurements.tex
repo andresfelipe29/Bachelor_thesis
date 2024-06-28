@@ -57,12 +57,24 @@ Increasing the time response could greatly improve the detector's resolution sin
   \includegraphics[width=.25\textwidth]{measurements/Source_position.jpg}
   \caption{\label{fig:source_position}Radioactive source positioning relative to the detector. In this picture the transparent disc corresponds to a $^{22}$Na source, which has been held in place by tapping it to the detector.}
 \end{figure}
-
 Figure \ref{fig:source_position} shows how the radioactive sources were positioned relative to the detector, it is done this way for two reasons: first, it ensures the gamma rays will have a longer travel path inside the crystal, and second, the small distance seems to produce the best results for low activities, such as those of Manganese, Yttrium, and Cesium, on the other hand, the Sodium source was placed 15 \unit{\cm} away from the detector due to its large activity, since moving it closer only increased Compton counts, although a more thorough analysis could be made in order to find an optimum source position.
 
 Figure \ref{fig:CW_spectra} shows the spectra obtained for four different calibrated sources (the same used while testing the CosmicWatch with NIM modules in Sec. \ref{sec:NIM_modules}) while running the \texttt{spectra.py} script on the Pico for one hour. These spectra take into account the ADC shortcomings showcased in Sec. \ref{sec:ADC_shortcomings}, therefore, the channels range from 0 to 4095, the periodically low counts were ``erased'' by grouping the data every 8 channels, and the large DNL in channels 511 and 1536 was removed by taking the average of the previous and next channel. 
 
 Contrary to the spectra shown in sections \ref{sec:RTO6} and \ref{sec:NIM_modules}, in this case, not all of the photopeaks cover enough channels to fit a gaussian to them, this was only possible for Sodium and Cesium, as showcased in Fig. \ref{fig:CW_spectra}. In the case of Manganese and Yttrium, we can only estimate the centroid to lie at the channel with the most counts in their respective photopeaks, which means that it will have an 8-channel error due to the channel-grouping discussed earlier, doing this we get the calibration shown in Fig. \ref{sfig:CW_LYSO_calibration}.
+\begin{table}[H]
+  \caption{Relevant energy emissions of some radioactive sources.}
+  \centering
+  \begin{tabular}{c c c c c c c}
+    \midrule
+    Isotope & $^{22}$Na & $^{137}$Cs & $^{54}$Mn & $^{88}$Y & $^{60}$Co \\
+    \midrule
+    \multirow{2}{*}{Energies [keV]} & 511 & 33 & 834 & 898 & 1173 \\
+     & 1275 & 662 &  & 1836 & 1333 \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:energy_emisions}
+\end{table}
 
 \begin{figure}[H]
   \begin{subfigure}[t]{0.48\textwidth}
@@ -90,16 +102,15 @@ Contrary to the spectra shown in sections \ref{sec:RTO6} and \ref{sec:NIM_module
   \end{subfigure}
   \caption{\label{fig:CW_spectra}Spectra measured with the Raspberry Pi Pico using the \texttt{spectra.py} script found in Appendix \ref{sec:spectra.py}.}
 \end{figure}
-
 As mentioned in subsection \ref{sec:Non-linearity}, the detector's response to variations in SiPM pulse amplitudes is not linear, making necessary the use of an eleven-degree polynomial to represent the peak detector's behavior. Since it was only possible to measure four gamma-ray peaks, it is not possible to use the polynomial calibration showcased in \ref{fig:nonlinearity}, it is for this reason that we have limited our calibration to a linear fit. The lack of a true representation of the detector's nonlinearity is most likely the reason why we find negative energy values in Figure \ref{sfig:CW_joint_spectra}.
 
-Since it was not possible to perform a gaussian fit for all peaks, we can not show an FWHM versus energy comparison which would provide a clear picture of the detector's resolution. Instead, we will have to conform with just the energy resolution at 511 keV, which in this case is 36.5$\%$. Further work needs to be done to increase resolution, some possible alternatives are explored in Chapter \ref{chap:future}.
+Since it was not possible to perform a gaussian fit for all peaks, we can not show an FWHM versus energy comparison which would provide a clear picture of the detector's resolution. Instead, we will have to conform with just the energy resolution at 511 keV, which in this case is 36.5$\%$. Further work needs to be done to increase resolution, some possible alternatives are explored in Chapter \ref{chap:future}. The small lump around channel 644 in the Manganese spectrum has been taken as the 834 keV emission in Tab. \ref{tab:energy_emisions}. Further studies need to be performed in order to understand why the photopeak is so small for Manganese.
 
 \begin{figure}[H]
   \begin{subfigure}[t]{\textwidth}
     \centering
     \includegraphics[width=.98\textwidth]{measurements/CW/LYSO_calibration.pdf}
-    \caption{\label{sfig:CW_LYSO_calibration}LYSO calibration from Raspberry Pi Pico data. Obtained by fitting gaussian functions to the main peaks of Sodium and Cesium and taking the channel with the most counts in the photopeaks of Manganese and Yttrium.}
+    \caption{\label{sfig:CW_LYSO_calibration}LYSO calibration from Raspberry Pi Pico data. A gaussian fit was perfotmed to the main peaks of $^{22}$Na and $^{137}$Cs, for $^{54}$Mn and $^{88}$Y we took the channel with the most counts in their photopeaks.}
   \end{subfigure}
   \medskip
   \begin{subfigure}[t]{\textwidth}
@@ -107,7 +118,7 @@ Since it was not possible to perform a gaussian fit for all peaks, we can not sh
     \includegraphics[width=.98\textwidth]{measurements/CW/Calibrated_spectrum.pdf}
     \caption{\label{sfig:CW_joint_spectra}Calibrated spectrum obtained from the channel-energy conversion shown in \subref{sfig:CW_LYSO_calibration}.}
   \end{subfigure}
-  \caption{\label{fig:CW_calibration}Gamma-ray spectra obtained with the CosmicWatch detector.}
+  \caption{\label{fig:CW_calibration}Gamma-ray spectra obtained with the CosmicWatch. $^{22}$Na: 511 keV, $^{137}$Cs: 662 keV, $^{54}$Mn: 834 keV, $^{88}$Y: 898 keV.}
 \end{figure}
 
 \section{Rohde\&Schwarz RTO6 oscilloscope}\label{sec:RTO6}
@@ -159,7 +170,7 @@ Fitting gaussian functions to the main peaks one can get the relation between en
     \includegraphics[width=.98\textwidth]{measurements/RS/Calibrated_spectrum_low_peaks.pdf}
     \caption{\label{sfig:RS_LYSO_calibrated_spectrum_low_peaks}Calibrated spectrum obtained from the channel-energy conversion shown in \subref{sfig:RS_LYSO_calibration_low_peaks}.}
   \end{subfigure}
-  \caption{\label{fig:RS_low_peaks_calibration}Calibrated spectrum taking into account the x-ray and backscattering peaks of $^{137}$Cs.}
+  \caption{\label{fig:RS_low_peaks_calibration}Calibrated spectrum taking into account the x-ray and backscattering peaks of $^{137}$Cs. $^{22}$Na: 511 keV and 1275 keV, $^{137}$Cs: 33 keV, 184 keV, and 662 keV, $^{60}$Co: 1173 keV and 1333 keV}
 \end{figure}
 
 \begin{figure}[H]
@@ -174,7 +185,7 @@ Fitting gaussian functions to the main peaks one can get the relation between en
     \includegraphics[width=.98\textwidth]{measurements/RS/Calibrated_spectrum.pdf}
     \caption{\label{sfig:RS_LYSO_calibrated_spectrum}Calibrated spectrum obtained from the channel-energy conversion shown in \subref{sfig:RS_LYSO_calibration}.}
   \end{subfigure}
-  \caption{\label{fig:RS_calibration}Calibrated spectrum, ignoring the x-ray and backscattering peaks of $^{137}$Cs.}
+  \caption{\label{fig:RS_calibration}Calibrated spectrum, now ignoring the x-ray and backscattering peaks of $^{137}$Cs. $^{22}$Na: 511 keV and 1275 keV, $^{137}$Cs: 662 keV, $^{60}$Co: 1173 keV and 1333 keV}
 \end{figure}
 
 \newpage
@@ -186,12 +197,14 @@ In general, the $\chi^2$ results for the multiple fits performed were much bette
   \caption{\label{fig:RS_FWHM}FWHM as a function of energy from spectra obtained with a Rohde\&Schwarz RTO6 oscilloscope.}
 \end{figure}
 
+It is also worth noting that this has been the only setup where the 1275 keV emission of Sodium is easily distinguishable, showing that the oscilloscope seems to maintain good resolution throughout the energy range tested.
+
 \newpage
 \section{NIM modules}\label{sec:NIM_modules}
 
 In the same way the CosmicWatch was studied with the Rohde\&Schwarz oscilloscope, NIM modules were used to get a LYSO calibration when coupled to the SiPM, this section shows some of the results obtained.
 
-\subsection{Odd features}
+\subsection{Odd features}\label{sec:odd_features}
 
 While testing the detector response some odd features were found in the measured spectra, they are yet to be understood and present an interesting study case, Figure \ref{fig:NIM_odd_features} showcases some of the spectra obtained that illustrate these anomalies.
 
@@ -239,7 +252,7 @@ In principle, $^{68}$Ge should have a spectrum very similar to $^{22}$Na, in thi
   \caption{\label{fig:NIM_odd_features}Spectra measured with a Timing Filter Amplifier and Analog to Digital Converter NIM modules. Each graph features the isotope used, its activity at the time of measurement, and the centroid of the Gaussian fitted to each peak. The $x$ axis gives channels since the ADC creates a histogram based on pulse area. Some odd features can be seen in these spectra, like the large number of counts above the Cesium and Manganese photopeaks.}
 \end{figure}
 
-The Cesium spectrum shown in Fig. \ref{sfig:NIM_odd_137Cs} was taken while placing the source 10 cm away from the detector, trying to reduce the count rate due to the large activity of the source, nonetheless, this resulted in an oddly shaped photopeak, and therefore a comparatively large FWHM
+The Caesium spectrum shown in Fig. \ref{sfig:NIM_odd_137Cs} was taken while placing the source 10 cm away from the detector, trying to reduce the count rate due to the large activity of the source, nonetheless, this resulted in an oddly shaped photopeak, and therefore a comparatively large FWHM
 
 %\begin{figure}[H]
 %  \centering
@@ -249,17 +262,15 @@ The Cesium spectrum shown in Fig. \ref{sfig:NIM_odd_137Cs} was taken while placi
 
 \subsection{Calibration}
 
-Following the goal of this work, multiple spectra were measured trying to find the NIM-modules setup that would optimize energy resolution. As expressed in \cite[sec.~4.4.3]{gilmore2008practical}: ``theory suggests that the lowest noise contribution is found when the integration and differentiation times are made equal. On all modern amplifiers, the shaping time constants are made equal and are controlled by a single selector knob.'' In our case, however, the integration and differentiation times were controlled independently, since we used a Canberra Model 2111 Timing Filter Amplifier \cite{CanberraTFA}. So far, the best results were found while using the OUT setup for both time constants, corresponding to 4 ns of integration time and 160 $\mu$s of differentiation time. 
+Following the goal of this work, multiple spectra were measured trying to find the NIM-modules setup that optimizes energy resolution. As expressed in \cite[Sec.~4.4.3]{gilmore2008practical}: ``theory suggests that the lowest noise contribution is found when the integration and differentiation times are made equal. On all modern amplifiers, the shaping time constants are made equal and are controlled by a single selector knob.'' In our case, however, the integration and differentiation times were controlled independently, since we used a Canberra Model 2111 Timing Filter Amplifier \cite{CanberraTFA}. So far, the best results were found while using the OUT setup for both time constants, corresponding to 4 ns of integration time and 160 $\mu$s of differentiation time. 
 
-Even though the FWHM does not vary significantly for different time-constant setups, the OUT configuration produced the most accurate calibrations achieved, obtaining an energy resolution of 25.2\% at 511 keV. Further work needs to be done to better understand the origin of the odd features presented above, this may greatly influence the energy resolution since, as can be seen in the Manganese spectrum, not all the peaks present a truly gaussian form.
+Even though the FWHM does not vary significantly for different time-constant setups, the OUT configuration produced the most accurate calibrations achieved, obtaining an energy resolution of 25.2\% at 511 keV. Further work needs to be done to better understand the origin of the odd features presented in subsection \ref{sec:odd_features}, this may greatly influence the energy resolution since, as can be seen in the Manganese spectrum, not all the peaks present a truly gaussian form.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=.98\textwidth]{measurements/NIM/2024-05-24/outD/FWHM.pdf}
   \caption{\label{fig:NIM_FWHM}FWHM obtained from gaussian fits to the photo- and positron-annihilation peaks shown in \ref{fig:NIM_spectra}.}
 \end{figure}
-
-It is worth noting the great similarities between Figures \ref{sfig:NIM_54Mn}-\subref{sfig:NIM_88Y} and the features explained in subsection \ref{sec:gammas_in_the_detector}, each showcasing a clear photopeak, Compton edge, and backscattering peak.
 
 \begin{figure}[H]
   \begin{subfigure}[t]{0.47\textwidth}
@@ -288,6 +299,8 @@ It is worth noting the great similarities between Figures \ref{sfig:NIM_54Mn}-\s
   \caption{\label{fig:NIM_spectra}Spectra measured with a Timing Filter Amplifier and Analog to Digital Converter NIM modules. The $x$ axis measures channels since the ADC creates a histogram based on pulse area. Each graph features the centroid of the Gaussian fitted to each peak.}
 \end{figure}
 
+It is worth noting the great similarities between Figures \ref{sfig:NIM_54Mn}-\subref{sfig:NIM_88Y} and the features explained in subsection \ref{sec:gammas_in_the_detector}, each showcasing a clear photopeak, Compton edge, and backscattering peak. An interesting feature in this case is that the calibration with NIM modules does not result in the prediction of negative energies, like in the case of the RTO6 oscilloscope and the CosmicWatch electronics, despite the various flaws in these spectra. These results are also quite compelling since they mean that the detector can be coupled to acquisition systems that are commonly found in laboratories that deal with gamma radiation, showing that our designs could be adapted to different experimental setups that may also require small, user-friendly, and accessible instruments.
+
 \begin{figure}[H]
   \begin{subfigure}[t]{\textwidth}
     \centering
@@ -300,7 +313,5 @@ It is worth noting the great similarities between Figures \ref{sfig:NIM_54Mn}-\s
     \includegraphics[width=.98\textwidth]{measurements/NIM/2024-05-24/outD/Calibrated_spectrum.pdf}
     \caption{\label{sfig:NIM_LYSO_calibrated_spectrum}Calibrated spectrum obtained from the channel-energy conversion shown in \subref{sfig:NIM_LYSO_calibration}.}
   \end{subfigure}
-  \caption{\label{fig:NIM_calibration}Gamma-ray spectra obtained with NIM modules.}
+  \caption{\label{fig:NIM_calibration}Gamma-ray spectra obtained with NIM modules. $^{22}$Na: 511 keV and 1275 keV, $^{137}$Cs: 662 keV, $^{54}$Mn: 834 keV, $^{88}$Y: 898 keV.}
 \end{figure}
-
-Notably, this new calibration does not result in the prediction of negative energies, like in the case of the RTO6 oscilloscope, despite the various flaws in these spectra.

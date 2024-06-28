@@ -173,7 +173,8 @@ This design follows the same principles as the one shown in the previous subsect
     \label{circ:pd_np}
 \end{figure}
 
-There is physics student that goes by the alias of NuclearPhoenix, who has developed a gamma detector that also utilizes a Raspberry Pi Pico and a Silicon photomultiplier, his schematics also include a peak detection circuit which is shown in Fig. \ref{circ:pd_np}, his project can be found in \href{https://nuclearphoenix.xyz/hardware/ogd/}{Open Gamma Detector}. This design aims to prevent leakage current across $D_3$, this discharges the capacitor at a faster rate than intended once the peak voltage has been reached. In this case, $R_{30}$ is feeding back the peak voltage value to $D_3$, therefore creating a 0 V difference across the diode, preventing any leakage current from flowing out of $C_{25}$ and into the output of the op-amp.
+This peak detector design is taken from the Open Gamma Detector project in \cite{Nucelar_phoenix}, where they have developed a gamma detector that also utilizes a Raspberry Pi Pico and a Silicon photomultiplier, the schematics also include a peak detection circuit which is shown in Fig. \ref{circ:pd_np}. The project link has been added in Appendix
+\ref{app:useful_links}. This design aims to prevent leakage current across $D_3$, this discharges the capacitor at a faster rate than intended once the peak voltage has been reached. In this case, $R_{30}$ is feeding back the peak voltage value to $D_3$, therefore creating a 0 V difference across the diode, preventing any leakage current from flowing out of $C_{25}$ and into the output of the op-amp.
 
 \subsection{Nonlinearity}\label{sec:Non-linearity}
 
